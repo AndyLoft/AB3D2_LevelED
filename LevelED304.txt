@@ -19,102 +19,102 @@
 '  700->720: W. Keep-graphics-data-banks.. 
 '  800     : W. Music for Trackplayer  
 '----------------------------------------------------------------------------' 
-Set Buffer 650
-Amos To Back 
-VER$="AlienBreed 3DII LevelEd V3.04"
-VDA$="19-05-2023"
-Flush Libs 
-_amos Name "AB3DII_LevelED"
-'
-'
-'
-Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL
-MXP=600 : MZ=256 : MCP=99 : MOBJ=200
-'
-'
-'
-Dim OB$(10),ECHO(MZ),CO(260),I(180),GPAL(16),D_INK(20),W(10,2),LW(10),GAD24(40),GAD16(40),GAD10(50),LOCK(20)
-Dim OPS(20,6),LOPS(20,6),SGAD(120),SPRDATA(20,10)
-Dim TELZO(MZ),TELX(MZ),TELZ(MZ),CPTUL(MCP+1),USED(MZ),WB(MZ,10),UWB(MZ,10)
-Dim BUT$(59),PX(MXP),PY(MXP),ZO(MZ,10),ZP(MZ),WT(MZ,10),ZW(MZ,10,1)
-Dim ZH(MZ,3),ZC(MZ,10),ZB(MZ),UZB(MZ),OBX(MOBJ),OBZ(MOBJ),ZZ(MZ,10)
-Dim UZH(MZ,3),ZPBR(MZ,10,3),ZRG(MZ,2),ZFG(MZ,2),ZWG(MZ,10,3),WD(MZ,10),ZD(MZ),DC(20)
-Dim UZRG(MZ,2),UZFG(MZ,2),UZWG(MZ,10,3)
-Dim VECT$(20),CPTX(MCP+1),CPTY(MCP+1),CPTZ(MCP+1),ZCPT(MZ),UZCPT(MZ)
-Dim RB(MZ),FB(MZ)
-Dim VCPL(MZ),VCPR(MZ),LP(MZ,100),RP(MZ,100),ZU(MZ),PU(MXP)
-Dim PN(MXP),X(4),Y(4),D(MXP,3),SOW(20),PW(MXP),CORD(MZ),LIFTC(20)
-Dim WLI(MZ,10),ZLI(MZ),DMX(30),DMZ(30),DMY(30),PCW(MXP,1)
-Dim SWWL(7,1),SWP(7),KEYGRAPH(3),ZDPT(MZ),ZGPT(MZ),SGO(7)
-Dim DWPT(MZ,10),ZLIPT(20),ZDOPT(20),DRT(20),DLT(20),LRT(20),LLT(20)
-Dim WATH(20),WABH(20),ZWA(MZ),WASP(20),WAPT(MZ)
-Dim DR$(10),DL$(10),LR$(10),LL$(10),BSFX(MZ)
-Dim LSP(20)
-Dim LEVELTEXT$(15),SWT(10),BWT(10),IACE$(15)
-Dim SAM$(61),BSFXNAME(15)
-Dim LABEL$(100),M_REM2(20)
-'
-'
-'
-Global OB$(),ECHO(),CO(),I(),SGAD(),D_INK(),GPAL(),LW(),GAD24(),SAM$(),GAD16(),GAD10(),LOCK()
-Global OPS(),LOPS(),SPRDATA()
-Global TELZO(),TELX(),TELZ(),CPTUL(),USED(),WB(),UWB()
-Global BUT$(),PX(),PY(),ZO(),ZP(),WT(),ZW(),ZH(),ZC(),ZB(),UZB(),OBX(),OBZ(),ZZ()
-Global UZH(),ZPBR(),ZRG(),ZFG(),ZWG(),WD(),ZD(),DC(),UZRG(),UZFG(),UZWG()
-Global CPTX(),CPTY(),CPTZ(),ZCPT(),UZCPT(),RB(),FB()
-Global VCPL(),VCPR(),LP(),RP(),ZU(),PU()
-Global PN(),X(),Y(),D(),SOW(),PW(),CORD(),LIFTC()
-Global WLI(),ZLI()
-Global DMX(),DMZ(),DMY(),PCW(),SWWL(),SWP(),KEYGRAPH()
-Global ZDPT(),ZGPT(),SGO(),DWPT(),ZLIPT(),ZDOPT(),DRT(),DLT(),LRT(),LLT()
-Global WATH(),WABH(),ZWA(),WASP(),WAPT(),DR$(),DL$(),IACE$()
-Global LR$(),LL$(),BSFX(),SWT(),BWT(),LSP()
-Global LEVELTEXT$(),M_REM2()
-Global A$,ALTO,BSFX,CCP,CMODE,CONTP,COBJ,CP,CZ,CZ2,D1,DLOCKED,DWALL
-Global EBX,EZONE,FB,FL,FLH,FR,F_IDCMP
-Global LG,LLOCKED,LS,LWCHUNK,LWGW
-Global MP,MPX,MU,MZ,M
-Global NCPT,NDO,NL,NO,NP,NZ,NWA
-Global OBTO,OFB,OP,OPO,OT,OZFG,OZFGS,OZRG,OZRGS
-Global P1,P2,PAN,PANF,PBR,PBRF,PDTA,PDTAF,PERMCALC,PLX,PLY,PLZ,PLX2,PLY2,PLZ2,PZ
-Global RB,RBO,RECPT,RFH
-Global SC,STQ,STRTANIM,SWN,SCR_MODE
-Global TEAM,TL,TR,TW,TXT,UPORLO
-Global VT,VSUM,WAH,WGH,WGW
-Global X,XL,XM,XO,XRES,XC
-Global Y,YM,YO,YC,YRES
-Global ZC,ZE,ZFG,ZFGS,ZGW,ZIP,ZRG,ZRGS,ZWG,ZWGC,ZWGL,KSH
-Global DIAL1,DIAL2,SHMODE,GRIDSET,VER$,VDA$
-Global AUTOSTAIR1,AUTOSTAIR1B,AUTOSTAIR2,AUTOSTAIR3,LINK,PALC
-Global GLINK,GCLIP,GCHECK,GFILE$,PRE1,MPTR,LRO,LGU
-Global O_POINT,O_CPT,CPACK$,P_PRG$
-' NEVER make these global
-'WX,WY,X1,X2,X3,X4,Y1,Y2,Y3,Y4 
-'
-'  Open Locale 
-'
-GFILE$="LevelED_303.guide"
-If Exist(Dir$+"catalogs") : Exec "Assign Locale: "+Dir$+" add" : End If 
-If Exist(Dir$+"c") : Exec "Assign C: "+Dir$+"C/ add" : End If 
-Open Catalog "AB3DII-Edit.catalog","english"
-Trap Screen Close 0
-_CHECK_TOOLS
-F_IDCMP=$8+$10+$20+$40+$100+$200+$400+$200000
-'
-' Check assign 
-'
-If Not Exist("Ab3:") : Exec "Assign Ab3: "+Dir$ : End If 
-If Not Exist("Tkg1:") : Exec "Assign Tkg1: Ab3:" : End If 
-If Not Exist("Tkg2:") : Exec "Assign Tkg2: Ab3:" : End If 
-If Not Exist("SFX:") : Exec "Assign SFX: Ab3:" : End If 
-_INIT_PROGRAM
-DIAL1=True : DIAL2=0
-P1=-1 : P2=-2
-_REDRAW
-OP=38 : _INITDEF
-Amos To Back 
-_DO_MAIN
-_END_PROGRAM
+   Set Buffer 650
+   Amos To Back 
+   VER$="AlienBreed 3DII LevelEd V3.04"
+   VDA$="19-05-2023"
+   Flush Libs 
+   _amos Name "AB3DII_LevelED"
+   '
+   '
+   '
+   Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL
+   MXP=600 : MZ=256 : MCP=99 : MOBJ=200
+   '
+   '
+   '
+   Dim OB$(10),ECHO(MZ),CO(260),I(180),GPAL(16),D_INK(20),W(10,2),LW(10),GAD24(40),GAD16(40),GAD10(50),LOCK(20)
+   Dim OPS(20,6),LOPS(20,6),SGAD(120),SPRDATA(20,10)
+   Dim TELZO(MZ),TELX(MZ),TELZ(MZ),CPTUL(MCP+1),USED(MZ),WB(MZ,10),UWB(MZ,10)
+   Dim BUT$(59),PX(MXP),PY(MXP),ZO(MZ,10),ZP(MZ),WT(MZ,10),ZW(MZ,10,1)
+   Dim ZH(MZ,3),ZC(MZ,10),ZB(MZ),UZB(MZ),OBX(MOBJ),OBZ(MOBJ),ZZ(MZ,10)
+   Dim UZH(MZ,3),ZPBR(MZ,10,3),ZRG(MZ,2),ZFG(MZ,2),ZWG(MZ,10,3),WD(MZ,10),ZD(MZ),DC(20)
+   Dim UZRG(MZ,2),UZFG(MZ,2),UZWG(MZ,10,3)
+   Dim VECT$(20),CPTX(MCP+1),CPTY(MCP+1),CPTZ(MCP+1),ZCPT(MZ),UZCPT(MZ)
+   Dim RB(MZ),FB(MZ)
+   Dim VCPL(MZ),VCPR(MZ),LP(MZ,100),RP(MZ,100),ZU(MZ),PU(MXP)
+   Dim PN(MXP),X(4),Y(4),D(MXP,3),SOW(20),PW(MXP),CORD(MZ),LIFTC(20)
+   Dim WLI(MZ,10),ZLI(MZ),DMX(30),DMZ(30),DMY(30),PCW(MXP,1)
+   Dim SWWL(7,1),SWP(7),KEYGRAPH(3),ZDPT(MZ),ZGPT(MZ),SGO(7)
+   Dim DWPT(MZ,10),ZLIPT(20),ZDOPT(20),DRT(20),DLT(20),LRT(20),LLT(20)
+   Dim WATH(20),WABH(20),ZWA(MZ),WASP(20),WAPT(MZ)
+   Dim DR$(10),DL$(10),LR$(10),LL$(10),BSFX(MZ)
+   Dim LSP(20)
+   Dim LEVELTEXT$(15),SWT(10),BWT(10),IACE$(15)
+   Dim SAM$(61),BSFXNAME(15)
+   Dim LABEL$(100),M_REM2(20)
+   '
+   '
+   '
+   Global OB$(),ECHO(),CO(),I(),SGAD(),D_INK(),GPAL(),LW(),GAD24(),SAM$(),GAD16(),GAD10(),LOCK()
+   Global OPS(),LOPS(),SPRDATA()
+   Global TELZO(),TELX(),TELZ(),CPTUL(),USED(),WB(),UWB()
+   Global BUT$(),PX(),PY(),ZO(),ZP(),WT(),ZW(),ZH(),ZC(),ZB(),UZB(),OBX(),OBZ(),ZZ()
+   Global UZH(),ZPBR(),ZRG(),ZFG(),ZWG(),WD(),ZD(),DC(),UZRG(),UZFG(),UZWG()
+   Global CPTX(),CPTY(),CPTZ(),ZCPT(),UZCPT(),RB(),FB()
+   Global VCPL(),VCPR(),LP(),RP(),ZU(),PU()
+   Global PN(),X(),Y(),D(),SOW(),PW(),CORD(),LIFTC()
+   Global WLI(),ZLI()
+   Global DMX(),DMZ(),DMY(),PCW(),SWWL(),SWP(),KEYGRAPH()
+   Global ZDPT(),ZGPT(),SGO(),DWPT(),ZLIPT(),ZDOPT(),DRT(),DLT(),LRT(),LLT()
+   Global WATH(),WABH(),ZWA(),WASP(),WAPT(),DR$(),DL$(),IACE$()
+   Global LR$(),LL$(),BSFX(),SWT(),BWT(),LSP()
+   Global LEVELTEXT$(),M_REM2()
+   Global A$,ALTO,BSFX,CCP,CMODE,CONTP,COBJ,CP,CZ,CZ2,D1,DLOCKED,DWALL
+   Global EBX,EZONE,FB,FL,FLH,FR,F_IDCMP
+   Global LG,LLOCKED,LS,LWCHUNK,LWGW
+   Global MP,MPX,MU,MZ,M
+   Global NCPT,NDO,NL,NO,NP,NZ,NWA
+   Global OBTO,OFB,OP,OPO,OT,OZFG,OZFGS,OZRG,OZRGS
+   Global P1,P2,PAN,PANF,PBR,PBRF,PDTA,PDTAF,PERMCALC,PLX,PLY,PLZ,PLX2,PLY2,PLZ2,PZ
+   Global RB,RBO,RECPT,RFH
+   Global SC,STQ,STRTANIM,SWN,SCR_MODE
+   Global TEAM,TL,TR,TW,TXT,UPORLO
+   Global VT,VSUM,WAH,WGH,WGW
+   Global X,XL,XM,XO,XRES,XC
+   Global Y,YM,YO,YC,YRES
+   Global ZC,ZE,ZFG,ZFGS,ZGW,ZIP,ZRG,ZRGS,ZWG,ZWGC,ZWGL,KSH
+   Global DIAL1,DIAL2,SHMODE,GRIDSET,VER$,VDA$
+   Global AUTOSTAIR1,AUTOSTAIR1B,AUTOSTAIR2,AUTOSTAIR3,LINK,PALC
+   Global GLINK,GCLIP,GCHECK,GFILE$,PRE1,MPTR,LRO,LGU
+   Global O_POINT,O_CPT,CPACK$,P_PRG$
+   ' NEVER make these global
+   'WX,WY,X1,X2,X3,X4,Y1,Y2,Y3,Y4 
+   '
+   '  Open Locale 
+   '
+   GFILE$="LevelED_303.guide"
+   If Exist(Dir$+"catalogs") : Exec "Assign Locale: "+Dir$+" add" : End If 
+   If Exist(Dir$+"c") : Exec "Assign C: "+Dir$+"C/ add" : End If 
+   Open Catalog "AB3DII-Edit.catalog","english"
+   Trap Screen Close 0
+   _CHECK_TOOLS
+   F_IDCMP=$8+$10+$20+$40+$100+$200+$400+$200000
+   '
+   ' Check assign 
+   '
+   If Not Exist("Ab3:") : Exec "Assign Ab3: "+Dir$ : End If 
+   If Not Exist("Tkg1:") : Exec "Assign Tkg1: Ab3:" : End If 
+   If Not Exist("Tkg2:") : Exec "Assign Tkg2: Ab3:" : End If 
+   If Not Exist("SFX:") : Exec "Assign SFX: Ab3:" : End If 
+   _INIT_PROGRAM
+   DIAL1=True : DIAL2=0
+   P1=-1 : P2=-2
+   _REDRAW
+   OP=38 : _INITDEF
+   Amos To Back 
+   _DO_MAIN
+   _END_PROGRAM
 End 
 
 Procedure _DO_MAIN
@@ -211,11 +211,11 @@ Procedure _IMCHECK
    M1=_wnd Id Event Menu
    M2=_wnd Id Event Item
    M3=_wnd Id Event Sub
-   
+
    On M1+1 Gosub MPROJ,MVIEW,MLEVE,MGAME,MTOOL,MMISC
-   Pop Proc[False]
-   
-   MPROJ:
+Pop Proc[False]
+
+MPROJ:
    If M2=0 : _IPICKBUTTON[38] : End If 
    If M2=1 : _LOAD_LEVEL[""] : End If 
    If M2=2 : _IPICKBUTTON[6] : _SAVE_LEVEL[""] : End If 
@@ -225,9 +225,9 @@ Procedure _IMCHECK
    If M2=6 : _MAKE_LEVEL["",True] : End If 
    If M2=8 : _ICONIFY : End If 
    If M2=9 and M3=0 : Pop Proc[True] : End If 
-   Return 
-   
-   MVIEW:
+Return 
+
+MVIEW:
    _wnd Id Use 0
    X=(_wnd Id Width/2)*MU+XO : Y=(_wnd Id Height/2*YRES)*MU+YO
    If M2=0 : MU=MU*2 : VT=VT*2 : XO=X-(_wnd Id Width/2*MU) : YO=Y-(_wnd Id Height/2*YRES*MU) : _REDRAW : End If 
@@ -252,17 +252,17 @@ Procedure _IMCHECK
    If M2=5 : Bchg M3,SHMODE : _SHOW_MENU : _REDRAW : End If 
    If M2=6 and M3=3 : RECPT=0 : _SHOW_MENU : _REDRAW : End If 
    If M2=6 : Bchg M3,RECPT : _SHOW_MENU : _REDRAW : End If 
-   Return 
-   
-   MLEVE:
+Return 
+
+MLEVE:
    If M2=0 : _N_SETLEVELTEXT : End If 
    If M2=2 : End If 
    If M2=3 : _CHECK_LEVEL : End If 
    If M2=4 : _OPT_ZONES : End If 
    If M2=5 : _OPT_POINTS : End If 
-   Return 
-   
-   MGAME:
+Return 
+
+MGAME:
    Auto View On 
    If M2=0 : _GL_LEVELS : End If 
    If M2=1 : _GL_LGFX : End If 
@@ -279,9 +279,9 @@ Procedure _IMCHECK
    If M2=13 : _SAVE_LINK : End If 
    If M2=14 : _LOAD_DEF_LINK : End If 
    If M2=15 : _SAVE_DEF_LINK : End If 
-   Return 
-   
-   MTOOL:
+Return 
+
+MTOOL:
    Auto View On 
    If M2=0 : _TL_LEVELINTRO : End If 
    If M2=1 : _TL_PACKFILE : End If 
@@ -306,15 +306,15 @@ Procedure _IMCHECK
       If M3=0 : _TL_ED_CFLOOR : End If 
    End If 
    Amos To Back : _scr Id Show 1
-   Return 
-   
-   MMISC:
+Return 
+
+MMISC:
    If M2=0 : _S_PLAY_TRACK : End If 
    If M2=1 : _KILL_TRACK : End If 
    If M2=3 : _SHOW_AG["Main"] : End If 
-   Return 
-   
-   
+Return 
+
+
    If M1=4
       If M2=1 : _N_SETLEVELTEXT : End If 
       If M2=5 : _STATISTICS[0] : End If 
@@ -325,12 +325,12 @@ End Proc[E]
 Procedure _IPICKBUTTON[F]
    D1=_wnd Id Event Gadget
    If OP=D1-1 : Pop Proc : End If 
-If F=True : D1=OP+1 : Else If F : D1=F+1 : End If 
-   
+   If F=True : D1=OP+1 : Else If F : D1=F+1 : End If 
+
    _TIDYDEF
-   
+
    OP=D1-1
-   
+
    _INITDEF
 End Proc
 '
@@ -387,7 +387,7 @@ Procedure _CHECK_TOOLS
          W$=_tool Get$(IC,"MUSIC") : _PLAY_TRACK[W$]
       End If 
    End If 
-   
+
    '
    ' Check and append filenames.. 
    '
@@ -413,7 +413,7 @@ Procedure _INIT_MSCREEN
          Trap _scr Id Open 1,0,0,664,266,8,Hires,0,VER$
       End If 
    End If 
-   
+
    Bank Swap 1,597
    '  
    ' Get 16*16 pics for GT-Gadgets  
@@ -495,7 +495,7 @@ Procedure _INIT_MSCREEN
    ' Zone-drawing colours 
    '
    D_INK(4)=12 : D_INK(5)=13 : D_INK(6)=9
-   
+
    D_INK(7)=4 : D_INK(8)=10 : D_INK(9)=9
    '
    ' Zone-Hilite colours
@@ -508,7 +508,7 @@ Procedure _INIT_MSCREEN
    ' Zone-drawing colours 
    '
    D_INK(4)=3 : D_INK(5)=1 : D_INK(6)=9
-   
+
    D_INK(7)=4 : D_INK(8)=10 : D_INK(9)=9
    '
    ' Zone-Hilite colours
@@ -580,7 +580,7 @@ Procedure _INIT_MSCREEN
    ' Menu Setup 
    '
    Reserve As Gt Menus 490,120,1
-   
+
    _gt Add Menu Catalog String$(1100,"Project"),
    _gt Add Item Catalog String$(1176,"About"),"",,
    _gt Add Item Catalog String$(1105,"Load Level"),"",,
@@ -626,7 +626,7 @@ Procedure _INIT_MSCREEN
    _gt Add Item Catalog String$(1114,"Check Level"),"",,
    _gt Add Item Catalog String$(1186,"Optimize Zones"),"",,
    _gt Add Item Catalog String$(1187,"Optimize Points"),"",,
-   
+
    _gt Add Menu Catalog String$(1103,"Game-Setup"),
    _gt Add Item Catalog String$(1122,"Levels"),"",,
    _gt Add Item Catalog String$(1203,"Level GFX's"),"",,
@@ -677,7 +677,7 @@ Procedure _INIT_MSCREEN
    _gt Add Item Catalog String$(1200,"Kill Music"),"",,
    _gt Add Item -1,"",,
    _gt Add Item Catalog String$(1201,"Help"),"",,
-   
+
    Reserve As Gt Gadgets 491,50,1
    _gt Set Mode 0,"",0,1
    For A=0 To 12
@@ -685,16 +685,16 @@ Procedure _INIT_MSCREEN
          _gt Image A*3+B+1,B*32,12+A*32/YRES,$1,SGAD((A*3+B)*2+1),SGAD((A*3+B)*2+2)
       Next B
    Next A
-   
+
    _wnd Id Open 9,0,0,16,0,$100+$800+$1000,F_IDCMP,0,""
    _wnd Id Titles "",VER$
    _gt Menus Attach 490
-   
+
    _wnd Id Open 0,96,0,_scr Id Width(1)-96,_scr Id Height(1),$100+$800+$1000+$10000,F_IDCMP,0,""
    _wnd Id Titles "",VER$
    _wnd Id Cls 0
    _gt Menus Attach 490
-   
+
    _wnd Id Open 1,0,0,96,_scr Id Height(1),$100+$800,F_IDCMP,0,""
    _wnd Id Titles "",VER$
    _wnd Id Cls 3
@@ -891,7 +891,7 @@ Procedure _STATISTICS[TY]
          WOB=0 : WAL=0
          If NO>0
             For A=0 To NO
-            S=Start(12)+A*32 : If Peek(S)=0 : Inc WAL : Else If Peek(S)=1 : Inc WOB : End If 
+               S=Start(12)+A*32 : If Peek(S)=0 : Inc WAL : Else If Peek(S)=1 : Inc WOB : End If 
             Next A
          End If 
          Vdialog$(17,0)=Catalog String$(1300,"General statistics")
@@ -1200,12 +1200,12 @@ Procedure _INIT_PROGRAM
    For A=0 To 100 : Turbo Plot Rnd(15),Rnd(15),1 : Next 
    Get Sprite 5,0,0 To 16,16
    Hot Spot 3,2,2
-   
+
    'HILITE(0,0)=-1 : HILITE(0,1)=-1 
    'HILITE(1,0)=2 : HILITE(1,1)=-1
    'HILITE(2,0)=5 : HILITE(2,1)=-1
    'HILITE(3,0)=3 : HILITE(3,1)=4 
-   
+
    XO=-(128*10) : YO=-(128*6)
    MU=4 : NZ=0 : CZ=0 : ZE=0 : PZ=-1
    OP=6 : PX(MXP)=$7FFF : PY(MXP)=$7FFF
@@ -1234,23 +1234,23 @@ End Proc
 Procedure _N_SETLEVELTEXT
    '
    Trap _wnd Id Open 8,0,12,640,240,$2+$8,$40+$200,0,"Text Strings.."
-   
+
    _wnd Id Titles Catalog String$(1050,"Edit Text-strings"),VER$
    _wnd Id Activate 8
-   
+
    Reserve As Gt Gadgets 497,30,1
    _gt Set String Mode True,80,True,False
-   
+
    For A=0 To 9
       _gt String A+10,32,A*24+12,600,12,,Str$(A)-" "+":","",$0
       _gt String A+20,32,A*24+22,600,12,,"","",$0
    Next A
-   
+
    '
    ' Use gadgets
    '
    _gt Gadgets Attach 497
-   
+
    Do 
       '
       ' Update texts 
@@ -1311,7 +1311,7 @@ End Proc[D]
 Procedure _REDRAW
    _wnd Id Use 0
    _wnd Id Cls D_INK(0)
-   
+
    '
    '  Make Grid 
    '
@@ -1434,10 +1434,10 @@ Procedure _SHOWOBJADD
    End If 
    _gt Set Text 2,W$,,,
    For A=0 To 15
-   If Btst(A,DLOCKED) : _gt Set Checkbox 20+A,1 : Else _gt Set Checkbox 20+A,0 : End If 
+      If Btst(A,DLOCKED) : _gt Set Checkbox 20+A,1 : Else _gt Set Checkbox 20+A,0 : End If 
    Next 
    For A=0 To 15
-   If Btst(A,LLOCKED) : _gt Set Checkbox 40+A,1 : Else _gt Set Checkbox 40+A,0 : End If 
+      If Btst(A,LLOCKED) : _gt Set Checkbox 40+A,1 : Else _gt Set Checkbox 40+A,0 : End If 
    Next 
    _gt Set Cycle 5,,PERMCALC
    _gt Set Cycle 6,,UPORLO
@@ -1454,7 +1454,7 @@ Procedure _SHOWOBJADD
 End Proc
 Procedure _SHOWHEIGHTS
    _gt Gadgets Bank 499
-   
+
    If CZ>-1
       For A=0 To 4
          If A=0 : W=UZH(CZ,1) : End If 
@@ -1495,12 +1495,12 @@ Procedure _SHOWHEIGHTS
       _gt Set Slider 9,0,0,9000,,""
       _gt Set Slider 10,0,0,9000,,""
    End If 
-If Btst(1,CMODE) : _gt Set Checkbox 15,1 : Else _gt Set Checkbox 15,0 : End If 
-If Btst(2,CMODE) : _gt Set Checkbox 25,1 : Else _gt Set Checkbox 25,0 : End If 
-If Btst(3,CMODE) : _gt Set Checkbox 35,1 : Else _gt Set Checkbox 35,0 : End If 
-If Btst(4,CMODE) : _gt Set Checkbox 45,1 : Else _gt Set Checkbox 45,0 : End If 
-If Btst(5,CMODE) : _gt Set Checkbox 55,1 : Else _gt Set Checkbox 55,0 : End If 
-   
+   If Btst(1,CMODE) : _gt Set Checkbox 15,1 : Else _gt Set Checkbox 15,0 : End If 
+   If Btst(2,CMODE) : _gt Set Checkbox 25,1 : Else _gt Set Checkbox 25,0 : End If 
+   If Btst(3,CMODE) : _gt Set Checkbox 35,1 : Else _gt Set Checkbox 35,0 : End If 
+   If Btst(4,CMODE) : _gt Set Checkbox 45,1 : Else _gt Set Checkbox 45,0 : End If 
+   If Btst(5,CMODE) : _gt Set Checkbox 55,1 : Else _gt Set Checkbox 55,0 : End If 
+
    'If AUTOSTAIR1=5000 : Vdialog$(2,10)=Catalog String$(115,"AutoStair:")+Catalog String$(5,"<OFF>") : Else : Vdialog$(2,10)=Catalog String$(115,"AutoStair:")+Right$(Space$(5)+Str$(AUTOSTAIR1+AUTOSTAIR2),5) : End If 
    'Dialog Update 2,61
    'If Btst(0,PRE1) 
@@ -1542,11 +1542,11 @@ Procedure _SHOWWATER
    _gt Set Integer 21,WATH(NWA)
 End Proc
 Procedure _SHOWDEFWALL
-If Btst(0,DWALL) : _gt Set Cycle 3,,1 : Else _gt Set Cycle 3,,0 : End If 
+   If Btst(0,DWALL) : _gt Set Cycle 3,,1 : Else _gt Set Cycle 3,,0 : End If 
 End Proc
 Procedure _SHOWBRIGHTSLIDE
    _gt Gadgets Bank 499
-   
+
    PBR=0 : PDTA=0 : PAN=0 : PBRF=0 : PDTAF=0 : PANF=0
    If CZ>-1
       If OP=10 and CP>-1
@@ -1575,21 +1575,21 @@ Procedure _SHOWBRIGHTSLIDE
    _gt Set Slider 12,PBRF+20,0,40,,""
    _gt Set Slider 14,PANF,0,16,,""
    _gt Set Slider 16,PDTAF,0,16,,""
-If CMODE : _gt Set Image 19,GAD24(1),GAD24(0) : Else _gt Set Image 19,GAD24(0),GAD24(1) : End If 
+   If CMODE : _gt Set Image 19,GAD24(1),GAD24(0) : Else _gt Set Image 19,GAD24(0),GAD24(1) : End If 
 End Proc
 Procedure _SHOWDOOR
    ND=NDO
    _gt Gadgets Bank 499
-   
+
    _gt Set Text 1,Catalog String$(160,"Door Num:")+Chr$(ND+65),,,
    _gt Set Integer 12,OPS(ND,2)
    _gt Set Integer 13,OPS(ND,0)
-   
-If OPS(ND,3)>0 : _gt Set Text 4,Catalog String$(163,"Opening SFX:")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,3)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 4,Catalog String$(163,"Opening SFX:")+Catalog String$(5,"<OFF>"),,, : End If 
-If OPS(ND,5)>0 : _gt Set Text 5,Catalog String$(164,"Opened SFX :")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,5)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 5,Catalog String$(164,"Opened SFX :")+Catalog String$(5,"<OFF>"),,, : End If 
+
+   If OPS(ND,3)>0 : _gt Set Text 4,Catalog String$(163,"Opening SFX:")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,3)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 4,Catalog String$(163,"Opening SFX:")+Catalog String$(5,"<OFF>"),,, : End If 
+   If OPS(ND,5)>0 : _gt Set Text 5,Catalog String$(164,"Opened SFX :")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,5)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 5,Catalog String$(164,"Opened SFX :")+Catalog String$(5,"<OFF>"),,, : End If 
    _gt Set Integer 16,OPS(ND,1)
-If OPS(ND,4)>0 : _gt Set Text 7,Catalog String$(166,"Closing SFX:")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,4)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 7,Catalog String$(166,"Closing SFX:")+Catalog String$(5,"<OFF>"),,, : End If 
-If OPS(ND,6)>0 : _gt Set Text 8,Catalog String$(167,"Closed SFX :")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,6)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 8,Catalog String$(167,"Closed SFX :")+Catalog String$(5,"<OFF>"),,, : End If 
+   If OPS(ND,4)>0 : _gt Set Text 7,Catalog String$(166,"Closing SFX:")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,4)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 7,Catalog String$(166,"Closing SFX:")+Catalog String$(5,"<OFF>"),,, : End If 
+   If OPS(ND,6)>0 : _gt Set Text 8,Catalog String$(167,"Closed SFX :")+Left$(Dr File$(Peek$(LINK+$A40+(OPS(ND,6)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 8,Catalog String$(167,"Closed SFX :")+Catalog String$(5,"<OFF>"),,, : End If 
    _gt Set Cycle 9,,DRT(ND)
    _gt Set Cycle 10,,DLT(ND)
    If OPO<>ND
@@ -1615,11 +1615,11 @@ Procedure _SHOWLIFT
    Else : _gt Set Cycle 2,,1
    End If 
    _gt Set Integer 13,LOPS(NL,0)
-If LOPS(NL,3)>0 : _gt Set Text 4,Catalog String$(183,"Raise SFX  :")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,3)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 4,Catalog String$(183,"Raise SFX  :")+Catalog String$(5,"<OFF>"),,, : End If 
-If LOPS(NL,5)>0 : _gt Set Text 5,Catalog String$(184,"At Top SFX :")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,5)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 5,Catalog String$(184,"At Top SFX :")+Catalog String$(5,"<OFF>"),,, : End If 
+   If LOPS(NL,3)>0 : _gt Set Text 4,Catalog String$(183,"Raise SFX  :")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,3)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 4,Catalog String$(183,"Raise SFX  :")+Catalog String$(5,"<OFF>"),,, : End If 
+   If LOPS(NL,5)>0 : _gt Set Text 5,Catalog String$(184,"At Top SFX :")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,5)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 5,Catalog String$(184,"At Top SFX :")+Catalog String$(5,"<OFF>"),,, : End If 
    _gt Set Integer 16,LOPS(NL,1)
-If LOPS(NL,4)>0 : _gt Set Text 7,Catalog String$(186,"Lower SFX  :")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,4)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 7,Catalog String$(186,"Lower SFX  :")+Catalog String$(5,"<OFF>"),,, : End If 
-If LOPS(NL,6)>0 : _gt Set Text 8,Catalog String$(187,"At Bot. SFX:")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,6)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 8,Catalog String$(187,"At Bot. SFX:")+Catalog String$(5,"<OFF>"),,, : End If 
+   If LOPS(NL,4)>0 : _gt Set Text 7,Catalog String$(186,"Lower SFX  :")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,4)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 7,Catalog String$(186,"Lower SFX  :")+Catalog String$(5,"<OFF>"),,, : End If 
+   If LOPS(NL,6)>0 : _gt Set Text 8,Catalog String$(187,"At Bot. SFX:")+" "+Left$(Dr File$(Peek$(LINK+$A40+(LOPS(NL,6)-1)*64,64,Chr$(0))),11),,, : Else : _gt Set Text 8,Catalog String$(187,"At Bot. SFX:")+Catalog String$(5,"<OFF>"),,, : End If 
    _gt Set Cycle 9,,LRT(NL)
    _gt Set Cycle 10,,LLT(NL)
    If CZ>-1
@@ -1652,7 +1652,7 @@ End Proc
 Procedure _SHOWDEFGFX[FULL]
    Shared W(),BFLX,BFLY,BROX,BROY
    Dim WGX(10),WGY(10),WGU(10)
-If OP=18 : LEV=1 : Else LEV=0 : End If 
+   If OP=18 : LEV=1 : Else LEV=0 : End If 
    SRE=2
    If FULL
       Trap _wnd Id Use 3
@@ -1689,7 +1689,7 @@ If OP=18 : LEV=1 : Else LEV=0 : End If
          WGY(A)=WGY(A)/SRE+14
       Next A
       WGU=False
-      
+
       MXX=480/SRE : MXY=216/SRE
       WBX=-$8000 : WBY=-$8000 : WSX=-WBX : WSY=-WBY
       WXO=128/SRE : WYO=(136+12)/SRE
@@ -1833,7 +1833,7 @@ If OP=18 : LEV=1 : Else LEV=0 : End If
       _wnd Id Ink D_INK(5),D_INK(0),D_INK(0)
       _wnd Id Text WXO,WYO+6,Str$(ZFGS)-" "
    End If 
-   
+
    For A=0 To ZP(CZ)-1
       WXO=W(A,0) : WYO=W(A,1)
       If LEV=0
@@ -1897,7 +1897,7 @@ Procedure _SHOWDEFGRAPH
          If Length(701+ZWGC)<100
             _LOAD[701+ZWGC,Peek$(LINK+$14760+ZWGC*64,64,Chr$(0))]
          End If 
-      If Length(701+ZWGC)=0 and ZWGC>0 : Dec ZWGC : Else : Exit : End If 
+         If Length(701+ZWGC)=0 and ZWGC>0 : Dec ZWGC : Else : Exit : End If 
       Loop 
       LG=-200
    End If 
@@ -1905,7 +1905,7 @@ Procedure _SHOWDEFGRAPH
       STQ=1
       If Btst(8,PRE1) : STQ=2 : End If 
       WXO=12 : WYO=12
-      
+
       _wnd Id Ink I(1),I(1),I(1) : _wnd Id Bar WXO,WYO To WXO+127,WYO+63/YRES
       Trap ADR=Start(701+ZWGC)
       If Errtrap=0
@@ -2020,8 +2020,8 @@ End Proc
 '
 Procedure _COND_DEFGFX
    GA=_wnd Id Event Gadget
-If OP=18 : LEV=1 : Else LEV=0 : End If 
-   
+   If OP=18 : LEV=1 : Else LEV=0 : End If 
+
    CCC=(GA/12)-2 : RE=False
    CH=GA mod 12
    If CH=2
@@ -2150,9 +2150,9 @@ If OP=18 : LEV=1 : Else LEV=0 : End If
       Gosub S_GFX_F
    End If 
    If RE : _SHOWDEFGFX[False] : End If 
-   Pop Proc
-   
-   S_GFX_2:
+Pop Proc
+
+S_GFX_2:
    E=False
    If LEV=0
       If CCC>-1
@@ -2171,8 +2171,8 @@ If OP=18 : LEV=1 : Else LEV=0 : End If
          End If 
       End If 
    End If 
-   Return 
-   S_GFX_1:
+Return 
+S_GFX_1:
    E=False
    If LEV=0
       If CCC>-1
@@ -2191,8 +2191,8 @@ If OP=18 : LEV=1 : Else LEV=0 : End If
          End If 
       End If 
    End If 
-   Return 
-   S_GFX_F:
+Return 
+S_GFX_F:
    E=False
    If LEV=0
       If CCC>-1
@@ -2215,7 +2215,7 @@ If OP=18 : LEV=1 : Else LEV=0 : End If
          RE=True
       End If 
    End If 
-   Return 
+Return 
 End Proc
 Procedure _COND_DEFDOOR
    WNDO=NDO : OPO=-1
@@ -2266,7 +2266,7 @@ Procedure _COND_DEFLIFT
    WNL=NL : OPO=-1
    C=_wnd Id Event Gadget
    _gt Gadgets Bank 499
-If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If 
+   If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If 
    If C=0 : Pop Proc
    Else If C=2 : LSP(NL)=1-LSP(NL)
    Else If C=13 : LOPS(NL,0)=Range(_gt What Integer(13),0 To 16)
@@ -2317,9 +2317,9 @@ Procedure _COND_DEFHEIGHTS
    _gt Gadgets Bank 499
    C=_wnd Id Event Gadget
    E=_wnd Id Event Code
-If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If 
+   If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If 
    M=0
-   
+
    If CZ>-1
       If C=6 : UZH(CZ,1)=-(E-5000) : End If 
       If C=7 : UZH(CZ,0)=-(E-5000) : End If 
@@ -2333,7 +2333,7 @@ If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If
       If C=15 : Bchg 1,CMODE : End If 
       If C=16 : _SURE["",Catalog String$(1800,"Copy U-Roof Height To All Zones ?")] : If Param : For A=0 To NZ : UZH(A,1)=UZH(CZ,1) : Next A : _REDRAW : End If : End If 
       If C=18 : UZH(CZ,1)=Range(_gt What Integer(18),-4000 To 5000) : End If 
-      
+
       If C=21 : UZH(CZ,0)=Range(UZH(CZ,0)-8*D,-4000 To 5000) : End If 
       If C=22 : UZH(CZ,0)=Range(UZH(CZ,0)-1*D,-4000 To 5000) : End If 
       If C=23 : UZH(CZ,0)=Range(UZH(CZ,0)+1*D,-4000 To 5000) : End If 
@@ -2341,7 +2341,7 @@ If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If
       If C=25 : Bchg 2,CMODE : End If 
       If C=26 : _SURE["",Catalog String$(1801,"Copy U-Floor Height To All Zones ?")] : If Param : For A=0 To NZ : UZH(A,0)=UZH(CZ,0) : Next A : _REDRAW : End If : End If 
       If C=28 : UZH(CZ,0)=Range(_gt What Integer(28),-4000 To 5000) : End If 
-      
+
       If C=31 : ZH(CZ,1)=Range(ZH(CZ,1)-8*D,-4000 To 5000) : End If 
       If C=32 : ZH(CZ,1)=Range(ZH(CZ,1)-1*D,-4000 To 5000) : End If 
       If C=33 : ZH(CZ,1)=Range(ZH(CZ,1)+1*D,-4000 To 5000) : End If 
@@ -2349,7 +2349,7 @@ If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If
       If C=35 : Bchg 3,CMODE : End If 
       If C=36 : _SURE["",Catalog String$(1802,"Copy L-Roof Height To All Zones ?")] : If Param : For A=0 To NZ : ZH(A,1)=ZH(CZ,1) : Next A : _REDRAW : End If : End If 
       If C=38 : ZH(CZ,1)=Range(_gt What Integer(38),-4000 To 5000) : End If 
-      
+
       If C=41 : ZH(CZ,0)=Range(ZH(CZ,0)-8*D,-4000 To 5000) : End If 
       If C=42 : ZH(CZ,0)=Range(ZH(CZ,0)-1*D,-4000 To 5000) : End If 
       If C=43 : ZH(CZ,0)=Range(ZH(CZ,0)+1*D,-4000 To 5000) : End If 
@@ -2357,7 +2357,7 @@ If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If
       If C=45 : Bchg 4,CMODE : End If 
       If C=46 : _SURE["",Catalog String$(1803,"Copy L-Floor Height To All Zones ?")] : If Param : For A=0 To NZ : ZH(A,0)=ZH(CZ,0) : Next A : _REDRAW : End If : End If 
       If C=48 : ZH(CZ,0)=Range(_gt What Integer(48),-4000 To 5000) : End If 
-      
+
       If C=51 : ZH(CZ,2)=Range(ZH(CZ,2)-8*D,-4000 To 5000) : End If 
       If C=52 : ZH(CZ,2)=Range(ZH(CZ,2)-1*D,-4000 To 5000) : End If 
       If C=53 : ZH(CZ,2)=Range(ZH(CZ,2)+1*D,-4000 To 5000) : End If 
@@ -2365,10 +2365,10 @@ If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If
       If C=55 : Bchg 5,CMODE : End If 
       If C=56 : _SURE["",Catalog String$(1804,"Copy Water Height To All Zones ?")] : If Param : For A=0 To NZ : ZH(A,2)=ZH(CZ,2) : Next A : _REDRAW : End If : End If 
       If C=58 : ZH(CZ,2)=Range(_gt What Integer(58),-4000 To 5000) : End If 
-      
+
       If C=61
          If AUTOSTAIR1=5000
-         If Btst(0,AUTOSTAIR3) : AUTOSTAIR1=UZH(CZ,0) : AUTOSTAIR1B=UZH(CZ,1) : Else : AUTOSTAIR1=ZH(CZ,0) : AUTOSTAIR1B=ZH(CZ,1) : End If 
+            If Btst(0,AUTOSTAIR3) : AUTOSTAIR1=UZH(CZ,0) : AUTOSTAIR1B=UZH(CZ,1) : Else : AUTOSTAIR1=ZH(CZ,0) : AUTOSTAIR1B=ZH(CZ,1) : End If 
          Else 
             AUTOSTAIR1=5000
          End If 
@@ -2544,8 +2544,8 @@ Procedure _COND_DEFGRAPH
    If C=6 : Add ZWGC,1 : ZWG=0 : End If 
    If C=7 and WGW<256 : WGW=WGW*2 : End If 
    If C=8 and WGW>2 : WGW=WGW/2 : End If 
-If C=9 : If ZWGL=0 : ZWGL=1 : Else : ZWGL=0 : End If : End If 
-If C=10 : If ZWGL=0 : ZWGL=2 : Else : ZWGL=0 : End If : End If 
+   If C=9 : If ZWGL=0 : ZWGL=1 : Else : ZWGL=0 : End If : End If 
+   If C=10 : If ZWGL=0 : ZWGL=2 : Else : ZWGL=0 : End If : End If 
    _SHOWDEFGRAPH
 End Proc
 Procedure _COND_DEFROOFGRAPH
@@ -2615,11 +2615,11 @@ End Proc
 '
 Procedure _INITDEFBACKSFX
    Reserve As Gt Gadgets 499,100,1
-   
+
    _gt Set Mode 0,"",1,0
    _gt Set Mode 0,"",0,1
    _gt Set Integer Mode 1,6,1,0
-   
+
    GD=10 : X=16 : Y=12
    For A=0 To 15
       W$=Left$(Dr File$(Peek$(LINK+$A40+Deek(LINK+$14CA0+A*2)*64,64,Chr$(0))),16)
@@ -2630,13 +2630,13 @@ Procedure _INITDEFBACKSFX
       Add Y,12 : Inc GD
       If Y>96 : Y=12 : Add X,148 : End If 
    Next A
-   
-   
+
+
    _wnd Id Open 3,0,_scr Id Height(1)-100,_scr Id Width(1),100,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    _SHOWBACKSFX
 End Proc
 Procedure _INITOBJ
@@ -2644,17 +2644,17 @@ Procedure _INITOBJ
    Reserve As Gt Gadgets 499,60,1
    W1$(0)=Catalog String$(100,"Object Type:")+" "+OB$(0)
    W1$(1)=Catalog String$(100,"Object Type:")+" "+OB$(1)
-   
+
    W2$(0)=Catalog String$(104,"Permanent Calculation:")+" "+Catalog String$(2,"No")
    W2$(1)=Catalog String$(104,"Permanent Calculation:")+" "+Catalog String$(1,"Yes")
-   
+
    W3$(0)=Catalog String$(105,"Start in Up/Lo Rooms:")+" "+Catalog String$(4,"Lower")
    W3$(1)=Catalog String$(105,"Start in Up/Lo Rooms:")+" "+Catalog String$(3,"Upper")
-   
+
    _gt Set Mode 0,"",1,0
    _gt Set Mode 0,"",0,1
    _gt Set Integer Mode 1,6,1,0
-   
+
    _gt Cycle 1,10,12,312,12,,"",Array(W1$(0)),0
    _gt Text 2,10,24,296,12,,"","",1
    _gt Image 16,306,24,1,GAD16(0),GAD16(1)
@@ -2672,13 +2672,13 @@ Procedure _INITOBJ
       _gt Checkbox A+20,128+A*32,70,12,12,,Chr$(A+65),0
       _gt Checkbox A+40,128+A*32,82,12,12,,Chr$(A+65),0
    Next A
-   
-   
+
+
    _wnd Id Open 3,0,_scr Id Height(1)-90,_scr Id Width(1),90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    _SHOWOBJADD
 End Proc
 Procedure _INITDEFGRAPH
@@ -2695,7 +2695,7 @@ Procedure _INITDEFGRAPH
    _gt Image 8,196,33,1,GAD10(10),GAD10(11)
    _gt Image 9,206,33,1,GAD10(12),GAD10(13)
    _gt Image 10,216,33,1,GAD10(14),GAD10(15)
-   
+
    _wnd Id Open 3,0,_scr Id Height(1)-80,_scr Id Width(1),80/YRES,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
@@ -2730,7 +2730,7 @@ Procedure _INITDEFLIFT
    Dim W1$(2)
    W1$(0)=Catalog String$(181,"Start Pos:")+" "+Catalog String$(7,"Bottom")
    W1$(1)=Catalog String$(181,"Start Pos:")+" "+Catalog String$(8,"Top")
-   
+
    Reserve As Gt Gadgets 499,50,1
    _gt Set Mode 0,"",1,0
    _gt Set Mode 0,"",0,1
@@ -2738,17 +2738,17 @@ Procedure _INITDEFLIFT
    _gt Set Integer Mode 1,6,1,0
    _gt Cycle 2,336,12,304,12,,"",Array(W1$(0)),0
    _gt Text 11,10,24,240,12,,"","",1
-   
+
    _gt Image 31,250,24,1,GAD16(2),GAD16(3)
    _gt Image 32,266,24,1,GAD16(4),GAD16(5)
    _gt Image 33,282,24,1,GAD16(6),GAD16(7)
    _gt Image 34,298,24,1,GAD16(8),GAD16(9)
-   
+
    _gt Text 3,10,36,200,12,,"",Catalog String$(182,"Raise Speed:"),0
    _gt Integer 13,224,36,64,12,0,"",1256,1
    _gt Text 6,10,48,200,12,,"",Catalog String$(185,"Lower Speed:"),0
    _gt Integer 16,224,48,64,12,0,"",1256,1
-   
+
    _gt Text 4,336,24,288,12,,"","",1
    _gt Image 44,624,24,1,GAD16(0),GAD16(1)
    _gt Text 5,336,36,288,12,,"","",1
@@ -2757,12 +2757,12 @@ Procedure _INITDEFLIFT
    _gt Image 47,624,48,1,GAD16(0),GAD16(1)
    _gt Text 8,336,60,288,12,,"","",1
    _gt Image 48,624,60,1,GAD16(0),GAD16(1)
-   
+
    _gt Text 17,10,60,150,12,,"",Catalog String$(168,"Raise Conditions:"),0
    _gt Cycle 9,160,60,160,12,,"",Array(LR$(0)),0
    _gt Text 18,10,72,150,12,,"",Catalog String$(169,"Lower Conditions:"),0
    _gt Cycle 10,160,72,160,12,,"",Array(LL$(0)),0
-   
+
    _gt Text 19,10,84,500,12,,"","",1
    _gt Image 21,124,12,1,GAD24(2),GAD24(3)
    _gt Image 22,148,12,1,GAD24(4),GAD24(5)
@@ -2770,12 +2770,12 @@ Procedure _INITDEFLIFT
    _gt Image 24,196,12,1,GAD24(8),GAD24(9)
    _gt Button 25,512,84,64,12,,Catalog String$(92,"Place")
    _gt Button 26,576,84,64,12,,Catalog String$(93,"Remove")
-   
+
    _wnd Id Open 3,0,_scr Id Height(1)-90,_scr Id Width(1),90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    If CZ>-1 : _ZOSHOW[CZ,4] : End If 
    CZ2=-1 : OPO=-1
    For A=0 To NZ : If ZLI(A)=NL+1 : CZ=A : CZ2=CZ : End If : Next A
@@ -2811,7 +2811,7 @@ Procedure _INITDEFDOOR
    _gt Integer 13,224,36,64,12,0,"",1256,1
    _gt Text 6,10,48,200,12,,"",Catalog String$(165,"Closing Speed:"),0
    _gt Integer 16,224,48,64,12,0,"",1256,1
-   
+
    _gt Text 4,336,24,288,12,,"","",1
    _gt Image 34,624,24,1,GAD16(0),GAD16(1)
    _gt Text 5,336,36,288,12,,"","",1
@@ -2820,12 +2820,12 @@ Procedure _INITDEFDOOR
    _gt Image 37,624,48,1,GAD16(0),GAD16(1)
    _gt Text 8,336,60,288,12,,"","",1
    _gt Image 38,624,60,1,GAD16(0),GAD16(1)
-   
+
    _gt Text 17,10,60,150,12,,"",Catalog String$(168,"Raise Conditions:"),0
    _gt Cycle 9,160,60,160,12,,"",Array(DR$(0)),0
    _gt Text 18,10,72,150,12,,"",Catalog String$(169,"Lower Conditions:"),0
    _gt Cycle 10,160,72,160,12,,"",Array(DL$(0)),0
-   
+
    _gt Text 19,10,84,500,12,,"","",1
    _gt Image 21,124,12,1,GAD24(2),GAD24(3)
    _gt Image 22,148,12,1,GAD24(4),GAD24(5)
@@ -2833,12 +2833,12 @@ Procedure _INITDEFDOOR
    _gt Image 24,196,12,1,GAD24(8),GAD24(9)
    _gt Button 25,512,84,64,12,,Catalog String$(92,"Place")
    _gt Button 26,576,84,64,12,,Catalog String$(93,"Remove")
-   
+
    _wnd Id Open 3,0,_scr Id Height(1)-90,_scr Id Width(1),90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    If CZ>-1 : _ZOSHOW[CZ,4] : End If 
    CZ2=-1 : OPO=-1
    For A=0 To NZ : If ZD(A)=NDO+1 : CZ=A : CZ2=CZ : End If : Next A
@@ -2848,11 +2848,11 @@ Procedure _INITDEFDOOR
 End Proc
 Procedure _INITBRIGHTSLIDE
    PBR=0 : PAN=0 : PDTA=0 : CMODE=False
-   
+
    Reserve As Gt Gadgets 499,50,1
    _gt Set Mode 0,"",1,0
    _gt Set Mode 0,"",0,1
-   
+
    _gt Text 40,10,12,56,12,,"",Catalog String$(13,"Roof")+":",0
    _gt Text 1,66,12,88,12,,"","",1
    _gt H Slider 2,154,12,152,12,,"",40*$1000,""
@@ -2867,9 +2867,9 @@ Procedure _INITBRIGHTSLIDE
    _gt H Slider 14,154,68,152,12,,"",16*$1000,""
    _gt Text 15,66,80,88,12,,"","",1
    _gt H Slider 16,154,80,152,12,,"",16*$1000,""
-   
+
    _gt Image 19,616,84,1,GAD24(0),GAD24(1)
-   
+
    _gt Button 21,312,12,192,12,,"Bright; lit from above"
    _gt Button 22,312,24,192,12,,"Bright; lit from below"
    _gt Button 23,312,36,192,12,,"Bright bottom, dark top"
@@ -2880,12 +2880,12 @@ Procedure _INITBRIGHTSLIDE
    _gt Button 28,504,24,136,12,,"Floor Glowing"
    _gt Button 29,504,36,136,12,,"Glowing in sync"
    _gt Button 30,504,48,136,12,,"Glowing off sync"
-   
+
    _wnd Id Open 3,0,_scr Id Height(1)-90,_scr Id Width(1),90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    _SHOWBRIGHTSLIDE
 End Proc
 Procedure _INITDEFHEIGHTS
@@ -2893,9 +2893,9 @@ Procedure _INITDEFHEIGHTS
    _gt Set Mode 0,"",1,0
    _gt Set Mode 0,"",0,1
    _gt Set Integer Mode 1,6,1,0
-   
+
    H=_scr Id Height(1)
-   
+
    For A=0 To 4
       _gt V Slider A+6,A*11+6,12,11,H-16,,"",0,""
       _gt Text A+1,66,A*40+12,96,12,,"","",0
@@ -2913,18 +2913,18 @@ Procedure _INITDEFHEIGHTS
    'A$=A$+"BUtton 62,440,8,168,8,00,00,01;[BO 0,0,85,SX,SY;PR 4,0,11VA,1;][BR 0;]"
    'A$=A$+"BU     63,608,8,16,7,0,0,001;[UN 0,0,196 BP+;][NW;BR 0;]"
    'A$=A$+"BU     64,624,8,16,7,0,0,001;[UN 0,0,198 BP+;][NW;BR 0;]"
-   
+
    _wnd Id Open 3,_scr Id Width(1)-222,0,222,_scr Id Height(1),$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    _gt Set Text 1,Catalog String$(110,"Upper Roof :"),,,
    _gt Set Text 2,Catalog String$(111,"Upper Floor:"),,,
    _gt Set Text 3,Catalog String$(112,"Lower Roof :"),,,
    _gt Set Text 4,Catalog String$(113,"Lower Floor:"),,,
    _gt Set Text 5,Catalog String$(114,"Water Level:"),,,
-   
+
    CMODE=0
    AUTOSTAIR1=5000 : AUTOSTAIR2=-16 : AUTOSTAIR3=0
    _SHOWHEIGHTS
@@ -2933,15 +2933,15 @@ Procedure _INITWALLBRIGHT
    Reserve As Gt Gadgets 499,20,1
    _gt Set Mode 0,"",0,1
    _gt Set Integer Mode 1,6,1,0
-   
+
    _gt Text 1,10,12,104,12,,"",Catalog String$(120,"Brightness offset"),0
    _gt Integer 11,224,12,64,12,0,"",0,1
-   
+
    _wnd Id Open 3,0,_scr Id Height(1)-90,_scr Id Width(1),90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    OPO=-1
    _SHOWWALLBRIGHT
 End Proc
@@ -2953,18 +2953,18 @@ Procedure _INITDEFWATER
    _gt Text 1,10,12,214,12,,"","",1
    _gt Text 2,10,24,214,12,,"",Catalog String$(131,"Height at top:"),0
    _gt Integer 21,224,24,64,12,0,"",1256,1
-   
+
    _gt Image 11,224,12,1,GAD24(2),GAD24(3)
    _gt Image 12,248,12,1,GAD24(4),GAD24(5)
-   
+
    _gt Button 31,512,84,64,12,,Catalog String$(92,"Place")
    _gt Button 32,576,84,64,12,,Catalog String$(93,"Remove")
-   
+
    _wnd Id Open 3,0,_scr Id Height(1)-90,_scr Id Width(1),90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    _SHOWWATER
 End Proc
 Procedure _INITDEFINFO
@@ -2975,7 +2975,7 @@ Procedure _INITDEFINFO
    _wnd Id Open 3,96,12,536,256,$2,F_IDCMP,0,""
    '_font Set _wnd What Rport(_wnd Id Base(3)),F
    '_font Set _scr Id Rport(1),F
-   
+
    _gt Bevel Box 2,16,26,512,16,0
    _gt Bevel Box 2,16,56,512,26,1
    _gt Bevel Box 2,16,96,512,158,1
@@ -2991,9 +2991,9 @@ Procedure _INITDEFINFO
    Loop 
    _wnd Id Titles BUT$(OP),VER$
    _gt Menus Attach 490
-   
+
    '_font Close(F)
-   INFODAT:
+INFODAT:
    Data 1,Catalog String$(193,"Written By:")+" Jens Vang Petersen (top_cat@post8.tele.dk)."
    Data 0,""
    Data 0,""
@@ -3018,22 +3018,22 @@ Procedure _INITDEFINFO
 End Proc
 Procedure _INITDEFWALL
    Dim W1$(2)
-   
+
    W1$(0)=Catalog String$(140,"Auto Double Wall:")+Catalog String$(5,"<OFF>")
    W1$(1)=Catalog String$(140,"Auto Double Wall:")+Catalog String$(6,"<ON>")
-   
+
    Reserve As Gt Gadgets 499,10,1
    _gt Set Mode 0,"",1,0
    _gt Set Mode 0,"",0,1
    _gt Text 1,16,20,304,12,,"",Catalog String$(1078,"RMB to select zone"),0
    _gt Text 2,16,32,304,12,,"",Catalog String$(1079,"LMB to select wall"),0
    _gt Cycle 3,16,44,304,12,,"",Array(W1$(0)),0
-   
+
    _wnd Id Open 3,0,_scr Id Height(1)-90,_scr Id Width(1),90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
    _gt Gadgets Attach 499
    _gt Menus Attach 490
-   
+
    OPO=-1
    _SHOWDEFWALL
 End Proc
@@ -3079,7 +3079,7 @@ Procedure _TIDYDEF
    For A=0 To 12*3+2
       _gt Set Image A+1,SGAD(A*2+1),SGAD(A*2+2)
    Next A
-   
+
    If OP=0 : _TIDYGEN : _TIDYSPRITE : End If 
    If OP=1 : _TIDYDEFZONE : End If 
    If OP=2 : _TIDYGEN2 : End If 
@@ -3607,7 +3607,7 @@ Procedure _M_OBJADD
       _SHOWOBJADD
    End If 
    Pop Proc
-   ALIENPUT:
+ALIENPUT:
    S=Start(12)+NO*32
    Poke S,0
    Poke S+2,ALTO
@@ -3621,8 +3621,8 @@ Procedure _M_OBJADD
    Doke S+16,CONTPT
    OBX(NO)=X : OBZ(NO)=Y
    Add NO,1
-   Return 
-   THINGPUT:
+Return 
+THINGPUT:
    S=Start(12)+NO*32
    Poke S,1
    Poke S+2,OBTO
@@ -3668,7 +3668,7 @@ Procedure _M_OBJADD
    Doke S+12,ANG
    OBX(NO)=X : OBZ(NO)=Y
    Add NO,1
-   Return 
+Return 
 End Proc
 Procedure _M_OBJDEL
    X=XC : Y=YC
@@ -4386,13 +4386,13 @@ Procedure _V_CONNECTCONT
       GLINK=True
    End If 
    Pop Proc
-   AUTOLINK:
+AUTOLINK:
    ' link up all control points visually
    Reserve As Gt Gadgets 498,10,1
    _gt Set Mode 0,"",0,1
    _gt Text 1,16,16,288,12,,"","Zone Update:",1
    _gt Text 2,16,32,288,12,,"","ControlPoints:",1
-   
+
    _wnd Id Open 2,160,128,320,52,$2,$0,0,""
    _gt Gadgets Attach 498
    _wnd Id Titles "AutoLinking Visual",VER$
@@ -4447,11 +4447,11 @@ Procedure _V_CONNECTCONT
       _REDRAW
    End If 
    GLINK=True
-   
+
    _gt Gadgets Remove 498
    _gt Gadgets Erase 498
    _wnd Id Close 2
-   Return 
+Return 
 End Proc
 Procedure _V_PLACECONTPT
    '
@@ -4593,7 +4593,7 @@ Procedure _SELGEN[ADR_I,NR_I,J_I,T$,M,M2]
    _wnd Id Open 2,0,128,568,90,$2,F_IDCMP,0,""
    _gt Gadgets Attach 498
    _wnd Id Titles T$,VER$
-   
+
    Do 
       AC=_wnd Id Next Event
       GA=_wnd Id Event Gadget
@@ -4620,20 +4620,20 @@ Procedure _SELGEN[ADR_I,NR_I,J_I,T$,M,M2]
 End Proc[P]
 '
 Procedure _SELLEVEL[N$]
-   
+
    Reserve As Gt Gadgets 498,21,1
    _gt Set Mode 0,"",0,1
    For A=0 To 15
       _gt Button A+1,16,16+A*12,384,12,,Chr$(A+65)+" - "+Peek$(LINK+$40+A*40,40,Chr$(0))
    Next A
    _gt Button 20,16,220,384,12,,Catalog String$(15,"<<NONE>>")
-   
+
    _wnd Id Open 2,0,128,400,236,$2,$40,0,""
    _gt Gadgets Attach 498
    If N$="" : _wnd Id Titles Catalog String$(206,"Select a Level"),VER$
    Else : _wnd Id Titles N$,VER$
    End If 
-   
+
    F$=""
    Do 
       AC=_wnd Id Next Event
@@ -4648,7 +4648,7 @@ Procedure _SELLEVEL[N$]
       End If 
       Multi Wait 
    Loop 
-   
+
    _gt Gadgets Remove 498
    _gt Gadgets Erase 498
    _wnd Id Close 2
@@ -4658,22 +4658,22 @@ Procedure _FRAMEPICK[M,OG,SV]
    Dim C(32),W1$(1)
    W1$(0)=Catalog String$(211,"Flip:")+" "+Catalog String$(2,"No")
    W1$(1)=Catalog String$(211,"Flip:")+" "+Catalog String$(1,"Yes")
-   
+
    FRN=Abs(SV)
    If FRN<1 : FRN=1 : End If 
    F$=Peek$(LINK+$2C0+OG*64,64,Chr$(0))
    If SV<0 Then FLIP=1 Else FLIP=0
    _LOAD[15,F$+".256pal"]
    If Param=0 : Pop Proc : End If 
-   
+
    _scr Id Open 2,0,64,_scr Id Width(1)/2,148,6,SCR_MODE and $FFFF1000,0,"Breed Editor Work"
-   
+
    _wnd Id Open 2,0,20,_scr Id Width(2),148,$2,F_IDCMP,0,"Levels.."
    _wnd Id Titles Catalog String$(530,"Set Object Frames"),VER$
    _wnd Id Activate 2
    _scr Id Show 2
    Reserve As Gt Gadgets 498,30,2
-   
+
    _gt Text 1,138,20,182,12,,"","",1
    _gt Image 2,138,44,1,GAD24(2),GAD24(3)
    _gt Image 3,162,44,1,GAD24(4),GAD24(5)
@@ -4693,7 +4693,7 @@ Procedure _FRAMEPICK[M,OG,SV]
    Erase 401 : Erase 402
    _LOAD[401,F$+".ptr"]
    _LOAD[402,F$+".wad"]
-   
+
    _gt Gadgets Attach 498
    If Length(401)>0 and Length(402)>0
       Do 
@@ -4701,7 +4701,7 @@ Procedure _FRAMEPICK[M,OG,SV]
          LY=Deek(LINK+$39B0+OG*256+(FRN-1)*8+2)
          LW=Deek(LINK+$39B0+OG*256+(FRN-1)*8+4)*2
          LH=Deek(LINK+$39B0+OG*256+(FRN-1)*8+6)*2
-         
+
          _wnd Id Ink 0,0,0
          W=_wnd Id Width-16
          _wnd Id Bar 8,16 To 128+8,128+16
@@ -4726,7 +4726,7 @@ Procedure _FRAMEPICK[M,OG,SV]
                End If 
             Next WB
          Next WAA
-         
+
          _gt Set Text 1,Catalog String$(210,"Frame:")+Str$(FRN),,,
          If Btst(0,M)
             _gt Set Cycle 5,,FLIP
@@ -4760,26 +4760,26 @@ Procedure _VFRAMEPICK[M,OG,SV]
    FRN=Abs(SV)
    If FRN<1 : FRN=1 : End If 
    If SV<0 Then FLIP=1 Else FLIP=0
-   
+
    _wnd Id Open 2,0,20,_scr Id Width(1)/2,140,$2,F_IDCMP,0,"Levels.."
    _wnd Id Titles Catalog String$(530,"Set Object Frames"),VER$
    _wnd Id Activate 2
    Reserve As Gt Gadgets 498,30,2
-   
+
    _gt Text 1,130,20,182,12,,"","",1
    _gt Image 2,130,44,1,GAD24(2),GAD24(3)
    _gt Image 3,154,44,1,GAD24(4),GAD24(5)
    _gt Button 4,178,44,134,12,,Catalog String$(1,"Yes")
-   
+
    Do 
       _wnd Id Ink 0,0,0
       _wnd Id Bar 8,16 To 128+8,128+16
-      
+
       _wnd Id Ink 1,0,0
       _wnd Id Text 8,20,Catalog String$(216,"Sorry, But This editor")
       _wnd Id Text 8,30,Catalog String$(217,"Can't show VectorFrames")
       _wnd Id Text 8,40,Catalog String$(218,"Look out for an update")
-      
+
       _gt Set Text 1,Catalog String$(210,"Frame:")+Str$(FRN),,,
       Do 
          AC=_wnd Id Next Event
@@ -4805,15 +4805,15 @@ Procedure _OBJFRAMEPICK[M,OB,SV]
    OBD=LINK+$5EB8+OB*120
    OBDS=LINK+$5A08+OB*20*2
    OGS=-1
-   
+
    _scr Id Open 2,0,64,_scr Id Width(1)/2,148,6,SCR_MODE and $FFFF1000,0,"Breed Editor Work"
-   
+
    _wnd Id Open 2,0,20,_scr Id Width(2),148,$2,F_IDCMP,0,"Levels.."
    _wnd Id Titles Catalog String$(530,"Set Object Frames"),VER$
    _wnd Id Activate 2
    _scr Id Show 2
    Reserve As Gt Gadgets 498,30,2
-   
+
    _gt Text 1,138,20,182,12,,"","",1
    _gt Image 2,138,44,1,GAD24(2),GAD24(3)
    _gt Image 3,162,44,1,GAD24(4),GAD24(5)
@@ -4821,12 +4821,12 @@ Procedure _OBJFRAMEPICK[M,OB,SV]
    If Btst(0,M)
       _gt Button 5,253,44,67,12,,Catalog String$(2,"No")
    End If 
-   
+
    _wnd Id Open 2,0,128,_scr Id Width(2),140,$2,$40,0,""
    '
    _gt Gadgets Attach 498
    _wnd Id Activate 2
-   
+
    If Deek(OBDS+2)=0
       TYPE=0
    Else 
@@ -4864,8 +4864,8 @@ Procedure _OBJFRAMEPICK[M,OB,SV]
          LY=Deek(LINK+$39B0+OG*256+Abs(SV)*8+2)
          LW=Min(Deek(LINK+$39B0+OG*256+Abs(SV)*8+4)*2,360)
          LH=Min(Deek(LINK+$39B0+OG*256+Abs(SV)*8+6)*2,128)
-      If SV<0 : FLIP=1 Else FLIP=0 : End If 
-         
+         If SV<0 : FLIP=1 Else FLIP=0 : End If 
+
          For WAA=0 To Min(127,LW)
             WA=WAA+LX
             OF=Leek(Start(401)+WA*4)
@@ -4891,7 +4891,7 @@ Procedure _OBJFRAMEPICK[M,OB,SV]
          _wnd Id Ink 0,0,0
          W=_wnd Id Width-16
          _wnd Id Bar 8,16 To 128+8,128+16
-         
+
          _wnd Id Ink 2,1,1
          _wnd Id Text 12,20,Catalog String$(216,"Sorry, But This editor")
          _wnd Id Text 12,30,Catalog String$(217,"Can't show VectorFrames")
@@ -5042,12 +5042,12 @@ Procedure _SAVE_LEVEL[F$]
       LP$="ab3:levels/"
    End If 
    LP$=LP$+"level_"+F$
-   
+
    'If Exist(LP$+"/twolev.dat") 
    '   _SURE["","Overwrite level "+F$]
    '   If Param=0 : Goto S_END : End If 
    'End If  
-   
+
    MPTR=-1 : Change Mouse 3
    For A=0 To NZ
       If USED(A)=0
@@ -5275,11 +5275,11 @@ Procedure _SAVE_LEVEL[F$]
    For A=0 To NZ-1
       For B=0 To ZP(A)-1
          'If USED(A)
-         If WT(A,B)=1
-            PW(ZO(A,B))=T
-            PCW(ZO(A,B),1)=ZO(A,B+1)
-            PCW(ZO(A,B+1),0)=ZO(A,B)
-         End If 
+            If WT(A,B)=1
+               PW(ZO(A,B))=T
+               PCW(ZO(A,B),1)=ZO(A,B+1)
+               PCW(ZO(A,B+1),0)=ZO(A,B)
+            End If 
          'End If  
          Add T,1
       Next 
@@ -5300,9 +5300,9 @@ Procedure _SAVE_LEVEL[F$]
          Next 
       Next 
       'If USED(A)
-      BT=BT/(ZP(A)*2)
-      UT=UT/(ZP(A)*2)
-      ZB(A)=BT : UZB(A)=UT
+         BT=BT/(ZP(A)*2)
+         UT=UT/(ZP(A)*2)
+         ZB(A)=BT : UZB(A)=UT
       'Else  
       '   ZB(A)=1 : UZB(A)=1 
       'End If  
@@ -5989,14 +5989,14 @@ Procedure _SAVE_LEVEL[F$]
    Bsave LP$+"/twolev.dat",Start(15) To MP
    Bsave LP$+"/twolev.obj",Start(12) To Start(12)+200*32
    Bsave LP$+"/twolev.links",Start(11) To Start(11)+100*100
-   S_END:
+S_END:
    _R_N_MSG
    _wnd Id Activate 0
    '_UPD_IFACE[OP+1]
    On Error 
    _REDRAW
-   Pop Proc
-   ALIENSAVE:
+Pop Proc
+ALIENSAVE:
    ' First put in the dummy effort: 
    For RT=1 To 15
    LK[0] : Next 
@@ -6026,8 +6026,8 @@ Procedure _SAVE_LEVEL[F$]
    Poke ST+21,Peek(S+12)
    Doke ST+24,Deek(S+14)
    Doke ST+32,Deek(S+16)
-   Return 
-   THINGSAVE:
+Return 
+THINGSAVE:
    For RT=1 To 15
    LK[0] : Next 
    TP=Peek(S+10)
@@ -6050,8 +6050,8 @@ Procedure _SAVE_LEVEL[F$]
    ANQ=(ANQ*8192)/360
    ANQ=ANQ and 8190
    Doke ST+30,ANQ
-   Return 
-   S_ERR:
+Return 
+S_ERR:
    _ERRTXT["Save Error During "+EM$+":",Err$(Errn)]
    Resume S_END
 End Proc
@@ -6261,7 +6261,7 @@ Procedure _LOAD_LEVEL[F$]
       End If 
    Next A
    GLINK=False : GCLIP=False
-   L_END:
+L_END:
    _R_N_MSG
    _wnd Id Activate 0
    '_UPD_IFACE[OP+1]
@@ -6275,7 +6275,7 @@ Procedure _CLIP_LEVEL[F$]
    If F$<"A"
       Pop Proc
    End If 
-   
+
    LP$=Peek$(LINK,64,Chr$(0))
    If LP$="" : LP$="ab3:levels/" : End If 
    LP$=LP$+"level_"+F$
@@ -6300,7 +6300,7 @@ Procedure _CLIP_LEVEL[F$]
             End If 
             If BWT(WT(A,B))=1
                For C=0 To NZ-1
-                  For D=0 To ZP(C)-1
+                     For D=0 To ZP(C)-1
                      If ZO(A,B)=ZO(C,D+1) and ZO(A,B+1)=ZO(C,D)
                         ZZ(A,B)=C
                         D=ZP(C) : C=NZ
@@ -6735,15 +6735,15 @@ Procedure _CLIP_LEVEL[F$]
    Bsave F$,Start(15) To MP
    _PACK[F$]
    GCLIP=False
-   C_END:
+C_END:
    _R_N_MSG
    _wnd Id Activate 0
    On Error 
    '_UPD_IFACE[OP+1]
-   Pop Proc
-   '
-   '
-   ELIMINLEFT:
+Pop Proc
+'
+'
+ELIMINLEFT:
    If VCPL(Z)>1
       Loke Start(9)+46,Varptr(ZO(Z,0))
       Doke Start(9)+52,ZP(Z)-1
@@ -6753,9 +6753,9 @@ Procedure _CLIP_LEVEL[F$]
       Call Start(9)+54
       VCPL(Z)=Deek(Start(9)+40)
    End If 
-   Return 
-   '  
-   ELIMINRIGHT:
+Return 
+'  
+ELIMINRIGHT:
    If VCPR(Z)>1
       Loke Start(9)+46,Varptr(ZO(Z,0))
       Doke Start(9)+52,ZP(Z)-1
@@ -6765,8 +6765,8 @@ Procedure _CLIP_LEVEL[F$]
       Call Start(9)+54
       VCPR(Z)=Deek(Start(9)+40)
    End If 
-   Return 
-   CALCORDER:
+Return 
+CALCORDER:
    Doke Start(9)+40,1
    Loke Start(9)+42,Varptr(ZO(F,0))
    Loke Start(9)+46,Varptr(ZO(Z,0))
@@ -6775,12 +6775,12 @@ Procedure _CLIP_LEVEL[F$]
    Doke Start(9)+52,ZP(Z)-1
    Call Start(9)+54
    CORD(Z)=Leek(Start(9)+50)
-   Return 
-   '
-   CHKBET:
-   Return 
-   '
-   RIGHTONEONLY:
+Return 
+'
+CHKBET:
+Return 
+'
+RIGHTONEONLY:
    RCPOTZ=-1
    If VCPR(Z)>0
       BQ=TLB
@@ -6814,9 +6814,9 @@ Procedure _CLIP_LEVEL[F$]
          VCPR(Z)=TPT
       End If 
    End If 
-   Return 
-   '
-   LEFTONEONLY:
+Return 
+'
+LEFTONEONLY:
    LCPOTZ=-1
    If VCPL(Z)>0
       BQ=TRB
@@ -6850,9 +6850,9 @@ Procedure _CLIP_LEVEL[F$]
          VCPL(Z)=TPT
       End If 
    End If 
-   Return 
-   '  
-   BETPTS:
+Return 
+'  
+BETPTS:
    Loke Start(9),Varptr(D(0,0))
    Loke Start(9)+4,Varptr(PX(0))
    Loke Start(9)+8,Varptr(PY(0))
@@ -6879,9 +6879,9 @@ Procedure _CLIP_LEVEL[F$]
    Doke Start(9)+40,0
    Call Start(9)+54
    PU(FL)=-5 : PU(TL)=-5 : PU(TR)=-1 : PU(FR)=-1
-   Return 
-   '
-   LRBORD:
+Return 
+'
+LRBORD:
    ' Find the two bordering lines joining the two zones.
    FL=0 : TL=0 : FR=0 : TR=0
    If ZO(F,FL)=ZO(Z,TL) Then FL=FL+1
@@ -6949,8 +6949,8 @@ Procedure _CLIP_LEVEL[F$]
          NR=(NR+ZP(F)-1) mod ZP(F)
       Wend 
    Wend 
-   Return 
-   C_ERR:
+Return 
+C_ERR:
    _ERRTXT["Clip Error:",Err$(Errn)]
    Resume C_END
 End Proc
@@ -7002,13 +7002,13 @@ Procedure _LINK_LEVEL[A$]
    Call GO
    Bsave LP$+"/twolev.flymap",Start(114) To Start(114)+NU*NU
    GLINK=False
-   L_END:
+L_END:
    _R_N_MSG
    _wnd Id Activate 0
    On Error 
    '_UPD_IFACE[OP+1]
    Pop Proc
-   L_ERR:
+L_ERR:
    _ERRTXT["Linkup Error:",Err$(Errn)]
    Resume L_END
 End Proc
@@ -7037,7 +7037,7 @@ Procedure _MAKE_LEVEL[F$,F]
 End Proc
 Procedure _CHECK_LEVEL
    Dim FER(30)
-   
+
    _N_MSG2[Catalog String$(1600,"Level Checking.."),6]
    E=False
    '
@@ -7139,7 +7139,7 @@ Procedure _CHECK_LEVEL
          End If 
       Next A
    End If 
-   
+
    If IERR
       M=_request Choice(_wnd Id Base(0),"",Catalog String$(1649,"Finished Checking"),"OK")
    End If 
@@ -7151,9 +7151,9 @@ Procedure _CHECK_LEVEL
       GCHECK=True
    End If 
    _REDRAW
-   Pop Proc[IERR]
-   
-   FATAERROR:
+Pop Proc[IERR]
+
+FATAERROR:
    T0$=Catalog String$(1650,"Serious error found:")
    T1$=Catalog String$(1651,"Ignore")
    T2$=Catalog String$(1652,"Show")
@@ -7164,7 +7164,7 @@ Procedure _CHECK_LEVEL
    IERR=False
    If M=1 : IERR=True : End If 
    'IERR=True 
-   Return 
+Return 
 End Proc
 '
 Procedure _LOAD_LINK
@@ -7348,9 +7348,9 @@ Procedure _ZOSHOW[Z,C]
       Next A
    End If 
    If Btst(3,SHMODE)
-   WY=((WYS/ZP(Z)-YO)/MU-12)/YRES : If WX=WXS : WX=WXS/ZP(Z) : WX=(WX-XO)/MU-28 : Else : WX=WX+22 : End If 
-   If UZH(Z,1)=5000 : _wnd Id Text WX,WY,"UR<Off>" : Else _wnd Id Text WX,WY,"UR"+Str$(UZH(Z,1)) : End If 
-   If UZH(Z,0)=5000 : _wnd Id Text WX,WY+8,"UF<Off>" : Else _wnd Id Text WX,WY+8,"UF"+Str$(UZH(Z,0)) : End If 
+      WY=((WYS/ZP(Z)-YO)/MU-12)/YRES : If WX=WXS : WX=WXS/ZP(Z) : WX=(WX-XO)/MU-28 : Else : WX=WX+22 : End If 
+      If UZH(Z,1)=5000 : _wnd Id Text WX,WY,"UR<Off>" : Else _wnd Id Text WX,WY,"UR"+Str$(UZH(Z,1)) : End If 
+      If UZH(Z,0)=5000 : _wnd Id Text WX,WY+8,"UF<Off>" : Else _wnd Id Text WX,WY+8,"UF"+Str$(UZH(Z,0)) : End If 
       _wnd Id Text WX,WY+16,"LR"+Str$(ZH(Z,1))
       _wnd Id Text WX,WY+24,"LF"+Str$(ZH(Z,0))
       _wnd Id Text WX,WY+32,"WA"+Str$(ZH(Z,2))
@@ -7585,13 +7585,13 @@ Procedure _GL_OBJGFX
       _wnd Id Titles Catalog String$(500,"Select Object GFX-frames (Hold 'Alt' to set frames)"),VER$
       _wnd Id Activate 8
       Reserve As Gt Gadgets 497,30,1
-      
-      
+
+
       _gt Set String Mode True,80,True,False
       _gt Set Listview Mode ,,,16,0,
-      
+
       _gt Listview 8,32,16,592,220,,"",Array(W$(0)),0
-      
+
       _gt Gadgets Attach 497
       Do 
          For A=0 To 29
@@ -7642,9 +7642,9 @@ Procedure _GL_SETOBJFRAMES[NR]
    _LOAD[15,Peek$(LINK+$2C0+NR*64,64,Chr$(0))+".256pal"]
    If Param=0 : Pop Proc : End If 
    Dim C(32)
-   
+
    _scr Id Open 2,0,0,_scr Id Width(1)/2,266,6,SCR_MODE and $FFFF1000,0,"Breed Editor Work"
-   
+
    _wnd Id Open 8,0,20,_scr Id Width(1),250,$2+$8,F_IDCMP,0,"Levels.."
    _wnd Id Titles Catalog String$(530,"Set Object Frames"),VER$
    _wnd Id Activate 8
@@ -7728,7 +7728,7 @@ Procedure _GL_SETOBJFRAMES[NR]
          _wnd Id Titles Catalog String$(530,"Set Object Frames"),VER$
          OLY=-1
       End If 
-   If EV=$40 : C=GA : Else : C=-1 : End If 
+      If EV=$40 : C=GA : Else : C=-1 : End If 
       If C=11
          CF=Max(CF-1,0)
          Gosub FRAMEDISPLAY
@@ -7792,15 +7792,15 @@ Procedure _GL_SETOBJFRAMES[NR]
    _scr Id Close 2
    _scr Id Use 1
    _scr Id Show 1
-   Pop Proc
-   FRAMEDISPLAY:
+Pop Proc
+FRAMEDISPLAY:
    _gt Set Text 1,Catalog String$(536,"Frame Number:")+Str$(CF),,,
    _gt Set Integer 21,Deek(LINK+$39B0+NR*256+CF*8)
    _gt Set Integer 22,Deek(LINK+$39B0+NR*256+CF*8+2)
    _gt Set Integer 23,Deek(LINK+$39B0+NR*256+CF*8+4)*2
    _gt Set Integer 24,Deek(LINK+$39B0+NR*256+CF*8+6)*2
-   Return 
-   WIDTHSHOW:
+Return 
+WIDTHSHOW:
    _wnd Id Ink 0,0,0
    W=_wnd Id Width-16
    _wnd Id Bar 8,16 To W+8,128+16
@@ -7823,11 +7823,11 @@ Procedure _GL_SETOBJFRAMES[NR]
          Next WB
       End If 
    Next WAA
-   Return 
-   AFRAME:
+Return 
+AFRAME:
    Reserve As Gt Gadgets 498,10,2
    _gt Set Integer Mode 1,6,1,0
-   
+
    _gt Text 7,8,14,196,12,,"",Catalog String$(505,"Number of frames:"),0
    _gt Text 8,8,28,196,12,,"",Catalog String$(506,"Width of each frame:"),0
    _gt Text 9,8,42,196,12,,"",Catalog String$(507,"Height of each frame:"),0
@@ -7835,7 +7835,7 @@ Procedure _GL_SETOBJFRAMES[NR]
    _gt Integer 2,204,28,64,12,0,"",WOFF,1
    _gt Integer 3,204,42,64,12,0,"",HOFF,1
    _gt Button 4,204,56,64,12,,"OK"
-   
+
    _wnd Id Open 2,40,20,268,60,$2+$8,F_IDCMP,498,".."
    _wnd Id Titles Catalog String$(535,"Generate frames from graphic data"),VER$
    Do 
@@ -7851,20 +7851,20 @@ Procedure _GL_SETOBJFRAMES[NR]
    _gt Gadgets Remove 498
    _wnd Id Close 2
    _gt Gadgets Erase 498
-   Return 
+Return 
 End Proc
 Procedure _GL_SETVEC
    Dim W1$(29)
    _wnd Id Open 8,0,20,_scr Id Width(1),188,$2+$8,F_IDCMP,0,"Levels.."
-   
+
    '  
    ' Set title of window, and the screen title when window is active
    '
    _wnd Id Titles Catalog String$(570,"Vector FileNames"),VER$
    _wnd Id Activate 8
-   
+
    Reserve As Gt Gadgets 497,30,1
-   
+
    '
    ' Preparing string gadgets 
    ' Tabcycle=True, MaxChars=80, ExitHelp=True, Replacemode=False 
@@ -7872,9 +7872,9 @@ Procedure _GL_SETVEC
    _gt Set String Mode True,80,True,False
    _gt Set Listview Mode ,,,16,0,
    _gt Listview 1,32,32,592,144,,"",Array(W1$(0)),0
-   
+
    _gt Gadgets Attach 497
-   
+
    Do 
       For A=0 To 29
          W1$(A)=Peek$(LINK+$13FE0+A*64,64,Chr$(0))
@@ -7923,13 +7923,13 @@ Procedure _GL_SETBULLET
       _gt Set Mode 0,"",0,1
       _gt Set Listview Mode ,,,16,0,
       _gt Set Integer Mode 1,6,1,0
-      
+
       _gt Listview 1,8,12,_scr Id Width(1)-16,128,,"",Array(W$(0)),0
-      
+
       _wnd Id Open 8,0,128,_scr Id Width(1),130,$2+$8,F_IDCMP,0,""
       _gt Gadgets Attach 497
       _wnd Id Titles Catalog String$(600,"Set Bullets"),VER$
-      
+
       Do 
          AC=_wnd Id Next Event
          GA=_wnd Id Event Gadget
@@ -7951,8 +7951,8 @@ Procedure _GL_SETBULLET
       Exit If AC=$200
       Gosub CHANGEBULLETSTATS
    Loop 
-   Pop Proc
-   CHANGEBULLETSTATS:
+Pop Proc
+CHANGEBULLETSTATS:
    W1$(0)=Catalog String$(2,"NO")
    W1$(1)=Catalog String$(1,"YES")
    W2$(0)=Catalog String$(608,"INSTANT")
@@ -7962,57 +7962,57 @@ Procedure _GL_SETBULLET
    W3$(2)=Catalog String$(22,"Additive Transparency")
    W4$(0)="0" : W4$(1)="1" : W4$(2)="2"
    W4$(3)="3" : W4$(4)="4" : W4$(5)="5"
-   
+
    Do 
       Reserve As Gt Gadgets 497,60,1
       _gt Set Mode 0,"",0,1
       _gt Set Listview Mode ,,,16,0,
       _gt Set Integer Mode 1,6,1,0
       _gt Set String Mode 1,20,1,0
-      
+
       _gt String 34,336,14,208,12,0,"","-",1
-      
+
       _gt Text 41,8,28,328,12,,"",Catalog String$(601,"Damage to target pr. bullet:"),0
       _gt Integer 30,336,28,208,12,0,"",1256,1
-      
+
       _gt Text 42,8,42,328,12,,"",Catalog String$(606,"Visible bullet or instant effect:"),0
       _gt Cycle 1,336,42,208,12,0,"",Array(W2$(0)),0
-      
+
       _gt Text 43,8,56,328,12,,"",Catalog String$(602,"Gravity:"),0
       _gt Integer 31,336,56,208,12,0,"",1256,1
-      
+
       _gt Text 44,8,70,328,12,,"",Catalog String$(609,"Bounce Off Walls:"),0
       _gt Cycle 2,336,70,208,12,0,"",Array(W1$(0)),0
-      
+
       _gt Text 45,8,84,328,12,,"",Catalog String$(610,"Bounce Off Roofs/Floors:"),0
       _gt Cycle 3,336,84,208,12,0,"",Array(W1$(0)),0
-      
+
       _gt Text 46,8,98,328,12,,"",Catalog String$(603,"Bullet Lifetime (-1=Infinite):"),0
       _gt Integer 32,336,98,208,12,0,"",1256,1
-      
+
       _gt Text 47,8,112,328,12,,"",Catalog String$(604,"Explosive force:"),0
       _gt Integer 33,336,112,208,12,0,"",1256,1
-      
+
       _gt Text 48,8,126,328,12,,"",Catalog String$(611,"Movement speed:"),0
       _gt Cycle 4,336,126,208,12,0,"",Array(W4$(0)),0
-      
+
       _gt Text 49,8,140,328,12,,"",Catalog String$(612,"Impact noise:"),0
       _gt Text 50,336,140,192,12,,"","-",1
       _gt Image 5,528,140,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 51,8,154,328,12,,"",Catalog String$(613,"Bullet Graphic Type:"),0
       _gt Cycle 6,336,154,208,12,0,"",Array(W3$(0)),0
-      
+
       _gt Text 52,8,168,328,12,,"",Catalog String$(614,"Impact Graphic Type:"),0
       _gt Cycle 7,336,168,208,12,0,"",Array(W3$(0)),0
-      
+
       _gt Button 10,8,200,268,12,,Catalog String$(2200,"Define Bullet Animation")
       _gt Button 11,276,200,268,12,,Catalog String$(2201,"Define Bullet Impact Animation")
       _gt Button 59,8,212,536,12,,Catalog String$(2202,"Import Bullet Data")
-      
+
       _wnd Id Open 8,0,128,544,216,$2+$8,F_IDCMP,497,""
       _wnd Id Titles Catalog String$(605,"Bullet statistics for:"),VER$
-      
+
       BAS=LINK+$1AC0+BULNUM*300
       Do 
          _gt Gadgets Bank 497
@@ -8068,8 +8068,8 @@ Procedure _GL_SETBULLET
       If GA=10 or GA=11 : Gosub BULANIM : End If 
       If GA=59 : Gosub BUIMP : End If 
    Loop 
-   Return 
-   BUIMP:
+Return 
+BUIMP:
    '
    ' Import Bullet-data's 
    '
@@ -8091,15 +8091,15 @@ Procedure _GL_SETBULLET
       End If 
    End If 
    Erase 401
-   Return 
-   BULANIM:
+Return 
+BULANIM:
    If PON=0
       T$=Catalog String$(615,"Animation frames for")+" "+Peek$(LINK+$3230+BULNUM*20,20,Chr$(0))
    Else 
       T$=Catalog String$(616,"Impact frames for")+" "+Peek$(LINK+$3230+BULNUM*20,20,Chr$(0))
    End If 
    _GL_SET_ANIM[ANBAS,1,T$,BAS+(9+PON)*4]
-   Return 
+Return 
 End Proc
 Procedure _GL_SETGUN
    Dim W$(9)
@@ -8109,33 +8109,33 @@ Procedure _GL_SETGUN
       _gt Set Listview Mode ,,,16,0,
       _gt Set Integer Mode 1,6,1,0
       _gt Set String Mode 1,20,1,0
-      
+
       _gt Listview 32,8,12,_scr Id Width(1)-16,88,,"",Array(W$(0)),0
-      
+
       _gt Text 41,64,110,328,12,,"",Catalog String$(620,"Gun Name:"),0
       _gt String 1,392,110,208,12,0,"","-",1
-      
+
       _gt Text 42,64,124,328,12,,"",Catalog String$(621,"Bullets:"),0
       _gt Text 43,392,124,192,12,,"","-",1
       _gt Image 2,584,124,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 44,64,138,328,12,,"",Catalog String$(622,"Bullets Fired at shot:"),0
       _gt Integer 3,392,138,208,12,0,"",1234,1
-      
+
       _gt Text 45,64,152,328,12,,"",Catalog String$(623,"Delay between shots:"),0
       _gt Integer 4,392,152,208,12,0,"",1234,1
-      
+
       _gt Text 46,64,166,328,12,,"",Catalog String$(624,"Gun Sound:"),0
       _gt Text 47,392,166,192,12,,"","-",1
       _gt Image 5,584,166,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 48,64,180,328,12,,"",Catalog String$(625,"Graphic Appearence (Object):"),0
       _gt Text 49,392,180,192,12,,"","-",1
       _gt Image 6,584,180,1,GAD16(0),GAD16(1)
-      
+
       _wnd Id Open 8,0,128,_scr Id Width(1),190,$2+$8,F_IDCMP,497,""
       _wnd Id Titles Catalog String$(626,"Gun Types"),VER$
-      
+
       R=0 : GB1=LINK+$33C0 : GB2=LINK+$3488
       Do 
          _gt Gadgets Bank 497
@@ -8200,17 +8200,17 @@ Procedure _GL_SETALIEN
       For A=0 To 19
          W$(A)=Peek$(LINK+$34D8+A*20,20,Chr$(0))
       Next A
-      
+
       Reserve As Gt Gadgets 497,5,1
       _gt Set Mode 0,"",0,1
       _gt Set Listview Mode ,,,16,0,
       _gt Set Integer Mode 1,6,1,0
-      
+
       _gt Listview 1,8,12,_scr Id Width(1)-16,128,,"",Array(W$(0)),0
-      
+
       _wnd Id Open 8,0,128,_scr Id Width(1),130,$2+$8,F_IDCMP,497,""
       _wnd Id Titles Catalog String$(645,"Set Aliens"),VER$
-      
+
       Do 
          AC=_wnd Id Next Event
          GA=_wnd Id Event Gadget
@@ -8235,8 +8235,8 @@ Procedure _GL_SETALIEN
       Exit If AC=$200
       Gosub CHANGEALIENSTATS
    Loop 
-   Pop Proc
-   CHANGEALIENSTATS:
+Pop Proc
+CHANGEALIENSTATS:
    If YRES=2
       SET_PAGE=1
    Else 
@@ -8248,88 +8248,88 @@ Procedure _GL_SETALIEN
       _gt Set Listview Mode ,,,16,0,
       _gt Set Integer Mode 1,6,1,0
       _gt Set String Mode 1,20,1,0
-      
+
       _gt String 27,336,14,272,12,0,"","-",1
-      
+
       If SET_PAGE=1 or SET_PAGE=0
          _gt Text 41,8,28,328,12,,"",Catalog String$(646,"Graphic Type:"),0
          _gt Cycle 1,336,28,272,12,0,"",Array(GFX$(0)),0
-         
+
          _gt Text 42,8,42,328,12,,"",Catalog String$(647,"Default Behaviour:"),0
          _gt Cycle 2,336,42,272,12,0,"",Array(DEFB$(0)),0
-         
+
          _gt Text 43,8,56,328,12,,"",Catalog String$(648,"Reaction Time (50=1sec):"),0
          _gt Integer 3,336,56,272,12,0,"",1256,1
-         
+
          _gt Text 44,8,70,328,12,,"",Catalog String$(649,"Default movement speed:"),0
          _gt Integer 4,336,70,272,12,0,"",1256,1
-         
+
          _gt Text 45,8,84,328,12,,"",Catalog String$(650,"Response Behaviour:"),0
          _gt Cycle 5,336,84,272,12,0,"",Array(RESB$(0)),0
-         
+
          _gt Text 46,8,98,328,12,,"",Catalog String$(651,"Response movement speed:"),0
          _gt Integer 6,336,98,272,12,0,"",1256,1
-         
+
          _gt Text 47,8,112,328,12,,"",Catalog String$(652,"Response Timeout (50=1sec):"),0
          _gt Integer 7,336,112,272,12,0,"",1256,1
-         
+
          _gt Text 48,8,126,328,12,,"",Catalog String$(653,"Damage Taken Limit -> Retreat:"),0
          _gt Integer 8,336,126,272,12,0,"",1256,1
-         
+
          _gt Text 49,8,140,328,12,,"",Catalog String$(654,"Damage Inflicted Limit -> Followup:"),0
          _gt Integer 9,336,140,272,12,0,"",1256,1
-         
+
          _gt Text 50,8,154,328,12,,"",Catalog String$(655,"Followup Behaviour:"),0
          _gt Cycle 10,336,154,272,12,0,"",Array(FOLB$(0)),0
-         
+
          _gt Text 51,8,168,328,12,,"",Catalog String$(656,"Followup Movement Speed:"),0
          _gt Integer 11,336,168,272,12,0,"",1256,1
-         
+
          _gt Text 52,8,182,328,12,,"",Catalog String$(657,"Followup Timeout (50=1sec):"),0
          _gt Integer 12,336,182,272,12,0,"",1256,1
       End If 
-   If SET_PAGE=0 : B2=224+14 : Else : B2=42+14+14 : End If 
+      If SET_PAGE=0 : B2=224+14 : Else : B2=42+14+14 : End If 
       If SET_PAGE=2 or SET_PAGE=0
          _gt Text 53,8,B2-42,328,12,,"",Catalog String$(658,"Retreat Behaviour:"),0
          _gt Cycle 13,336,B2-42,272,12,0,"",Array(RETB$(0)),0
-         
+
          _gt Text 54,8,B2-28,328,12,,"",Catalog String$(659,"Retreat Movement Speed:"),0
          _gt Integer 14,336,B2-28,272,12,0,"",1256,1
-         
+
          _gt Text 55,8,B2-14,328,12,,"",Catalog String$(660,"Retreat Timeout (50=1sec):"),0
          _gt Integer 15,336,B2-14,272,12,0,"",1256,1
-         
+
          _gt Cycle 16,8,B2,320,12,0,"",Array(W1$(0)),0
          _gt Text 56,336,B2,256,12,,"","-",1
          _gt Image 17,592,B2,1,GAD16(0),GAD16(1)
-         
+
          _gt Text 57,8,B2+14,328,12,,"",Catalog String$(661,"Number Of Hit Points:"),0
          _gt Integer 18,336,B2+14,272,12,0,"",1256,1
-         
+
          _gt Text 58,8,B2+28,328,12,,"",Catalog String$(662,"Physical Height:"),0
          _gt Integer 19,336,B2+28,272,12,0,"",1256,1
-         
+
          _gt Text 59,8,B2+42,328,12,,"",Catalog String$(663,"Minimum distance to walls (0/1/2):"),0
          _gt Cycle 20,336,B2+42,272,12,0,"",Array(W2$(0)),0
-         
+
          _gt Cycle 21,8,B2+56,320,12,0,"",Array(W3$(0)),0
          _gt Text 60,336,B2+56,256,12,,"","-",1
          _gt Image 22,592,B2+56,1,GAD16(0),GAD16(1)
-         
+
          _gt Text 61,8,B2+70,328,12,,"",Catalog String$(664,"Auxilliary Object Type:"),0
          _gt Text 62,336,B2+70,256,12,,"","-",1
          _gt Image 23,592,B2+70,1,GAD16(0),GAD16(1)
-         
+
          _gt Text 63,8,B2+84,328,12,,"",Catalog String$(665,"Torch Brightness:"),0
          _gt Integer 24,336,B2+84,272,12,0,"",1256,1
-         
+
          _gt Text 64,8,B2+98,328,12,,"",Catalog String$(666,"Bullet Source X Offset:"),0
          _gt Integer 25,336,B2+98,272,12,0,"",1256,1
-         
+
          _gt Text 65,8,B2+112,328,12,,"",Catalog String$(667,"Bullet Source Y Offset:"),0
          _gt Integer 26,336,B2+112,272,12,0,"",1256,1
       End If 
-      
+
       If SET_PAGE=0
          _gt Button 79,8,478,600,12,,Catalog String$(2212,">> Set Animations >>")
          _gt Button 78,8,492,600,12,,Catalog String$(2213,"Import Alien Data")
@@ -8343,15 +8343,15 @@ Procedure _GL_SETALIEN
       If SET_PAGE=2
          _gt Button 80,8,230,600,12,,Catalog String$(2211,"<< MORE SETUP <<")
       End If 
-      
+
       If SET_PAGE=0
          _wnd Id Open 8,0,128,608,496,$2+$8,F_IDCMP,497,""
       Else 
          _wnd Id Open 8,0,128,608,248,$2+$8,F_IDCMP,497,""
       End If 
-      
+
       _wnd Id Titles Catalog String$(668,"Alien statistics for:"),VER$
-      
+
       BAS1=LINK+$3668+ALNUM*42
       Do 
          _gt Gadgets Bank 497
@@ -8472,8 +8472,8 @@ Procedure _GL_SETALIEN
          Gosub ALIMP
       End If 
    Loop 
-   Return 
-   ALIMP:
+Return 
+ALIMP:
    '
    ' Get link phile-data
    '
@@ -8500,12 +8500,12 @@ Procedure _GL_SETALIEN
       End If 
    End If 
    Erase 401
-   Return 
-   ALIANIM:
+Return 
+ALIANIM:
    Do 
       Reserve As Gt Gadgets 497,60,1
       _gt Set Mode 0,"",0,1
-      
+
       _gt Button 1,8,14,536,12,,Catalog String$(2220,"Front Facing Movement")
       If AL(0)<>1
          _gt Button 2,8,28,536,12,,Catalog String$(2221,"Front-Right Facing Movement")
@@ -8519,7 +8519,7 @@ Procedure _GL_SETALIEN
       _gt Button 9,8,126,536,12,,Catalog String$(2228,"Attacking Action")
       _gt Button 10,8,140,536,12,,Catalog String$(2229,"Recieving Damage Action")
       _gt Button 11,8,154,536,12,,Catalog String$(2230,"Dying Action")
-      
+
       _wnd Id Open 8,0,128,544,158,$2+$8,F_IDCMP,497,""
       _wnd Id Titles Catalog String$(2214,"Animation to Edit for:")+" "+Peek$(LINK+$34D8+ALNUM*20,20,Chr$(0)),VER$
       Do 
@@ -8540,7 +8540,7 @@ Procedure _GL_SETALIEN
       _gt Gadgets Erase 497
       _wnd Id Close 8
       Exit If AC=$200
-      
+
       If AL(0)<>1
          ANBAS=LINK+$82D0+ALNUM*2420+(GA-1)*220
          _GL_SET_ANIM[ANBAS,2,Catalog String$(676,"Edit VectorAnimation"),AL(20)]
@@ -8549,7 +8549,7 @@ Procedure _GL_SETALIEN
          _GL_SET_ANIM[ANBAS,-2,Catalog String$(680,"Edit Animation"),AL(20)]
       End If 
    Loop 
-   Return 
+Return 
 End Proc
 Procedure _GL_SETOBJECT
    Dim W$(29),OB(20),AN(20,5),W1$(3),W2$(2),W3$(1),W4$(1)
@@ -8560,22 +8560,22 @@ Procedure _GL_SETOBJECT
    W3$(0)=Catalog String$(2,"No") : W3$(1)=Catalog String$(1,"Yes")
    W4$(0)=Catalog String$(14,"FLOOR")
    W4$(1)=Catalog String$(13,"Roof")
-   
+
    Do 
       For A=0 To 29
          W$(A)=Peek$(LINK+$57B0+A*20,20,Chr$(0))
       Next A
-      
+
       Reserve As Gt Gadgets 497,5,1
       _gt Set Mode 0,"",0,1
       _gt Set Listview Mode ,,,16,0,
       _gt Set Integer Mode 1,6,1,0
-      
+
       _gt Listview 1,8,12,_scr Id Width(1)-16,128,,"",Array(W$(0)),0
-      
+
       _wnd Id Open 8,0,128,_scr Id Width(1),130,$2+$8,F_IDCMP,497,""
       _wnd Id Titles Catalog String$(700,"Set Objects"),VER$
-      
+
       Do 
          AC=_wnd Id Next Event
          GA=_wnd Id Event Gadget
@@ -8597,62 +8597,62 @@ Procedure _GL_SETOBJECT
       Exit If AC=$200
       Gosub CHANGEOBJSTATS
    Loop 
-   Pop Proc
-   CHANGEOBJSTATS:
+Pop Proc
+CHANGEOBJSTATS:
    Do 
       Reserve As Gt Gadgets 497,81,1
       _gt Set Mode 0,"",0,1
       _gt Set Listview Mode ,,,16,0,
       _gt Set Integer Mode 1,6,1,0
       _gt Set String Mode 1,20,1,0
-      
+
       _gt String 13,336,14,272,12,0,"","-",1
-      
+
       _gt Text 41,8,28,328,12,,"",Catalog String$(701,"Behaviour of object:"),0
       _gt Cycle 1,336,28,272,12,0,"",Array(W1$(0)),0
-      
+
       _gt Text 42,8,42,328,12,,"",Catalog String$(702,"Graphic type:"),0
       _gt Cycle 2,336,42,272,12,0,"",Array(W2$(0)),0
-      
+
       _gt Text 43,8,56,328,12,,"",Catalog String$(703,"Deactivate after (50ths/sec, -1=Never):"),0
       _gt Integer 3,336,56,272,12,0,"",1256,1
-      
+
       _gt Text 44,8,70,328,12,,"",Catalog String$(704,"Number of hit points:"),0
       _gt Integer 4,336,70,272,12,0,"",1256,1
-      
+
       _gt Text 45,8,84,328,12,,"",Catalog String$(705,"Explosive potential:"),0
       _gt Integer 5,336,84,272,12,0,"",1256,1
-      
+
       _gt Text 46,8,98,328,12,,"",Catalog String$(706,"Impassable in default state:"),0
       _gt Cycle 6,336,98,272,12,0,"",Array(W3$(0)),0
-      
+
       _gt Text 47,8,112,328,12,,"",Catalog String$(707,"Collision cylinder radius:"),0
       _gt Integer 7,336,112,272,12,0,"",1256,1
-      
+
       _gt Text 48,8,126,328,12,,"",Catalog String$(708,"Collision cylinder height:"),0
       _gt Integer 8,336,126,272,12,0,"",1256,1
-      
+
       _gt Text 49,8,140,328,12,,"",Catalog String$(709,"Position vertically relative to:"),0
       _gt Cycle 9,336,140,272,12,0,"",Array(W4$(0)),0
-      
+
       _gt Text 50,8,154,328,12,,"",Catalog String$(710,"Lock to nearest wall:"),0
       _gt Cycle 10,336,154,272,12,0,"",Array(W3$(0)),0
-      
+
       _gt Text 51,8,168,328,12,,"",Catalog String$(58,"Sound FX:"),0
       _gt Text 52,336,168,256,12,,"","-",1
       _gt Image 11,592,168,1,GAD16(0),GAD16(1)
-      
+
       _gt Button 26,8,190,600,12,,Catalog String$(712,"Define Gun/Jetpack/Shield given")
       _gt Button 27,8,204,600,12,,Catalog String$(713,"Define Amo/Fuel given")
       _gt Button 28,8,218,600,12,,Catalog String$(714,"Define default state animation")
       _gt Button 29,8,232,600,12,,Catalog String$(715,"Define active/destroyed animation")
       _gt Button 30,8,246,600,12,,Catalog String$(2240,"Import Object Data")
-      
+
       _wnd Id Open 8,0,128,608,250,$2+$8,F_IDCMP,497,""
-      
+
       _wnd Id Titles Catalog String$(711,"Object statistics for:"),VER$
-      
-      
+
+
       BAS1=LINK+$5A08+OBNUM*40
       Do 
          For A=0 To 19 : OB(A)=Sdeek(BAS1+A*2) : Next A
@@ -8666,7 +8666,7 @@ Procedure _GL_SETOBJECT
          _gt Set Integer 8,OB(8)*2
          _gt Set Cycle 9,,OB(9)
          _gt Set Cycle 10,,OB(10)
-      If OB(12)<0 : _gt Set Text 52,Catalog String$(15,"<NONE>"),,, : Else : _gt Set Text 52,Left$(Dr File$(Peek$(LINK+$A40+(OB(12))*64,64,Chr$(0))),18),,, : End If 
+         If OB(12)<0 : _gt Set Text 52,Catalog String$(15,"<NONE>"),,, : Else : _gt Set Text 52,Left$(Dr File$(Peek$(LINK+$A40+(OB(12))*64,64,Chr$(0))),18),,, : End If 
          _gt Set String 13,Right Trim$(Peek$(LINK+$57B0+OBNUM*20,20,Chr$(0)))
          Do 
             AC=_wnd Id Next Event
@@ -8723,8 +8723,8 @@ Procedure _GL_SETOBJECT
          Gosub OBJAMOGIVE
       End If 
    Loop 
-   Return 
-   OBIMP:
+Return 
+OBIMP:
    '
    ' Get link phile-data
    '
@@ -8753,24 +8753,24 @@ Procedure _GL_SETOBJECT
          End If 
       End If 
    End If 
-   Return 
-   OBJGUNGIVE:
+Return 
+OBJGUNGIVE:
    GBAS=LINK+$8000+OBNUM*24
    Reserve As Gt Gadgets 497,81,1
    _gt Set Mode 0,"",0,1
    _gt Set Listview Mode ,,,16,0,
    _gt Set Integer Mode 1,6,1,0
    _gt Set String Mode 1,20,1,0
-   
+
    For A=1 To 12
       _gt Text 20+A,8,A*14,328,12,,"","",0
       _gt Cycle A,336,A*14,272,12,0,"",Array(W3$(0)),0
    Next A
-   
+
    _wnd Id Open 8,0,128,608,172,$2+$8,F_IDCMP,497,""
-   
+
    _wnd Id Titles Catalog String$(726,"Equipment given by:")+" "+Peek$(LINK+$57B0+OBNUM*20,20,Chr$(0)),VER$
-   
+
    Do 
       For A=0 To 11
          If A=0 : W$=Catalog String$(727,"Shield:")
@@ -8799,25 +8799,25 @@ Procedure _GL_SETOBJECT
    _gt Gadgets Remove 497
    _wnd Id Close 8
    _gt Gadgets Erase 497
-   Return 
-   OBJAMOGIVE:
+Return 
+OBJAMOGIVE:
    Reserve As Gt Gadgets 497,81,1
    _gt Set Mode 0,"",0,1
    _gt Set Listview Mode ,,,16,0,
    _gt Set Integer Mode 1,6,1,0
    _gt Set String Mode 1,20,1,0
-   
+
    For A=1 To 11
       _gt Text 30+A,8,A*14,232,12,,"","",0
       _gt Integer A,240,A*14,80,12,0,"",1234,1
       _gt Text 41+A,344,A*14,232,12,,"","",0
       _gt Integer 11+A,576,A*14,80,12,0,"",1234,1
    Next A
-   
+
    _wnd Id Open 8,0,128,-1,158,$2+$8,F_IDCMP,497,""
-   
+
    _wnd Id Titles Catalog String$(729,"Ammo given by:")+" "+Peek$(LINK+$57B0+OBNUM*20,20,Chr$(0)),VER$
-   
+
    GBAS=LINK+$7AD8+OBNUM*44
    Do 
       For A=0 To 21
@@ -8848,7 +8848,7 @@ Procedure _GL_SETOBJECT
    _gt Gadgets Remove 497
    _wnd Id Close 8
    _gt Gadgets Erase 497
-   Return 
+Return 
 End Proc
 Procedure _GL_SETPLAYER
    Reserve As Gt Gadgets 497,60,1
@@ -8897,26 +8897,26 @@ Procedure _GL_SETFLOORDAM
    If Length(700)<>65536
       _LOAD[700,Peek$(LINK+$1940,64,Chr$(0))]
    End If 
-   
+
    Reserve As Gt Gadgets 497,60,1
    _gt Set Mode 0,"",0,1
    _gt Set Listview Mode ,,,16,0,
    _gt Set Integer Mode 1,6,1,0
    _gt Set String Mode 1,20,1,0
-   
+
    _gt Text 1,80,42,328,12,,"",Catalog String$(751,"Floor Footstep sound:"),0
    _gt Text 2,408,42,192,12,,"","-",1
    _gt Image 3,600,42,1,GAD16(0),GAD16(1)
-   
+
    _gt Text 4,80,56,328,12,,"",Catalog String$(752,"Damage to player:"),0
    _gt Integer 5,408,56,208,12,0,"",1234,1
-   
+
    _gt Image 30,80,14,1,GAD10(2),GAD10(3)
    _gt Image 31,90,14,1,GAD10(4),GAD10(5)
-   
+
    _wnd Id Open 8,0,128,_scr Id Width(1),68,$2+$8,F_IDCMP,497,""
    _wnd Id Titles Catalog String$(750,"Set Floor Stats.."),VER$
-   
+
    NR=0
    Do 
       _wnd Id Use 8
@@ -8961,29 +8961,29 @@ Procedure _GL_SETFLOORDAM
    _gt Gadgets Erase 497
 End Proc
 Procedure _GL_LEVELS
-   
+
    Dim W1$(15),W2$(15)
    _wnd Id Open 8,0,20,_scr Id Width(1),256,$2+$8,F_IDCMP,0,"Levels.."
-   
+
    '  
    ' Set title of window, and the screen title when window is active
    '
    _wnd Id Titles Catalog String$(1122,"Levels"),VER$
    _wnd Id Activate 8
-   
+
    '
    ' Prepare for gadgets
    ' Bank 497 is reserved for 30 gadgets to be used on screen 1 
    '
    Reserve As Gt Gadgets 497,30,1
-   
+
    '
    ' Preparing string gadgets 
    ' Tabcycle=True, MaxChars=80, ExitHelp=True, Replacemode=False 
    '  
    _gt Set String Mode True,80,True,False
    _gt Set Listview Mode ,,,16,0,
-   
+
    _gt Bevel Box 2,16,16,624,44,1
    _gt Bevel Box 2,16,64,624,100,1
    _gt Bevel Box 2,16,168,624,88,1
@@ -8995,12 +8995,12 @@ Procedure _GL_LEVELS
    _gt String 9,32,140,592,12,,"","",
    _gt Listview 12,32,184,592,64,,Catalog String$(755,"Set Levelmusic (Shift to hear)"),Array(W2$(0)),0
    SELLEV=0
-   
+
    '
    ' Use gadgets
    '
    _gt Gadgets Attach 497
-   
+
    Do 
       _gt Gadgets Bank 497
       For A=0 To 15
@@ -9070,9 +9070,9 @@ Procedure _GL_LEVELS
    '
    _wnd Id Close 8
    _gt Gadgets Erase 497
-   Pop Proc
-   
-   MAKEDIRS:
+Pop Proc
+
+MAKEDIRS:
    F$=Peek$(LINK,64,Chr$(0))
    If Exist(F$) and F$<>""
       For A=Asc("A") To Asc("P")
@@ -9082,31 +9082,31 @@ Procedure _GL_LEVELS
          End If 
       Next 
    End If 
-   Return 
+Return 
 End Proc
 Procedure _GL_LGFX
    Dim W1$(15)
    _wnd Id Open 8,0,20,_scr Id Width(1),240,$2+$8,F_IDCMP,0,"Levels.."
-   
+
    '  
    ' Set title of window, and the screen title when window is active
    '
    _wnd Id Titles Catalog String$(1203,"Level GFX's"),VER$
    _wnd Id Activate 8
-   
+
    '
    ' Prepare for gadgets
    ' Bank 497 is reserved for 30 gadgets to be used on screen 1 
    '
    Reserve As Gt Gadgets 497,30,1
-   
+
    '
    ' Preparing string gadgets 
    ' Tabcycle=True, MaxChars=80, ExitHelp=True, Replacemode=False 
    '  
    _gt Set String Mode True,80,True,False
    _gt Set Listview Mode ,,,16,0,
-   
+
    _gt Bevel Box 2,16,16,624,44,1
    _gt Bevel Box 2,16,64,624,44,1
    _gt Bevel Box 2,16,112,624,136,1
@@ -9120,12 +9120,12 @@ Procedure _GL_LGFX
    '_gt Button 24,464,80,160,12,,Catalog String$(595,"Create Dirs") 
    _gt Listview 8,32,128,592,112,,Catalog String$(560,"Set WallGFX's"),Array(W1$(0)),0
    SELLEV=0
-   
+
    '
    ' Use gadgets
    '
    _gt Gadgets Attach 497
-   
+
    Do 
       _gt Gadgets Bank 497
       For A=0 To 15
@@ -9210,26 +9210,26 @@ End Proc
 Procedure _GL_SFX
    Dim W1$(59),W2$(15),W3$(59)
    _wnd Id Open 8,0,20,_scr Id Width(1),256,$2+$8,F_IDCMP,0,"Levels.."
-   
+
    '  
    ' Set title of window, and the screen title when window is active
    '
    _wnd Id Titles Catalog String$(1125,"Samples"),VER$
    _wnd Id Activate 8
-   
+
    '
    ' Prepare for gadgets
    ' Bank 497 is reserved for 30 gadgets to be used on screen 1 
    '
    Reserve As Gt Gadgets 497,30,1
-   
+
    '
    ' Preparing string gadgets 
    ' Tabcycle=True, MaxChars=80, ExitHelp=True, Replacemode=False 
    '  
    _gt Set String Mode True,80,True,False
    _gt Set Listview Mode ,,,16,0,
-   
+
    _gt Bevel Box 2,16,16,624,80,1
    _gt Bevel Box 2,16,100,624,80,1
    _gt Bevel Box 2,16,184,624,80,1
@@ -9237,12 +9237,12 @@ Procedure _GL_SFX
    _gt Listview 8,32,116,592,56,,Catalog String$(590,"Set BackgroundSFX (Shift to hear)"),Array(W2$(0)),0
    _gt Listview 12,32,200,592,56,,Catalog String$(591,"Set Echoed SFX's (Hold shift to hear)"),Array(W3$(0)),0
    SELLEV=0
-   
+
    '
    ' Use gadgets
    '
    _gt Gadgets Attach 497
-   
+
    Do 
       _gt Gadgets Bank 497
       For A=0 To 59
@@ -9329,24 +9329,24 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
    _gt Set Mode 0,"",0,1
    _gt Set Listview Mode ,,,16,0,
    _gt Set Integer Mode 1,6,1,0
-   
+
    _gt Listview 1,8,12,_scr Id Width(1)-16,112,,"",Array(W1$(0)),0
-   
+
    If TYPE>0
       _gt Text 21,8,128,232,12,,"",Catalog String$(50,"Graphic File:"),0
       _gt Text 22,240,128,400,12,,"","-",1
       _gt Image 2,640,128,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 23,8,142,232,12,,"",Catalog String$(51,"Frame Number:"),0
       _gt Integer 3,240,142,64,12,0,"",1256,1
       _gt Image 4,304,142,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 24,8,156,232,12,,"",Catalog String$(52,"Scaled Width:"),0
       _gt Integer 5,240,156,80,12,0,"",1256,1
-      
+
       _gt Text 25,8,170,232,12,,"",Catalog String$(53,"Scaled Height:"),0
       _gt Integer 6,240,170,80,12,0,"",1256,1
-      
+
       _gt Text 26,8,184,232,12,,"",Catalog String$(54,"Vertical Offset:"),0
       _gt Integer 7,240,184,80,12,0,"",1256,1
    End If 
@@ -9354,14 +9354,14 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
       _gt Text 21,8,128,232,12,,"",Catalog String$(56,"Vector File:"),0
       _gt Text 22,240,128,400,12,,"","-",1
       _gt Image 2,640,128,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 23,8,142,232,12,,"",Catalog String$(51,"Frame Number:"),0
       _gt Integer 3,240,142,64,12,0,"",1256,1
       _gt Image 4,304,142,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 24,8,156,232,12,,"",Catalog String$(57,"Facing Angle:"),0
       _gt Integer 5,240,156,80,12,0,"",1256,1
-      
+
       _gt Text 26,8,170,232,12,,"",Catalog String$(54,"Vertical Offset:"),0
       _gt Integer 7,240,170,80,12,0,"",1256,1
    End If 
@@ -9380,20 +9380,20 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
       _gt Text 27,8,198,232,12,,"",Catalog String$(58,"Sound FX:"),0
       _gt Text 28,240,198,400,12,,"","-",1
       _gt Image 8,640,198,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 29,8,212,568,12,,"",Catalog String$(59,"Action:"),0
       _gt Cycle 9,576,212,80,12,,"",Array(W10$(0)),0
-      
+
       _gt Cycle 10,8,226,568,12,,"",Array(W30$(0)),0
       _gt Integer 11,576,226,80,12,0,"",1256,1
-      
+
       _gt Text 30,344,142,232,12,,"",Catalog String$(60,"Aux. Object Frame:"),0
       _gt Integer 12,576,142,64,12,0,"",1256,1
       _gt Image 13,640,142,1,GAD16(0),GAD16(1)
-      
+
       _gt Text 31,344,156,232,12,,"",Catalog String$(61,"Aux. Frame X-Offset:"),0
       _gt Integer 14,576,156,80,12,0,"",1256,1
-      
+
       _gt Text 32,344,170,232,12,,"",Catalog String$(62,"Aux. Frame Y-Offset:"),0
       _gt Integer 15,576,170,80,12,0,"",1256,1
    End If 
@@ -9402,13 +9402,13 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
       _gt Text 27,8,198,232,12,,"",Catalog String$(63,"Next Frame:"),0
       _gt Integer 8,240,198,80,12,0,"",1256,1
    End If 
-   
+
    _gt Button 55,8,252,128,12,,Catalog String$(2310,"Insert")
    _gt Button 56,136,252,128,12,,Catalog String$(2311,"Delete")
-   
+
    _wnd Id Open 8,0,128,_scr Id Width(1),256,$2+$8,F_IDCMP,497,""
    _wnd Id Titles T$,VER$
-   
+
    R=-1
    Do 
       _gt Gadgets Bank 497
@@ -9433,16 +9433,16 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
          Exit If AC=$200,2
       Loop 
    Loop 
-   
+
    _gt Gadgets Remove 497
    _gt Gadgets Erase 497
    _wnd Id Close 8
    If AM_HE
       Amos To Front 
    End If 
-   Pop Proc
-   
-   UPDTY1:
+Pop Proc
+
+UPDTY1:
    For A=0 To 19
       W1$(A)=""
       If A<=Leek(NRADR)
@@ -9466,8 +9466,8 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
       _gt Set Integer 8,Peek(ANBAS+R*6+5)
    End If 
    _gt Set Listview 1,Array(W1$(0)),R,,
-   Return 
-   CHEKTYP1:
+Return 
+CHEKTYP1:
    If GA=1
       R=KY
       If R>Leek(NRADR)
@@ -9495,9 +9495,9 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
          Loke NRADR,Leek(NRADR)-1
       End If 
    End If 
-   Return 
-   
-   UPDTY2:
+Return 
+
+UPDTY2:
    ALMAX=19
    For A=0 To 19
       For B=0 To 10
@@ -9537,8 +9537,8 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
       _gt Set Integer 6,ANM(R,3)
       Gosub UPDTY2G
    End If 
-   Return 
-   UPDTY2V:
+Return 
+UPDTY2V:
    ALMAX=19
    For A=0 To 19
       For B=0 To 10
@@ -9576,12 +9576,12 @@ Procedure _GL_SET_ANIM[ANBAS,TYPE,T$,NRADR]
       _gt Set Integer 5,ANM(R,2)*256+ANM(R,3) and 8190
       Gosub UPDTY2G
    End If 
-   Return 
-   UPDTY2G1:
+Return 
+UPDTY2G1:
    W1$(A)=W1$(A)+"VO:"+Right$(" "+Str$(ANM(A,4))-" ",2)+" "
    W1$(A)=W1$(A)+"FX:"+Right$(" "+Str$(ANM(A,5))-" ",2)+"   "
    W1$(A)=W1$(A)+"AC:"
-If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If 
+   If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If 
    W1$(A)=W1$(A)+" AI:" : A7=ANM(A,7)
    If A7=0 : W1$(A)=W1$(A)+" v "
    Else If A7/64=1 : W1$(A)=W1$(A)+"S"+Right$(" "+Str$(A7 and 63)-" ",2)
@@ -9594,8 +9594,8 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
    End If 
    W1$(A)=W1$(A)+" XO:"+Right$("  "+Str$(ANM(A,9)*2)-" ",3)+" "
    W1$(A)=W1$(A)+"YO:"+Right$("  "+Str$(ANM(A,10)*2)-" ",3)
-   Return 
-   UPDTY2G:
+Return 
+UPDTY2G:
    _gt Set Integer 7,ANM(R,4)
    If ANM(R,5)=0
       _gt Set Text 28,"<NONE>",,,
@@ -9612,8 +9612,8 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
    _gt Set Integer 12,ANM(R,8)+1
    _gt Set Integer 14,ANM(R,9)*2
    _gt Set Integer 15,ANM(R,10)*2
-   Return 
-   CHEKTYP2:
+Return 
+CHEKTYP2:
    If GA=1
       R=KY
       If R>ALMAX
@@ -9629,8 +9629,8 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
       End If 
       Gosub CHEKTYP2G
    End If 
-   Return 
-   CHEKTYP2V:
+Return 
+CHEKTYP2V:
    If GA=1
       R=KY
       If R>ALMAX
@@ -9645,8 +9645,8 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
       End If 
       Gosub CHEKTYP2G
    End If 
-   Return 
-   CHEKTYP2G:
+Return 
+CHEKTYP2G:
    If GA=7 : Poke ANBAS+R*11+4,_gt What Integer(7)
    Else If GA=8 : _SELSFX[1,""] : Poke ANBAS+R*11+5,Param
    Else If GA=9 : Add ANM(R,6),1,0 To 1 : Poke ANBAS+R*11+6,ANM(R,6)
@@ -9670,9 +9670,9 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
       Next A
       Loke NRADR,Leek(NRADR)-1
    End If 
-   Return 
-   
-   UPDTY3:
+Return 
+
+UPDTY3:
    For A=0 To 19
       For B=0 To 5
          ANM(A,B)=Peek(ANBAS+A*6+B)
@@ -9703,8 +9703,8 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
       _gt Set Integer 7,ANM(R,4)
       _gt Set Integer 8,ANM(R,5)
    End If 
-   Return 
-   UPDTY3V:
+Return 
+UPDTY3V:
    For A=0 To 19
       For B=0 To 5
          ANM(A,B)=Peek(ANBAS+A*6+B)
@@ -9734,8 +9734,8 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
       _gt Set Integer 7,ANM(R,4)
       _gt Set Integer 8,ANM(R,5)
    End If 
-   Return 
-   CHEKTYP3:
+Return 
+CHEKTYP3:
    If GA=1
       R=KY
       If R>Deek(NRADR)
@@ -9763,8 +9763,8 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
          Doke NRADR,Deek(NRADR)-1
       End If 
    End If 
-   Return 
-   CHEKTYP3V:
+Return 
+CHEKTYP3V:
    If GA=1
       R=KY
       If R>Deek(NRADR)
@@ -9791,16 +9791,16 @@ If ANM(A,6)=1 : W1$(A)=W1$(A)+"* " : Else : W1$(A)=W1$(A)+"  " : End If
          Doke NRADR,Deek(NRADR)-1
       End If 
    End If 
-   Return 
+Return 
 End Proc
 '
 Procedure _GL_IGETPAL[SC,DST]
    Dim PR(31),PG(31),PB(31)
-   
+
    _scr Id Use 1 : _scr Id Show 1
    _N_MSG2["",2]
    _gt Set Text 1,Catalog String$(1080,"Building Shade-palette"),,,
-   
+
    _scr Id Use SC
    For A=0 To 31
       C=_scr Id Get Aga Pal(A)
@@ -9809,7 +9809,7 @@ Procedure _GL_IGETPAL[SC,DST]
       PB(A)=C and $FF
    Next 
    _scr Id Use 1
-   
+
    N=DST
    For A=0 To 31
       _gt Set Text 2,Str$((A*100)/32)-" "+"%",,,
@@ -9839,24 +9839,24 @@ Procedure _TL_OBJFRAMECONV
    F$=Param$
    If F$="" : Pop Proc : End If 
    If Not Exist(F$) : Pop Proc : End If 
-   
+
    Erase 401
    Trap Wload F$,401
    If Errtrap : Erase 401 : Pop Proc : End If 
-   
+
    _ILBM_FROM_BANK[2,401,%1]
    If Param
       Trap _scr Id Close 2 : Pop Proc
    End If 
    Reserve As Work 401,2048
-   
+
    FILE$=F$
    F$=Dr File$(F$)
    _scr Id Use 1 : _scr Id Show 1
-   
+
    Reserve As Gt Gadgets 497,10,1
    _gt Set Integer Mode 1,6,1,0
-   
+
    _gt Text 7,8,14,196,12,,"",Catalog String$(505,"Number of frames:"),0
    _gt Text 8,8,28,196,12,,"",Catalog String$(506,"Width of each frame:"),0
    _gt Text 9,8,42,196,12,,"",Catalog String$(507,"Height of each frame:"),0
@@ -9864,7 +9864,7 @@ Procedure _TL_OBJFRAMECONV
    _gt Integer 2,204,28,64,12,0,"",0,1
    _gt Integer 3,204,42,64,12,0,"",0,1
    _gt Button 4,204,56,64,12,,"OK"
-   
+
    _wnd Id Open 8,128,20,268,60,$2+$8,F_IDCMP,497,".."
    _wnd Id Titles Catalog String$(504,"Load Object Graphics"),VER$
    Do 
@@ -9880,15 +9880,15 @@ Procedure _TL_OBJFRAMECONV
    _gt Gadgets Remove 497
    _wnd Id Close 8
    _gt Gadgets Erase 497
-   
+
    If WOF=0 or NOF=0 or HOF=0 or EV=$200
       _scr Id Close 2 : Pop Proc
    End If 
    WOS=_scr Id Width(2)
-   
+
    N=Start(401)
    _GL_IGETPAL[2,N]
-   
+
    _scr Id Use 2 : _scr Id Show 2
    SI=WOF*HOF*NOF+12
    If Length(15)<SI : Reserve As Work 15,SI : End If 
@@ -9905,7 +9905,7 @@ Procedure _TL_OBJFRAMECONV
    Next 
    _scr Id Close 2
    _scr Id Use 1 : _scr Id Show 1
-   
+
    _S_FILE[1,Catalog String$(509,"Save raw data file"),"ab3:includes/","",""]
    F$=Param$
    If F$="" : Pop Proc : End If 
@@ -9959,10 +9959,10 @@ Procedure _TL_CONVHQN
    End If 
    If ER
       _scr Id Use 1 : _scr Id Show 1
-      
+
       Reserve As Gt Gadgets 497,10,1
       _gt Set Integer Mode 1,6,1,0
-      
+
       _gt Text 7,8,14,196,12,,"",Catalog String$(505,"Number of frames:"),0
       _gt Text 8,8,28,196,12,,"",Catalog String$(506,"Width of each frame:"),0
       _gt Text 9,8,42,196,12,,"",Catalog String$(507,"Height of each frame:"),0
@@ -9970,7 +9970,7 @@ Procedure _TL_CONVHQN
       _gt Integer 2,204,28,64,12,0,"",SH,1
       _gt Integer 3,204,42,64,12,0,"",SH,1
       _gt Button 4,204,56,64,12,,"OK"
-      
+
       _wnd Id Open 8,128,20,268,60,$2+$8,F_IDCMP,497,".."
       _wnd Id Titles Catalog String$(504,"Load Object Graphics"),VER$
       Do 
@@ -9986,7 +9986,7 @@ Procedure _TL_CONVHQN
       _gt Gadgets Remove 497
       _wnd Id Close 8
       _gt Gadgets Erase 497
-      
+
       If WOF=0 or NOF=0 or HOF=0 or EV=$200
          _scr Id Close 2 : Pop Proc
       End If 
@@ -10087,7 +10087,7 @@ Procedure _TL_CONVHQN
          For Q=0 To WOF-1
             For W=0 To HOF-1
                CC=_scr Id Point(Q+X,W+Y)/9
-            If CC<>0 : C=Peek(Z) : Else : C=0 : End If 
+               If CC<>0 : C=Peek(Z) : Else : C=0 : End If 
                Poke Z,(C*8)+CC
                Add Z,1
                _scr Id Plot Q+X,W+Y
@@ -10157,7 +10157,7 @@ Procedure _TL_PACK_FRAME_DATA[F$]
    For A=0 To S-1
       Z=0 : For L=0 To HF : If Peek(F+L)=0 Then Z=L+1 Else L=1000 : Next 
       T(A)=Z
-   Z=HF : For L=HF-1 To 0 Step -1 : If Peek(F+L)=0 : Z=L Else L=-10 : End If : Next 
+      Z=HF : For L=HF-1 To 0 Step -1 : If Peek(F+L)=0 : Z=L Else L=-10 : End If : Next 
       B(A)=Z : Add F,HF
    Next 
    F=Start(15) : D=Start(401) : E=Start(15)+(S-1)*HF : B=HF-B(0)
@@ -10183,12 +10183,12 @@ Procedure _TL_PACK_FRAME_DATA[F$]
    TD=0 : _N_MSG["",Catalog String$(514,"Packing Strips...")]
    F=Start(401) : D=Start(401)+HF
    For A=0 To HF-1 : Poke Start(401)+A,Peek(Start(15)+A) : Next 
-Z=HF : For L=HF-1 To 0 Step -1 : If Peek(F+L)=0 : Z=L Else L=-10 : End If : Next 
+   Z=HF : For L=HF-1 To 0 Step -1 : If Peek(F+L)=0 : Z=L Else L=-10 : End If : Next 
    B=Z : Add F,HF
    For X=1 To S-1
-   Z=0 : For L=0 To HF : If Peek(F+L)=0 : Z=L+1 Else L=1000 : End If : Next 
+      Z=0 : For L=0 To HF : If Peek(F+L)=0 : Z=L+1 Else L=1000 : End If : Next 
       T=Z : J=HF-B : K=Min(J,T) : TD=TD+Abs(J-T) : D=D-K : Z=HF
-   For L=HF-1 To 0 Step -1 : If Peek(F+L)=0 : Z=L Else L=-10 : End If : Next 
+      For L=HF-1 To 0 Step -1 : If Peek(F+L)=0 : Z=L Else L=-10 : End If : Next 
       B=Z
       For A=0 To HF-1 : Poke D+A,Peek(F+A) : Next 
       Loke Start(404)+X*4,D-Start(401) : Add D,HF : Add F,HF
@@ -10254,10 +10254,10 @@ End Proc
 '
 Procedure _TL_LEVELINTRO
    Dim W1$(1)
-   
+
    W1$(0)=Catalog String$(2301,"Adjust=Left")
    W1$(1)=Catalog String$(2302,"Adjust=Center")
-   
+
    Fill Start(15) To Start(15)+20992+256,$20202020
    _LOAD[15,"Ab3:includes/TEXT_FILE"]
    Reserve As Gt Gadgets 497,60,1
@@ -10265,7 +10265,7 @@ Procedure _TL_LEVELINTRO
    _gt Set Listview Mode ,,,16,0,
    _gt Set Integer Mode 1,6,1,0
    _gt Set String Mode 1,20,1,0
-   
+
    _wnd Id Open 8,0,128,_scr Id Width(1),240,$2+$8,F_IDCMP,0,""
    _gt Bevel Box 1,8,16,648,168,1
    For B=1 To 16
@@ -10285,11 +10285,11 @@ Procedure _TL_LEVELINTRO
    _gt Cycle 20,8,194,160,12,,"",Array(W1$(0)),0
    _gt Button 21,168,194,128,12,,Catalog String$(2310,"Insert")
    _gt Button 22,296,194,128,12,,Catalog String$(2311,"Delete")
-   
+
    _gt Text 30,8,220,288,12,,"","-",1
    _gt Button 31,296,220,64,12,,"<"
    _gt Button 32,360,220,64,12,,">"
-   
+
    _gt Gadgets Attach 497
    _wnd Id Titles Catalog String$(760,"Set Level-Intro Texts"),VER$
    
@@ -10340,7 +10340,7 @@ Procedure _TL_LEVELINTRO
                   Exit 
                End If 
             End If 
-            
+
             OC_L=C_L
             Exit If AC=$200,2
             Multi Wait 
@@ -10589,16 +10589,16 @@ Procedure _TL_IFF2WALL
             F$=Dr File$(F$)
             SW=_scr Id Width(2) : SH=_scr Id Height(2)
             _scr Id Use 1 : _scr Id Show 1
-            
+
             Reserve As Gt Gadgets 497,10,1
             _gt Set Integer Mode 1,6,1,0
-            
+
             _gt Text 7,8,14,196,12,,"",Catalog String$(564,"Width of chunk"),0
             _gt Text 8,8,28,196,12,,"",Catalog String$(565,"Height of chunk"),0
             _gt Integer 1,204,14,64,12,0,"",SW,1
             _gt Integer 2,204,28,64,12,0,"",SH,1
             _gt Button 3,204,42,64,12,,"OK"
-            
+
             _wnd Id Open 8,128,20,268,46,$2,F_IDCMP,497,".."
             _wnd Id Titles Catalog String$(563,"Load Wall Picture"),VER$
             Do 
@@ -10662,51 +10662,51 @@ Procedure _TL_BUILDARCHIVE
    W1$(1)="LZx"
    W1$(2)="Custom"
    _wnd Id Open 8,0,20,600,232,$2+$8,F_IDCMP,0,"Levels.."
-   
+
    '  
    ' Set title of window, and the screen title when window is active
    '
    _wnd Id Titles Catalog String$(1205,"Build Archive"),VER$
    _wnd Id Activate 8
-   
+
    '
    ' Prepare for gadgets
    ' Bank 497 is reserved for 30 gadgets to be used on screen 1 
    '
    Reserve As Gt Gadgets 497,40,1
    _gt Set Mode 0,"",0,1
-   
+
    _gt Bevel Box 2,16,16,112,224,1
    _gt Text 20,32,20,80,10,,"",Catalog String$(2100,"Levels:"),0
    For A=0 To 15
       _gt Checkbox A+1,100,A*12+32,12,12,,Chr$(A+65),0
    Next A
-   
+
    _gt Bevel Box 2,144,16,272,224,1
    _gt Text 23,160,20,80,10,,"",Catalog String$(2103,"Options:"),0
    _gt Checkbox 31,388,32,12,12,,Catalog String$(2101,"Include Developer files:"),0
    _gt Checkbox 32,388,44,12,12,,Catalog String$(2102,"Include Game-SetUp:"),0
-   
+
    _gt Bevel Box 2,432,16,160,192,1
    _gt Text 24,448,20,80,10,,"",Catalog String$(2104,"Archiver:"),0
    _gt Mx 22,564,32,12,12,,"",Array(W1$(0)),6
-   
+
    _gt Button 21,432,228,160,12,,"Ok"
    '
    ' Use gadgets
    '
    _gt Gadgets Attach 497
-   
+
    P_LEVELS=0
    P_GEN=%10
    P_PACK=0
    ESC=False
    Do 
       For A=0 To 15
-      If Btst(A,P_LEVELS) : _gt Set Checkbox A+1,1 : Else _gt Set Checkbox A+1,0 : End If 
+         If Btst(A,P_LEVELS) : _gt Set Checkbox A+1,1 : Else _gt Set Checkbox A+1,0 : End If 
       Next A
       For A=0 To 1
-      If Btst(A,P_GEN) : _gt Set Checkbox A+31,1 : Else _gt Set Checkbox A+31,0 : End If 
+         If Btst(A,P_GEN) : _gt Set Checkbox A+31,1 : Else _gt Set Checkbox A+31,0 : End If 
       Next A
       _gt Set Mx 22,P_PACK
       Do 
@@ -10762,9 +10762,9 @@ Procedure _TL_BUILDARCHIVE
    _S_FILE[1,Catalog String$(2149,"Select Archive Name:"),"Ab3:","",""]
    AF$=Param$
    If AF$="" : Pop Proc : End If 
-   
+
    ARC$=Replacestr$(ARC$,"%a" To Chr$(34)+AF$+Chr$(34))
-   
+
    _N_MSG[Catalog String$(2148,"Doing Levels:"),""]
    '
    ' Do the Levels
@@ -10794,9 +10794,9 @@ Procedure _TL_BUILDARCHIVE
       Gosub BA_G_SET
    End If 
    _R_N_MSG
-   Pop Proc
-   
-   BA_G_SET:
+Pop Proc
+
+BA_G_SET:
    _N_MSG[Catalog String$(2147,"Doing Game-SetUp:"),""]
    Reserve As Work 402,100000
    _LOAD[402,"Ab3:Includes/test.lnk"]
@@ -10817,7 +10817,7 @@ Procedure _TL_BUILDARCHIVE
             WF2$=Replacestr$(WF2$,"TKG1:" To "AB3:")
             WF2$=Replacestr$(WF2$,"TKG2:" To "AB3:")
             WF2$=Replacestr$(WF2$,"SFX:" To "AB3:")
-         If G=7 : WF2W$=WF2$+".WAD" : Else WF2W$=WF2$ : End If 
+            If G=7 : WF2W$=WF2$+".WAD" : Else WF2W$=WF2$ : End If 
             If WF$=WF2W$ : WM=True : End If 
          Else 
             WF2$=WF$ : WM=True : WF2W$=WF2$
@@ -10860,19 +10860,19 @@ Procedure _TL_BUILDARCHIVE
          Inc GNR
       End If 
    Loop 
-   Return 
-   
+Return 
+
    Data 1,-1,0
    Data 0,"ab3:includes/test.lnk",$AF04D976,7192
    Data 0,"ab3:includes/text_file",$2982A4FC,6071
    Data 0,"ab3:includes/rawbackpacked",$1BB054DB,30612
-   
+
    Data 2,$1940,0
    Data 0,"ab3:includes/floortile",$E1E1C5D4,38781
-   
+
    Data 3,$1980,0
    Data 0,"ab3:includes/newtexturemaps",$2EB818AC,76311
-   
+
    Data 4,85184,64
    Data 0,"ab3:music/packedtest",$5C2756E6,9301
    Data 0,"ab3:music/packedtest",$5C2756E6,9301
@@ -10890,7 +10890,7 @@ Procedure _TL_BUILDARCHIVE
    Data 0,"ab3:music/packedtest",$5C2756E6,9301
    Data 0,"ab3:music/packedtest",$5C2756E6,9301
    Data 0,"ab3:music/packedtest",$5C2756E6,9301
-   
+
    Data 5,$13FE0,64
    Data 0,"ab3:vectobj/generator",$7360B40E,1610
    Data 0,"ab3:vectobj/switch",$FD0FB39B,866
@@ -10915,7 +10915,7 @@ Procedure _TL_BUILDARCHIVE
    Data 0,"ab3:vectobj/jetpack",$1DF68A46,450
    Data 0,"ab3:vectobj/charger",$834A1F3B,106
    Data 0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0
-   
+
    Data 6,$14760,64
    Data 0,"ab3:wallinc/stonewall.256wad",$ADAF024D,7491
    Data 0,"ab3:wallinc/brownpipes.256wad",$2BE99F7C,9643
@@ -10931,7 +10931,7 @@ Procedure _TL_BUILDARCHIVE
    Data 0,"ab3:wallinc/steampunk.256wad",$3A5F2D60,29177
    Data 0,"ab3:wallinc/brownstonestep.256wad",$C4498A82,1904
    Data 0,"",0,0,0,"",0,0,0,"",0,0
-   
+
    Data 7,$2C0,64
    Data 0,"ab3:includes/alien2.wad",$3D08C64B,11072
    Data 0,"ab3:includes/pickups.wad",$4DF5FFD0,4422
@@ -10949,7 +10949,7 @@ Procedure _TL_BUILDARCHIVE
    Data 0,"ab3:hqn/insect.wad",$DD4BD6EB,37284
    Data 0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0
    Data 0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0,0,"",0,0
-   
+
    Data 8,$A40,64
    Data 0,"ab3:samples/scream.fib",$F02B2FF0,1663
    Data 0,"ab3:samples/fire!.fib",$40AFC8BA,3196
@@ -11222,14 +11222,14 @@ Procedure _TL_N_IFF2TEXT
             If F$>" "
                Trap Bsave F$,Start(15) To Start(15)+65536*2
                _PACK[F$]
-               
+
                _LOAD[15,"ab3:includes/textpal.backup"]
                L=Param
                If L=0
                   _LOAD[15,"ab3:includes/newtexturemaps.pal"]
                   L=Param
                End If 
-               
+
                If L=0
                   _TL_BUILDGLARE
                Else 
@@ -11377,10 +11377,10 @@ Procedure _PAL2ISCREEN[N]
 End Proc
 Procedure _TL_BUILDGLARE
    Dim R(255),G(255),B(255)
-   
+
    _scr Id Show 1
    _N_MSG["",Catalog String$(555,"Building glare Palette")]
-   
+
    N=PALC
    For A=0 To 255
       R(A)=Deek(N) : Add N,2
@@ -11674,7 +11674,7 @@ End Proc
 Procedure _SURE[T0$,T$]
    If T0$="" : T0$=Catalog String$(90,"Are You sure that you want to:") : End If 
    P=_request Choice(_wnd Id Base(0),T0$,T$,Catalog String$(2,"No")+"|"+Catalog String$(1,"Yes"))
-If P=0 : R=True : Else : R=False : End If 
+   If P=0 : R=True : Else : R=False : End If 
 End Proc[R]
 '
 Procedure _SHOW_AG[NO$]
@@ -11772,7 +11772,7 @@ Procedure _I_SAVEIFFPIC[SCR,F$]
          Next WC
       Next WB
    Next WA
-   
+
    '
    ' Store filelength-header length in file 
    ' The save it and clean up.. 
@@ -11780,7 +11780,7 @@ Procedure _I_SAVEIFFPIC[SCR,F$]
    Loke Start(401)+4,PO-Start(401)-8
    Trap Bsave F$,Start(401) To PO
    Erase 401
-   
+
 End Proc
 '
 '
@@ -11822,7 +11822,7 @@ Procedure _ILBM_FROM_BANK[W_SCR,W_BNK,W_FLGS]
    ' Ok, There's no error to begin with ;-) 
    '
    W_ERR=0
-   
+
    '
    ' Check for filetype 
    '
@@ -11831,10 +11831,10 @@ Procedure _ILBM_FROM_BANK[W_SCR,W_BNK,W_FLGS]
    If W_H$<>"FORM" : W_ERR=1 : Goto FIN : End If 
    W_H$=Peek$(Start(W_BNK)+8,4)
    If W_H$<>"ILBM" : W_ERR=2 : Goto FIN : End If 
-   
+
    W_BNKS=Start(W_BNK)
    W_BNKE=Start(W_BNK)+Length(W_BNK)
-   
+
    '
    ' Find and Decode "BMHD" chunk, hosts general information  
    ' (Cancel work if not found) 
@@ -11842,7 +11842,7 @@ Procedure _ILBM_FROM_BANK[W_SCR,W_BNK,W_FLGS]
    W_PO=Hunt(W_BNKS To W_BNKE,"BMHD")
    If W_PO<W_BNKS : W_ERR=2 : Goto FIN : End If 
    Add W_PO,8
-   
+
    W_PW=_struct Word(W_PO,0) : Rem      Picture Width 
    W_PH=_struct Word(W_PO,2) : Rem      Picture Height
    W_PD=_struct Byte(W_PO,8) : Rem      Depth (Planes)
@@ -11850,8 +11850,8 @@ Procedure _ILBM_FROM_BANK[W_SCR,W_BNK,W_FLGS]
    W_PSW=_struct Word(W_PO,16) : Rem    Screen Width
    W_PSH=_struct Word(W_PO,18) : Rem    Screen Height 
    If PCOMP>1 : W_ERR=4 : Goto FIN : End If 
-   
-   
+
+
    '
    ' Find & Decode "CAMG" chunk, holding the viewmode.. 
    '
@@ -11872,8 +11872,8 @@ Procedure _ILBM_FROM_BANK[W_SCR,W_BNK,W_FLGS]
       Trap _scr Id Open W_SCR,0,0,Max(32,W_PW),Max(16,W_PH),W_PD,W_MODE,0,""
       If Errtrap : W_ERR=3 : Goto FIN : End If 
    End If 
-   
-   
+
+
    '
    ' Find & Decode "CMAP" chunk, holding the Colours..  
    '
@@ -11892,16 +11892,16 @@ Procedure _ILBM_FROM_BANK[W_SCR,W_BNK,W_FLGS]
          Inc WB
       Next WA
    End If 
-   
+
    '
    ' Find & Decode "BODY" part, this hosts the picture data.. 
    '
    W_PO=Hunt(W_BNKS To W_BNKE,"BODY")
    If W_PO<W_BNKS : W_ERR=5 : Goto FIN : End If 
-   
+
    W_S=Leek(W_PO+4)
    Add W_PO,8
-   
+
    W_P=0
    W_CBM=_rp What Bmap(_scr Id Rport(W_SCR))
    W_SCRBB=_bm What Modulo(W_CBM)
@@ -11943,7 +11943,7 @@ Procedure _ILBM_FROM_BANK[W_SCR,W_BNK,W_FLGS]
          End If 
       Next WB
    Next WA
-   FIN:
+FIN:
 End Proc[W_ERR]
 Procedure _ILBM_TO_BANK[W_SCR,W_BNK]
    '-------------------------------------------------------------------------'  
@@ -11967,28 +11967,28 @@ Procedure _ILBM_TO_BANK[W_SCR,W_BNK]
    '-------------------------------------------------------------------------'  
    Trap _scr Id Use W_SCR
    If Errtrap : Goto FIN : End If 
-   
+
    '
    ' Get Screen sizes 
    '
    W_PW=_scr Id Width(W_SCR)
    W_PH=_scr Id Height(W_SCR)
    W_PD=_scr Id Depth(W_SCR)
-   
+
    '
    ' Calculate resulting file-size..  
    '
    W_SIZE=8+4+8+20+8+2^W_PD*3+8+4+8+W_PW/8*W_PH*W_PD
    '      ---HD--- ---CMAP--- -V- -------BMAP-------
-   
+
    Reserve As Work W_BNK,W_SIZE
    W_PO=Start(W_BNK)
-   
+
    '
    ' Build header-structure:
    '
    Poke$ W_PO,"FORM"+_chr$.l(W_SIZE-8)+"ILBM" : Add W_PO,12
-   
+
    '
    ' Build "BMHD" Chunk (General information):
    '
@@ -11999,7 +11999,7 @@ Procedure _ILBM_TO_BANK[W_SCR,W_BNK]
    Poke W_PO,0 : Add W_PO,1 : Add W_PO,5
    Doke W_PO,W_PW : Add W_PO,2
    Doke W_PO,W_PH : Add W_PO,2
-   
+
    '
    ' Build "CMAP" Chunk (Colour-maps):
    '
@@ -12010,13 +12010,13 @@ Procedure _ILBM_TO_BANK[W_SCR,W_BNK]
       Poke W_PO,(WB/$100) and $FF : Inc W_PO
       Poke W_PO,WB and $FF : Inc W_PO
    Next WA
-   
+
    '
    ' Build "CAMG" Chunk (Viewmode, AMIGA only): 
    '
    Poke$ W_PO,"CAMG"+_chr$.l(4) : Add W_PO,8
    Loke W_PO,_scr Id Mode(W_SCR) : Add W_PO,4
-   
+
    '
    ' Build "BODY" Chunk (Bitmap stored in raster-format): 
    '
@@ -12033,7 +12033,7 @@ Procedure _ILBM_TO_BANK[W_SCR,W_BNK]
          Next WC
       Next WB
    Next WA
-   FIN:
+FIN:
 End Proc
 
 '
@@ -12105,12 +12105,12 @@ Procedure _SCR_ID_LOAD[SCRNB,FILE$,MAP]
       _tag Set ,$800010C9,Varptr(BMH)
       _tag Done 0
       OK=_dt What Attrs(DTO,)
-      
+
       If MAP=1
          _tag Set ,$8000000A,IDMODE
          _tag Done 0
          IDMODE=_mode Best Id(_base Tag)
-         '
+               '
          ' Open Screen
          ' ~~~~~~~~~~~      
          _tag Set ,$80000021,_struct Word(BMH,4)
@@ -12120,7 +12120,7 @@ Procedure _SCR_ID_LOAD[SCRNB,FILE$,MAP]
          _tag Set ,$80000025,_struct Ubyte(BMH,8)
          _tag Set ,$80000032,IDMODE
          _tag Done 0
-         
+      
          _scr Id Tag Open SCRNB,
       End If 
    End If 
@@ -12195,15 +12195,15 @@ Procedure _LOADSAM[NAME$,BNK]
    DTBASE=_dt Init
    If DTBASE=0 Then Goto FIN
    NAME$=NAME$+_0$
-   
+
    _tag Set ,$8000101F,_val.l("soun")
    _tag Set ,$800010D3,0
    _tag Done 0
-   
+      
    DTO=_dt Create(Varptr(NAME$),)
    If DTO=0 : Goto FIN : End If 
-   
-   
+
+
    '
    ' Get Attributes 
    ' ~~~~~~~~~~~~~~ 
@@ -12213,7 +12213,7 @@ Procedure _LOADSAM[NAME$,BNK]
    _tag Set ,$80001067,Varptr(DT)
    _tag Done 0
    OK=_dt What Attrs(DTO,)
-   
+
    '
    ' Test if DataType is sample ('soun')  
    ' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
@@ -12227,7 +12227,7 @@ Procedure _LOADSAM[NAME$,BNK]
    '
    ' FreeIng
    ' ~~~~~~~
-   FIN:
+FIN:
    _dt Delete DTO
 End Proc[SAMRATE]
 '
