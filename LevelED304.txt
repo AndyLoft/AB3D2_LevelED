@@ -217,12 +217,12 @@ Pop Proc[False]
 
 MPROJ:
    If M2=0 : _IPICKBUTTON[38] : End If 
-   If M2=1 : _LOAD_LEVEL[""] : End If 
+   If M2=1 : _IPICKBUTTON[6] : _LOAD_LEVEL[""] : End If 
    If M2=2 : _IPICKBUTTON[6] : _SAVE_LEVEL[""] : End If 
-   If M2=3 : _CLIP_LEVEL[""] : End If 
-   If M2=4 : _LINK_LEVEL[""] : End If 
-   If M2=5 : _MAKE_LEVEL["",False] : End If 
-   If M2=6 : _MAKE_LEVEL["",True] : End If 
+   If M2=3 : _IPICKBUTTON[6] : _CLIP_LEVEL[""] : End If 
+   If M2=4 : _IPICKBUTTON[6] : _LINK_LEVEL[""] : End If 
+   If M2=5 : _IPICKBUTTON[6] : _MAKE_LEVEL["",False] : End If 
+   If M2=6 : _IPICKBUTTON[6] : _MAKE_LEVEL["",True] : End If 
    If M2=8 : _ICONIFY : End If 
    If M2=9 and M3=0 : Pop Proc[True] : End If 
 Return 
@@ -4146,7 +4146,7 @@ Procedure _VANILLAKEY
    If OP=28 : _V_PLACECONTPT : End If 
    If OP=29 : _V_CPTNEARTOZONE : End If 
    If OP=31 : _V_CONNECTCONT : End If 
-   If OP=35 : _V_CONNECTCONT : End If 
+   If OP=35 : _V_CPTMOVE : End If 
 End Proc
 '
 Procedure _V_DEFZONE
