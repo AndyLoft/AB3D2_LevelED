@@ -3,7 +3,7 @@
 '             AlienBreed 3DII - Editor, revised edition V3.04                ' 
 '                  Originaly written by: Andy Clitheroe                      '   
 '                    Rewritten by: Jens Vang Petersen                        ' 
-'                   Additional work by: Abu_the_monkey                                                         ' 
+'                   Additional work by: Abu_the_monkey                       ' 
 '             Contact me:                  Jens Vang Petersen                ' 
 '                                       top_cat@post8.tele.dk                ' 
 '                                                                            ' 
@@ -402,7 +402,7 @@ Procedure _INIT_MSCREEN
       Else If DEFNCOL=32
          Trap _scr Id Open 1,0,0,664,532,5,SCR_MODE,0,VER$
       Else 
-         Trap _scr Id Open 1,0,0,664,532,8,SCR_MODE,0,VER$
+         Trap _scr Id Open 1,0,0,800,600,8,SCR_MODE,0,VER$
       End If 
    Else 
       If DEFNCOL=16
