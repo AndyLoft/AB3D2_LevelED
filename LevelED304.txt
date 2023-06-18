@@ -22,13 +22,13 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="19-05-2023"
+   VDA$="18-06-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
    '
    '
-   Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL
+   Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL,CANVASWIDTH,CANVASHEIGHT,_TXT_BOX_W
    MXP=600 : MZ=256 : MCP=99 : MOBJ=200
    '
    '
@@ -256,6 +256,7 @@ Return
 
 MLEVE:
    If M2=0 : _N_SETLEVELTEXT : End If 
+   'If M2=2 : _STATISTICS[0] : End If' PROC _STATISTICS re write req
    If M2=2 : End If 
    If M2=3 : _CHECK_LEVEL : End If 
    If M2=4 : _OPT_ZONES : End If 
@@ -348,6 +349,9 @@ Procedure _CHECK_TOOLS
    SCR_MODE=Hires+Laced
    YRES=1
    DEFNCOL=16
+   CANVASWIDTH=664
+   CANVASHEIGHT=532
+   _TXT_BOX_W=640
    '
    ' Flags in 'PRE1'
    ' b 0: 1=metric heights
@@ -383,6 +387,17 @@ Procedure _CHECK_TOOLS
          If W$="L1" : GRIDSET=8 : End If 
          If W$="L2" : GRIDSET=16 : End If 
       End If 
+      If _tool Exist(IC,"CanvasWidth")
+         W$=_tool Get$(IC,"CanvasWidth")
+         CANVASWIDTH=Val(W$)
+            If CANVASWIDTH>664
+               _TXT_BOX_W=83*8
+            End If 
+      End If 
+      If _tool Exist(IC,"CanvasHeight")
+         W$=_tool Get$(IC,"CanvasHeight")
+         CANVASHEIGHT=Val(W$)
+      End If 
       If _tool Exist(IC,"MUSIC")
          W$=_tool Get$(IC,"MUSIC") : _PLAY_TRACK[W$]
       End If 
@@ -402,7 +417,8 @@ Procedure _INIT_MSCREEN
       Else If DEFNCOL=32
          Trap _scr Id Open 1,0,0,664,532,5,SCR_MODE,0,VER$
       Else 
-         Trap _scr Id Open 1,0,0,800,600,8,SCR_MODE,0,VER$
+         'changed the 8 bit canvas size to a icon tooltype for better RTG support AL
+         Trap _scr Id Open 1,0,0,CANVASWIDTH,CANVASHEIGHT,8,SCR_MODE,0,VER$
       End If 
    Else 
       If DEFNCOL=16
@@ -1232,8 +1248,12 @@ End Proc
 '----------------------------------------------------------------------------
 '
 Procedure _N_SETLEVELTEXT
-   '
-   Trap _wnd Id Open 8,0,12,640,240,$2+$8,$40+$200,0,"Text Strings.."
+   'this if else may not be required but eh. AL 
+   If CANVASWIDTH<800
+      Trap _wnd Id Open 8,0,12,664,240,$2+$8,$40+$200,0,"Text Strings.."
+   Else 
+      Trap _wnd Id Open 8,0,12,CANVASWIDTH,34*11,$2+$8,$40+$200,0,"Text Strings.."
+   End If 
 
    _wnd Id Titles Catalog String$(1050,"Edit Text-strings"),VER$
    _wnd Id Activate 8
@@ -1242,8 +1262,8 @@ Procedure _N_SETLEVELTEXT
    _gt Set String Mode True,80,True,False
 
    For A=0 To 9
-      _gt String A+10,32,A*24+12,600,12,,Str$(A)-" "+":","",$0
-      _gt String A+20,32,A*24+22,600,12,,"","",$0
+      _gt String A+10,32,A*34+22,_TXT_BOX_W,12,,Str$(A)-" ","",$0
+      _gt String A+20,32,A*34+32,_TXT_BOX_W,12,,"","",$0
    Next A
 
    '
@@ -1256,8 +1276,8 @@ Procedure _N_SETLEVELTEXT
       ' Update texts 
       '
       For A=0 To 9
-         _gt Set String A+10,Right Trim$(Left$(LEVELTEXT$(A),80))
-         _gt Set String A+20,Right Trim$(Right$(LEVELTEXT$(A),80))
+         _gt Set String A+10,Left Trim$(Left$(LEVELTEXT$(A),80))+_0$
+         _gt Set String A+20,Left Trim$(Right$(LEVELTEXT$(A),80))+_0$
       Next A
       Do 
          '
@@ -2223,10 +2243,10 @@ Procedure _COND_DEFDOOR
    _gt Gadgets Bank 499
    If C=0 : Pop Proc
    Else If C=12 : OPS(NDO,2)=_gt What Integer(12)
-   Else If C=13 : OPS(NDO,0)=Range(_gt What Integer(13),0 To 16)
+   Else If C=13 : OPS(NDO,0)=Range(_gt What Integer(13),0 To 255)
    Else If C=34 : _SELSFX[1,""] : OPS(NDO,3)=Param
    Else If C=35 : _SELSFX[1,""] : OPS(NDO,5)=Param
-   Else If C=16 : OPS(NDO,1)=Range(_gt What Integer(16),0 To 16)
+   Else If C=16 : OPS(NDO,1)=Range(_gt What Integer(16),0 To 255)
    Else If C=37 : _SELSFX[1,""] : OPS(NDO,4)=Param
    Else If C=38 : _SELSFX[1,""] : OPS(NDO,6)=Param
    Else If C=9 : Add DRT(NDO),1,0 To 5
@@ -2269,10 +2289,10 @@ Procedure _COND_DEFLIFT
    If _wnd Id Event Qualifier and %111 : D=32 : Else : D=1 : End If 
    If C=0 : Pop Proc
    Else If C=2 : LSP(NL)=1-LSP(NL)
-   Else If C=13 : LOPS(NL,0)=Range(_gt What Integer(13),0 To 16)
+   Else If C=13 : LOPS(NL,0)=Range(_gt What Integer(13),0 To 255)
    Else If C=44 : _SELSFX[1,""] : LOPS(NL,3)=Param
    Else If C=45 : _SELSFX[1,""] : LOPS(NL,5)=Param
-   Else If C=16 : LOPS(NL,1)=Range(_gt What Integer(16),0 To 16)
+   Else If C=16 : LOPS(NL,1)=Range(_gt What Integer(16),0 To 255)
    Else If C=47 : _SELSFX[1,""] : LOPS(NL,4)=Param
    Else If C=48 : _SELSFX[1,""] : LOPS(NL,6)=Param
    Else If C=9 : Add LRT(NL),1 : If LR$(LRT(NL))="" : LRT(NL)=0 : End If 
@@ -3974,6 +3994,10 @@ Procedure _M_CPTNEARTOZONE
       End If 
    End If 
    If M=1
+      'check if zone selected first
+      If CZ=0
+         Pop Proc
+      End If 
       FINDCONT[X,Y]
       P=Param
       If P>-1
@@ -7109,7 +7133,7 @@ Procedure _CHECK_LEVEL
                _gt Set Text 2,Catalog String$(1610,"Non-Convex zones:")+Str$(FER(1)),,,$2
                If FER(1)=1
                   FERR=1 : Gosub FATAERROR
-                  If IERR=0 : Exit 2 : ERRZ=A : End If 
+                  If IERR=0 : ERRZ=A : Exit 2 : End If 
                End If 
             Else If WB<90 and D>1 and E2=0
                Inc FER(2)
@@ -7133,19 +7157,24 @@ Procedure _CHECK_LEVEL
                E=True
                If FER(11)=1
                   FERR=11 : Gosub FATAERROR
-                  If IERR=0 : Exit : ERRZ=B : End If 
+                  If IERR=0 : ERRZ=B : Exit : End If 
                End If 
             End If 
          End If 
       Next A
    End If 
-
-   If IERR
-      M=_request Choice(_wnd Id Base(0),"",Catalog String$(1649,"Finished Checking"),"OK")
+'
+'somewhere IERR gets set to something other than 1 or 0 so checking for not 0 instead of =1 for now    
+'moved the string out of the request command AL
+'
+   If IERR<>0
+      T0$=Catalog String$(1649,"Finished Checking")
+      M=_request Choice(_wnd Id Base(0),"",T0$,"OK")
    End If 
    _R_N_MSG
    GCHECK=False
    If IERR=0
+'
       _TIDYDEF : OP=1
       _INITDEF : _SHOW_MENU : CZ=ERRZ
       GCHECK=True
@@ -7161,9 +7190,10 @@ FATAERROR:
    Else If FERR=11 : T$=Catalog String$(1654,"Point found inside zone")
    End If 
    M=_request Choice(_wnd Id Base(0),T0$,T$,T1$+"|"+T2$)
-   IERR=False
-   If M=1 : IERR=True : End If 
-   'IERR=True 
+'
+'edited this into a single line AL 
+   If M=0 : IERR=False : Else : IERR=True : End If 
+'
 Return 
 End Proc
 '
