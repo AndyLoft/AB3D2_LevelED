@@ -1680,7 +1680,7 @@ Procedure _SHOWDEFGFX[FULL]
          Trap _gt Gadgets Remove 499
          Trap _gt Gadgets Erase 499
       End If 
-      _wnd Id Open 3,0,256,344,256,$2,F_IDCMP,0,""
+      _wnd Id Open 3,0,CANVASHEIGHT-256,344,256,$2,F_IDCMP,0,""
       _wnd Id Titles BUT$(OP),VER$
       For A=0 To 10 : W(A,0)=0 : W(A,1)=0 : LW(A)=-1 : Next A
       LRO=-1 : LGU=-1
