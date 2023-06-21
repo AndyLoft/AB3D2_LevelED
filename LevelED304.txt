@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="18-06-2023"
+   VDA$="21-06-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -1841,7 +1841,7 @@ Procedure _SHOWDEFGFX[FULL]
    If LGU<>REF
       WXO=BFLX : WYO=BFLY
       _wnd Id Ink 0,0,0 : _wnd Id Bar WXO,WYO To WXO+31,WYO+31/YRES
-      S=ADR+(RER mod 4)+((RER/4) and 3)*256
+      S=ADR+(REF mod 4)+((REF/4) and 3)*256
       For WX=0 To 31 Step STQ
          For WY=0 To 31/YRES Step STQ
             C=CO(Peek(S+WX*8+WY*2048*YRES))
@@ -11167,6 +11167,7 @@ Procedure _TL_N_IFF2FLOOR
          End If 
       End If 
    End If 
+   _scr Id Use 1
    _scr Id Show 1
 End Proc
 Procedure _SCREEN2FLOOR
