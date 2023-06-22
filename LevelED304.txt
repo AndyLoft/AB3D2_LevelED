@@ -3301,7 +3301,7 @@ Procedure _M_DEFZONE
          _OUTLINE[CP]
          ZO(CZ,ZP(CZ))=CP
          WT(CZ,ZP(CZ)-1)=1
-         If ZP(CZ)>0 : _JOIN[ZO(CZ,ZP(CZ)-1),ZO(CZ,ZP(CZ)),3] : End If 
+         If ZP(CZ)>0 : _JOIN[ZO(CZ,ZP(CZ)-1),ZO(CZ,ZP(CZ)),6] : End If 
          If ZO(CZ,0)=ZO(CZ,ZP(CZ))
             Degree 
             WS=0 : WA=0
