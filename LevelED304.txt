@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="18-06-2023"
+   VDA$="21-06-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -1680,7 +1680,7 @@ Procedure _SHOWDEFGFX[FULL]
          Trap _gt Gadgets Remove 499
          Trap _gt Gadgets Erase 499
       End If 
-      _wnd Id Open 3,0,256,344,256,$2,F_IDCMP,0,""
+      _wnd Id Open 3,0,CANVASHEIGHT-256,344,256,$2,F_IDCMP,0,""
       _wnd Id Titles BUT$(OP),VER$
       For A=0 To 10 : W(A,0)=0 : W(A,1)=0 : LW(A)=-1 : Next A
       LRO=-1 : LGU=-1
@@ -1841,7 +1841,7 @@ Procedure _SHOWDEFGFX[FULL]
    If LGU<>REF
       WXO=BFLX : WYO=BFLY
       _wnd Id Ink 0,0,0 : _wnd Id Bar WXO,WYO To WXO+31,WYO+31/YRES
-      S=ADR+(RER mod 4)+((RER/4) and 3)*256
+      S=ADR+(REF mod 4)+((REF/4) and 3)*256
       For WX=0 To 31 Step STQ
          For WY=0 To 31/YRES Step STQ
             C=CO(Peek(S+WX*8+WY*2048*YRES))
@@ -3301,7 +3301,7 @@ Procedure _M_DEFZONE
          _OUTLINE[CP]
          ZO(CZ,ZP(CZ))=CP
          WT(CZ,ZP(CZ)-1)=1
-         If ZP(CZ)>0 : _JOIN[ZO(CZ,ZP(CZ)-1),ZO(CZ,ZP(CZ)),3] : End If 
+         If ZP(CZ)>0 : _JOIN[ZO(CZ,ZP(CZ)-1),ZO(CZ,ZP(CZ)),6] : End If 
          If ZO(CZ,0)=ZO(CZ,ZP(CZ))
             Degree 
             WS=0 : WA=0
@@ -11167,6 +11167,7 @@ Procedure _TL_N_IFF2FLOOR
          End If 
       End If 
    End If 
+   _scr Id Use 1
    _scr Id Show 1
 End Proc
 Procedure _SCREEN2FLOOR
