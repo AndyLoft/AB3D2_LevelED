@@ -70,7 +70,7 @@
    Global WATH(),WABH(),ZWA(),WASP(),WAPT(),DR$(),DL$(),IACE$()
    Global LR$(),LL$(),BSFX(),SWT(),BWT(),LSP()
    Global LEVELTEXT$(),M_REM2()
-   Global A$,ALTO,BSFX,CCP,CMODE,CONTP,COBJ,CP,CZ,CZ2,D1,DLOCKED,DWALL
+Global A$,ALTO,BSFX,CCP,CMODE,CONTPT,COBJ,CP,CZ,CZ2,D1,DLOCKED,DWALL
    Global EBX,EZONE,FB,FL,FLH,FR,F_IDCMP
    Global LG,LLOCKED,LS,LWCHUNK,LWGW
    Global MP,MPX,MU,MZ,M
@@ -152,7 +152,7 @@ Procedure _DO_MAIN
          Y=_wnd Id Event Y Mouse*YRES
          XC=X*MU+XO : YC=Y*MU+YO
          A$=Chr$(_wnd Id Event Code)
-         _VANILLAKEY
+         _VANILLAKEY : _REDRAW
       End If 
       '
       ' Gadget picked
@@ -799,7 +799,7 @@ Procedure _NEW_LEVEL[FULL]
    '
    XO=-(128*10) : YO=-(128*6)
    MU=4 : NZ=0 : CZ=0 : ZE=0 : PZ=-1 : NO=0 : NCPT=-1 : PZ=-1
-   CONTP=0 : TEAM=-1
+   CONTPT=0 : TEAM=-1
    '
    ' Reset zones
    '
@@ -2605,6 +2605,9 @@ Procedure _INITDEF
    If OP=3 : _TLINES[Catalog String$(1053,"RMB to select point"),Catalog String$(1054,"LMB for new location"),"","","",""] : _INITSPRITE : End If 
    If OP=4 : _INITDEFWALL : End If 
    If OP=5 : _TLINES[Catalog String$(1055,"RMB to select object"),Catalog String$(1054,"LMB for new location"),"","","",""] : End If 
+
+   If OP=7 : _TLINES[Catalog String$(1301,"Objects placed")+":"+Str$(NO),Catalog String$(1303,"Points used")+":"+Str$(NP+1),Catalog String$(1304,"Zones used")+":"+Str$(NZ),Catalog String$(1305,"CONTROLPOINTS USED")+":"+Str$(NCPT+1),"",""] : End If 
+
    If OP=8 : _TLINE[Catalog String$(1056,"LMB to delete object")] : End If 
    If OP=10 : _INITBRIGHTSLIDE : End If 
    If OP=11 : _TLINES[Catalog String$(1057,"LMB start player one"),Catalog String$(1058,"RMB start player two"),Catalog String$(1059,"point+e to set endzone"),"","",""] : End If 
@@ -3106,6 +3109,9 @@ Procedure _TIDYDEF
    If OP=3 : _TIDYGEN : _TIDYSPRITE : End If 
    If OP=4 : _TIDYGEN2 : End If 
    If OP=5 : _TIDYGEN : End If 
+
+   If OP=7 : _TIDYGEN : End If 
+
    If OP=8 : _TIDYGEN : End If 
    If OP=10 : _TIDYGEN2 : End If 
    If OP=11 : _TIDYPLACEPLAYER : End If 
@@ -3617,7 +3623,7 @@ Procedure _M_OBJADD
       CZ=P
       _ZOSHOW[CZ,10]
       If NO>=MOBJ-1 : _ERROR[0,3,3] : Pop Proc : End If 
-      If OT=0 : Gosub ALIENPUT : End If 
+      If OT=0 : FINDCONT[X,Y] : CONTPT=Param : Gosub ALIENPUT : End If 
       If OT=1 : Gosub THINGPUT : End If 
       _OBJPUT[X,Y,2]
    Else 
@@ -4481,11 +4487,18 @@ Procedure _V_PLACECONTPT
    '
    ' Remove Controlpoints 
    '
-   If A$="d"
       X=XC : Y=YC
-      FINDCONT[X,Y]
-      P=Param
-      If P>-1
+      If NCPT<0 Then Pop Proc
+      If A$="d"
+
+      ZOGET[X,Y] : Z=Param
+      If Z>=0
+         _ZOSHOW[CZ,4]
+         CZ=Z
+         _ZOSHOW[CZ,10]
+      End If 
+      FINDCONT[X,Y] : P=Param
+      If P>=0
          HIGHCONT[ZCPT(CZ)]
          N=Start(11)
          For A=P To NCPT
