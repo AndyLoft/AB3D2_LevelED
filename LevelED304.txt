@@ -2605,6 +2605,7 @@ Procedure _INITDEF
    If OP=3 : _TLINES[Catalog String$(1053,"RMB to select point"),Catalog String$(1054,"LMB for new location"),"","","",""] : _INITSPRITE : End If 
    If OP=4 : _INITDEFWALL : End If 
    If OP=5 : _TLINES[Catalog String$(1055,"RMB to select object"),Catalog String$(1054,"LMB for new location"),"","","",""] : End If 
+   If OP=7 : _TLINES[Catalog String$(1301,"Objects placed")+":"+Str$(NO),Catalog String$(1303,"Points used")+":"+Str$(NP+1),Catalog String$(1304,"Zones used")+":"+Str$(NZ),Catalog String$(1305,"CONTROLPOINTS USED")+":"+Str$(NCPT+1),"",""] : End If 
    If OP=8 : _TLINE[Catalog String$(1056,"LMB to delete object")] : End If 
    If OP=10 : _INITBRIGHTSLIDE : End If 
    If OP=11 : _TLINES[Catalog String$(1057,"LMB start player one"),Catalog String$(1058,"RMB start player two"),Catalog String$(1059,"point+e to set endzone"),"","",""] : End If 
@@ -3106,6 +3107,7 @@ Procedure _TIDYDEF
    If OP=3 : _TIDYGEN : _TIDYSPRITE : End If 
    If OP=4 : _TIDYGEN2 : End If 
    If OP=5 : _TIDYGEN : End If 
+   If OP=7 : _TIDYGEN : End If 
    If OP=8 : _TIDYGEN : End If 
    If OP=10 : _TIDYGEN2 : End If 
    If OP=11 : _TIDYPLACEPLAYER : End If 
