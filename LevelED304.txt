@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="21-06-2023"
+   VDA$="09-07-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -11569,6 +11569,7 @@ Procedure _TLINES[T1$,T2$,T3$,T4$,T5$,T6$]
    End If 
    _wnd Id Open 3,0,_scr Id Height(1)-WH,320,WH,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
+   _wnd Id Ink 1,0,1
    _wnd Id Text 8,20,T1$
    _wnd Id Text 8,30,T2$
    _wnd Id Text 8,40,T3$
@@ -11579,6 +11580,7 @@ End Proc
 Procedure _TLINE[T1$]
    _wnd Id Open 3,0,_scr Id Height(1)-90,320,90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
+   _wnd Id Ink 1,0,1
    _wnd Id Text 8,20,T1$
 End Proc
 Procedure _WRONG[G,N]
