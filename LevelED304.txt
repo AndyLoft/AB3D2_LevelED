@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="21-06-2023"
+   VDA$="16-07-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -1117,7 +1117,8 @@ Procedure _INIT_PROGRAM
    Reserve As Work 12,(MOBJ+20)*64
    Reserve As Work 14,MZ*64*6
    Fill Start(14) To Bank End(14),-1
-   Reserve As Work 15,220000
+'   Reserve As Work 15,220000
+    Reserve As Work 15,300000
    _LOAD_DEF_LINK
    '
    ' Setup ASM programs 
@@ -2605,6 +2606,7 @@ Procedure _INITDEF
    If OP=3 : _TLINES[Catalog String$(1053,"RMB to select point"),Catalog String$(1054,"LMB for new location"),"","","",""] : _INITSPRITE : End If 
    If OP=4 : _INITDEFWALL : End If 
    If OP=5 : _TLINES[Catalog String$(1055,"RMB to select object"),Catalog String$(1054,"LMB for new location"),"","","",""] : End If 
+   If OP=7 : _TLINES[Catalog String$(1301,"Objects placed")+":"+Str$(NO),Catalog String$(1303,"Points used")+":"+Str$(NP+1),Catalog String$(1304,"Zones used")+":"+Str$(NZ),Catalog String$(1305,"CONTROLPOINTS USED")+":"+Str$(NCPT+1),"",""] : End If 
    If OP=8 : _TLINE[Catalog String$(1056,"LMB to delete object")] : End If 
    If OP=10 : _INITBRIGHTSLIDE : End If 
    If OP=11 : _TLINES[Catalog String$(1057,"LMB start player one"),Catalog String$(1058,"RMB start player two"),Catalog String$(1059,"point+e to set endzone"),"","",""] : End If 
@@ -2814,7 +2816,7 @@ Procedure _INITDEFZONE
       End If 
    Next 
    If CZ<0
-      If NZ>=MZ-1 : _ERROR[0,3,0] : Pop Proc : End If 
+      If NZ>MZ-1 : _ERROR[0,3,1] : Pop Proc : End If 
       CZ=NZ : ZP(CZ)=0
    End If 
    _TLINES[Catalog String$(1075,"LMB to select points"),Catalog String$(1076,"Start from Low-left point"),Catalog String$(1077,"Select points clock-wise"),"",Catalog String$(1078,"RMB to select zone"),Catalog String$(1081,"'d' to del sel.zone")]
@@ -3106,6 +3108,7 @@ Procedure _TIDYDEF
    If OP=3 : _TIDYGEN : _TIDYSPRITE : End If 
    If OP=4 : _TIDYGEN2 : End If 
    If OP=5 : _TIDYGEN : End If 
+   If OP=7 : _TIDYGEN : End If 
    If OP=8 : _TIDYGEN : End If 
    If OP=10 : _TIDYGEN2 : End If 
    If OP=11 : _TIDYPLACEPLAYER : End If 
@@ -3280,6 +3283,7 @@ Procedure _M_PTMOVE
 End Proc
 Procedure _M_DEFZONE
    If M=1
+    If NZ=MZ-1 : _ERROR[0,3,1] : Pop Proc : End If 
       If CZ2>-1 : _INITDEFZONE : End If 
       If CZ>=0
          If ZP(CZ)=0 : _NEWZONE : Pop Proc : End If 
@@ -3995,7 +3999,7 @@ Procedure _M_CPTNEARTOZONE
    End If 
    If M=1
       'check if zone selected first
-      If CZ=0
+      If CZ<0
          Pop Proc
       End If 
       FINDCONT[X,Y]
@@ -11567,6 +11571,7 @@ Procedure _TLINES[T1$,T2$,T3$,T4$,T5$,T6$]
    End If 
    _wnd Id Open 3,0,_scr Id Height(1)-WH,320,WH,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
+   _wnd Id Ink 1,0,1
    _wnd Id Text 8,20,T1$
    _wnd Id Text 8,30,T2$
    _wnd Id Text 8,40,T3$
@@ -11577,6 +11582,7 @@ End Proc
 Procedure _TLINE[T1$]
    _wnd Id Open 3,0,_scr Id Height(1)-90,320,90,$2,F_IDCMP,0,""
    _wnd Id Titles BUT$(OP),VER$
+   _wnd Id Ink 1,0,1
    _wnd Id Text 8,20,T1$
 End Proc
 Procedure _WRONG[G,N]
