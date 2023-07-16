@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="14-07-2023"
+   VDA$="16-07-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -2816,7 +2816,7 @@ Procedure _INITDEFZONE
       End If 
    Next 
    If CZ<0
-      If NZ>MZ-1 : _ERROR[0,3,0] : Pop Proc : End If 
+      If NZ>MZ-1 : _ERROR[0,3,1] : Pop Proc : End If 
       CZ=NZ : ZP(CZ)=0
    End If 
    _TLINES[Catalog String$(1075,"LMB to select points"),Catalog String$(1076,"Start from Low-left point"),Catalog String$(1077,"Select points clock-wise"),"",Catalog String$(1078,"RMB to select zone"),Catalog String$(1081,"'d' to del sel.zone")]
@@ -3283,7 +3283,7 @@ Procedure _M_PTMOVE
 End Proc
 Procedure _M_DEFZONE
    If M=1
-    If NZ=MZ-1 : Pop Proc : End If 
+    If NZ=MZ-1 : _ERROR[0,3,1] : Pop Proc : End If 
       If CZ2>-1 : _INITDEFZONE : End If 
       If CZ>=0
          If ZP(CZ)=0 : _NEWZONE : Pop Proc : End If 
