@@ -22,14 +22,14 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="16-07-2023"
+   VDA$="22-07-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
    '
    '
-   Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL,CANVASWIDTH,CANVASHEIGHT,_TXT_BOX_W
-   MXP=800 : MZ=256 : MCP=99 : MOBJ=200
+   Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL,CANVASWIDTH,CANVASHEIGHT,_TXT_BOX_W,STNZ
+   MXP=800 : MZ=256 : MCP=99 : MOBJ=200 : STNZ=0
    '
    '
    '
@@ -84,7 +84,7 @@
    Global X,XL,XM,XO,XRES,XC
    Global Y,YM,YO,YC,YRES
    Global ZC,ZE,ZFG,ZFGS,ZGW,ZIP,ZRG,ZRGS,ZWG,ZWGC,ZWGL,KSH
-   Global DIAL1,DIAL2,SHMODE,GRIDSET,VER$,VDA$
+   Global DIAL1,DIAL2,SHMODE,STMODE,GRIDSET,VER$,VDA$
    Global AUTOSTAIR1,AUTOSTAIR1B,AUTOSTAIR2,AUTOSTAIR3,LINK,PALC
    Global GLINK,GCLIP,GCHECK,GFILE$,PRE1,MPTR,LRO,LGU
    Global O_POINT,O_CPT,CPACK$,P_PRG$
@@ -257,7 +257,8 @@ Return
 MLEVE:
    If M2=0 : _N_SETLEVELTEXT : End If 
    'If M2=2 : _STATISTICS[0] : End If' PROC _STATISTICS re write req
-   If M2=2 : End If 
+   'If M2=2 : End If
+   If M2=2 : Bchg 0,STMODE : _REDRAW : End If 
    If M2=3 : _CHECK_LEVEL : End If 
    If M2=4 : _OPT_ZONES : End If 
    If M2=5 : _OPT_POINTS : End If 
@@ -341,9 +342,10 @@ End Proc
 '
 Procedure _CHECK_TOOLS
    SC=8
-   GRIDSET=-16
+   GRIDSET=-8
    RECPT=%111
    SHMODE=%10111
+   STMODE=%0
    CPACK$="LhA a -x %a %f"
    P_PRG$="PPaint:PPaint %f"
    SCR_MODE=Hires+Laced
@@ -529,8 +531,11 @@ Procedure _INIT_MSCREEN
    '
    ' Zone-Hilite colours
    '
-   D_INK(10)=13 : D_INK(11)=2 : D_INK(12)=7
+   D_INK(10)=2 : D_INK(11)=2 : D_INK(12)=7
    '
+   ' Grid colours 
+   '
+   D_INK(13)=13
    '
    ' Palette-loadning 
    '
@@ -869,6 +874,25 @@ Procedure _END_PROGRAM
    Erase 1
    End 
 End Proc
+
+Procedure _STAT_ZONES
+'   If OP=7
+      If NZ<1 : Pop Proc : End If 
+      A=0 : R=0 : STNZ=0
+      
+      While A<NZ
+         If USED(A)=0
+            Inc R
+            'Inc A 
+         End If 
+         Inc A
+      Wend 
+      
+      STNZ=A-R
+      
+'   End If 
+End Proc
+
 Procedure _STATISTICS[TY]
    Menu Off : Dialog Freeze 
    Screen To Front 2 : Screen 2 : Flash Off : Cls 0
@@ -1329,6 +1353,31 @@ End Proc[D]
 '
 '----------------------------------------------------------------------------  
 '
+Procedure _STAT_SHOW
+
+   _wnd Id Use 0
+
+   WOB=0 : WAL=0
+         If NO>0
+            For A=0 To NO-1
+            S=Start(12)+A*32 : If Peek(S)=0 : Inc WAL : Else If Peek(S)=1 : Inc WOB : End If 
+            Next A
+         End If 
+
+   WX=_wnd Id Width-(24*8) : WY=4
+
+   _STAT_ZONES
+
+   _wnd Id Ink D_INK(2),, : Rem D_INK(0),D_INK(0)
+      Add WY,8 : M1$="Alien Objects placed"+Str$(WAL) : _wnd Id Text WX,WY+8,M1$
+      Add WY,8 : M2$="Other Objects placed"+Str$(WOB) : _wnd Id Text WX,WY+8,M2$
+      Add WY,8 : M3$="Total Objects placed"+Str$(NO) : _wnd Id Text WX,WY+8,M3$
+      Add WY,8 : M4$="         Points used"+Str$(NP+1) : _wnd Id Text WX,WY+8,M4$
+      Add WY,8 : M5$="          Zones used"+Str$(STNZ) : _wnd Id Text WX,WY+8,M5$
+      Add WY,8 : M6$="  ControlPoints used"+Str$(NCPT+1) : _wnd Id Text WX,WY+8,M6$
+
+End Proc
+
 Procedure _REDRAW
    _wnd Id Use 0
    _wnd Id Cls D_INK(0)
@@ -1336,8 +1385,9 @@ Procedure _REDRAW
    '
    '  Make Grid 
    '
-   _wnd Id Ink D_INK(1),D_INK(1),D_INK(1)
+'   _wnd Id Ink D_INK(4),D_INK(1),D_INK(1) 
    If GRIDSET>3
+   _wnd Id Ink D_INK(13),D_INK(1),D_INK(1)
       For A=YO To YO+(_wnd Id Height*MU) Step(GRIDSET*MU)/YRES
          Y=(T Clip(A,(SC*MU)/YRES)-YO)/MU
          _wnd Id Line 0,Y To _wnd Id Width,Y
@@ -1347,6 +1397,7 @@ Procedure _REDRAW
          _wnd Id Line X,0 To X,_wnd Id Height
       Next A
    Else If GRIDSET<-3
+   _wnd Id Ink D_INK(1),D_INK(1),D_INK(1)
       For A=YO To YO+(_wnd Id Height*MU) Step((Abs(GRIDSET)*MU))/YRES
          For B=XO To XO+(_wnd Id Width*MU) Step Abs(GRIDSET)*MU
             X=T Clip(B,SC*MU) : Y=T Clip(A,(SC*MU)/YRES)
@@ -2606,7 +2657,8 @@ Procedure _INITDEF
    If OP=3 : _TLINES[Catalog String$(1053,"RMB to select point"),Catalog String$(1054,"LMB for new location"),"","","",""] : _INITSPRITE : End If 
    If OP=4 : _INITDEFWALL : End If 
    If OP=5 : _TLINES[Catalog String$(1055,"RMB to select object"),Catalog String$(1054,"LMB for new location"),"","","",""] : End If 
-   If OP=7 : _TLINES[Catalog String$(1301,"Objects placed")+":"+Str$(NO),Catalog String$(1303,"Points used")+":"+Str$(NP+1),Catalog String$(1304,"Zones used")+":"+Str$(NZ),Catalog String$(1305,"CONTROLPOINTS USED")+":"+Str$(NCPT+1),"",""] : End If 
+   If OP=7 : _STAT_ZONES
+             _TLINES[Catalog String$(1301,"Objects placed")+":"+Str$(NO),Catalog String$(1303,"Points used")+":"+Str$(NP+1),Catalog String$(1304,"Zones used")+":"+Str$(STNZ),Catalog String$(1305,"CONTROLPOINTS USED")+":"+Str$(NCPT+1),"",""] : End If 
    If OP=8 : _TLINE[Catalog String$(1056,"LMB to delete object")] : End If 
    If OP=10 : _INITBRIGHTSLIDE : End If 
    If OP=11 : _TLINES[Catalog String$(1057,"LMB start player one"),Catalog String$(1058,"RMB start player two"),Catalog String$(1059,"point+e to set endzone"),"","",""] : End If 
@@ -4529,6 +4581,7 @@ Procedure _EVERY
    If OP=17 : _EVERY_SHOWWALL : End If 
    If OP=22 : _EVERY_SHOWWALL : End If 
    If OP=25 : _EVERY_SHOWWALL : End If 
+   If Btst(0,STMODE) : _STAT_SHOW : End If 
 End Proc
 '
 Procedure _EVERY_SHOWWALL
