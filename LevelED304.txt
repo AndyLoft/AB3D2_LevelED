@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="22-07-2023"
+VDA$="24-07-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -256,9 +256,14 @@ Return
 
 MLEVE:
    If M2=0 : _N_SETLEVELTEXT : End If 
-   'If M2=2 : _STATISTICS[0] : End If' PROC _STATISTICS re write req
-   'If M2=2 : End If
-   If M2=2 : Bchg 0,STMODE : _REDRAW : End If 
+   If M2=2
+      If STMODE=0
+         STMODE=1 : _SHOW_MENU_2 : _REDRAW
+      Else 
+         STMODE=0 : _SHOW_MENU_2 : _REDRAW
+      End If 
+   End If 
+'   If M2=2 : Bchg 0,STMODE : _SHOW_MENU_2 : _REDRAW : End If  
    If M2=3 : _CHECK_LEVEL : End If 
    If M2=4 : _OPT_ZONES : End If 
    If M2=5 : _OPT_POINTS : End If 
@@ -345,7 +350,7 @@ Procedure _CHECK_TOOLS
    GRIDSET=-8
    RECPT=%111
    SHMODE=%10111
-   STMODE=%0
+   STMODE=0
    CPACK$="LhA a -x %a %f"
    P_PRG$="PPaint:PPaint %f"
    SCR_MODE=Hires+Laced
@@ -643,7 +648,7 @@ Procedure _INIT_MSCREEN
    _gt Add Menu Catalog String$(1102,"Level"),
    _gt Add Item Catalog String$(1121,"Text Strings"),"",,
    _gt Add Item -1,"",,
-   _gt Add Item Catalog String$(1177,"Statistics"),"",,
+   _gt Add Item Catalog String$(1177,"Statistics"),"",$1,
    _gt Add Item Catalog String$(1114,"Check Level"),"",,
    _gt Add Item Catalog String$(1186,"Optimize Zones"),"",,
    _gt Add Item Catalog String$(1187,"Optimize Points"),"",,
@@ -798,6 +803,20 @@ Procedure _SHOW_MENU
       _gt Menu Set Check M1,M2,5
    End If 
 End Proc
+
+Procedure _SHOW_MENU_2
+   M1=2 : M2=2
+
+   If STMODE=0
+      _gt Menu Clear Check M1,M2,-1
+   End If 
+
+   If STMODE=1
+      _gt Menu Set Check M1,M2,-1
+   End If 
+
+End Proc
+
 Procedure _NEW_LEVEL[FULL]
    '
    ' Reset common values
@@ -1364,17 +1383,17 @@ Procedure _STAT_SHOW
             Next A
          End If 
 
-   WX=_wnd Id Width-(24*8) : WY=4
+   WX=_wnd Id Width-(15*8) : WY=4
 
    _STAT_ZONES
 
    _wnd Id Ink D_INK(2),, : Rem D_INK(0),D_INK(0)
-      Add WY,8 : M1$="Alien Objects placed"+Str$(WAL) : _wnd Id Text WX,WY+8,M1$
-      Add WY,8 : M2$="Other Objects placed"+Str$(WOB) : _wnd Id Text WX,WY+8,M2$
-      Add WY,8 : M3$="Total Objects placed"+Str$(NO) : _wnd Id Text WX,WY+8,M3$
-      Add WY,8 : M4$="         Points used"+Str$(NP+1) : _wnd Id Text WX,WY+8,M4$
-      Add WY,8 : M5$="          Zones used"+Str$(STNZ) : _wnd Id Text WX,WY+8,M5$
-      Add WY,8 : M6$="  ControlPoints used"+Str$(NCPT+1) : _wnd Id Text WX,WY+8,M6$
+      Add WY,8 : M1$="     Aliens"+Str$(WAL) : _wnd Id Text WX,WY+8,M1$
+      Add WY,8 : M2$="    Objects"+Str$(WOB) : _wnd Id Text WX,WY+8,M2$
+      Add WY,8 : M3$="Total Items"+Str$(NO) : _wnd Id Text WX,WY+8,M3$
+      Add WY,8 : M4$="     Points"+Str$(NP+1) : _wnd Id Text WX,WY+8,M4$
+      Add WY,8 : M5$="      Zones"+Str$(STNZ) : _wnd Id Text WX,WY+8,M5$
+      Add WY,8 : M6$="Ctrl Points"+Str$(NCPT+1) : _wnd Id Text WX,WY+8,M6$
 
 End Proc
 
@@ -4581,7 +4600,7 @@ Procedure _EVERY
    If OP=17 : _EVERY_SHOWWALL : End If 
    If OP=22 : _EVERY_SHOWWALL : End If 
    If OP=25 : _EVERY_SHOWWALL : End If 
-   If Btst(0,STMODE) : _STAT_SHOW : End If 
+   If STMODE=1 : _STAT_SHOW : End If 
 End Proc
 '
 Procedure _EVERY_SHOWWALL
