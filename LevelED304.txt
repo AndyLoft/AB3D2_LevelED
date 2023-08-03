@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-VDA$="24-07-2023"
+   VDA$="03-08-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -146,6 +146,9 @@ Procedure _DO_MAIN
       '
       ' VanillaKeys
       '
+      If Key State(80) : _CYCLEBUTTON : End If 
+      If Key State(80) : Wait 10 : End If 
+
       A$=""
       If AC=$200000
          X=_wnd Id Event X Mouse
@@ -329,6 +332,19 @@ Return
       On M2-11 Proc _OPT_ZONES,_OPT_POINTS
    End If 
 End Proc[E]
+
+Procedure _CYCLEBUTTON
+   If OP>37
+      _TIDYDEF
+      OP=0
+      _INITDEF
+   Else 
+      _TIDYDEF
+      OP=OP+1
+      _INITDEF
+   End If 
+End Proc
+
 Procedure _IPICKBUTTON[F]
    D1=_wnd Id Event Gadget
    If OP=D1-1 : Pop Proc : End If 
@@ -2676,8 +2692,9 @@ Procedure _INITDEF
    If OP=3 : _TLINES[Catalog String$(1053,"RMB to select point"),Catalog String$(1054,"LMB for new location"),"","","",""] : _INITSPRITE : End If 
    If OP=4 : _INITDEFWALL : End If 
    If OP=5 : _TLINES[Catalog String$(1055,"RMB to select object"),Catalog String$(1054,"LMB for new location"),"","","",""] : End If 
-   If OP=7 : _STAT_ZONES
-             _TLINES[Catalog String$(1301,"Objects placed")+":"+Str$(NO),Catalog String$(1303,"Points used")+":"+Str$(NP+1),Catalog String$(1304,"Zones used")+":"+Str$(STNZ),Catalog String$(1305,"CONTROLPOINTS USED")+":"+Str$(NCPT+1),"",""] : End If 
+'stats moved to main screen, accessed from title bar option AL 
+'   If OP=7 : _STAT_ZONES
+'   _TLINES[Catalog String$(1301,"Objects placed")+":"+Str$(NO),Catalog String$(1303,"Points used")+":"+Str$(NP+1),Catalog String$(1304,"Zones used")+":"+Str$(STNZ),Catalog String$(1305,"CONTROLPOINTS USED")+":"+Str$(NCPT+1),"",""] : End If 
    If OP=8 : _TLINE[Catalog String$(1056,"LMB to delete object")] : End If 
    If OP=10 : _INITBRIGHTSLIDE : End If 
    If OP=11 : _TLINES[Catalog String$(1057,"LMB start player one"),Catalog String$(1058,"RMB start player two"),Catalog String$(1059,"point+e to set endzone"),"","",""] : End If 
@@ -4124,6 +4141,7 @@ End Proc
 Procedure _M_CPTMOVE
    ' OP=35
    X=XC : Y=YC
+   If P1<0 Then Pop Proc
    ZOGET[X,Y]
    Z=Param
    If Z<0 Then Pop Proc
