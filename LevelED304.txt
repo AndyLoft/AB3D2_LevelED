@@ -28,12 +28,12 @@
    '
    '
    '
-   Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL,CANVASWIDTH,CANVASHEIGHT,_TXT_BOX_W,STNZ
-   MXP=800 : MZ=256 : MCP=99 : MOBJ=200 : STNZ=0
+Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL,CANVASWIDTH,CANVASHEIGHT,_TXT_BOX_W,STNZ,_EDITMODE
+MXP=800 : MZ=256 : MCP=99 : MOBJ=200 : STNZ=0 : _EDITMODE=0
    '
    '
    '
-   Dim OB$(10),ECHO(MZ),CO(260),I(180),GPAL(16),D_INK(20),W(10,2),LW(10),GAD24(40),GAD16(40),GAD10(50),LOCK(20)
+Dim EMODE$(4),OB$(10),ECHO(MZ),CO(260),I(180),GPAL(16),D_INK(20),W(10,2),LW(10),GAD24(40),GAD16(40),GAD10(50),LOCK(20)
    Dim OPS(20,6),LOPS(20,6),SGAD(120),SPRDATA(20,10)
    Dim TELZO(MZ),TELX(MZ),TELZ(MZ),CPTUL(MCP+1),USED(MZ),WB(MZ,10),UWB(MZ,10)
    Dim BUT$(59),PX(MXP),PY(MXP),ZO(MZ,10),ZP(MZ),WT(MZ,10),ZW(MZ,10,1)
@@ -56,7 +56,7 @@
    '
    '
    '
-   Global OB$(),ECHO(),CO(),I(),SGAD(),D_INK(),GPAL(),LW(),GAD24(),SAM$(),GAD16(),GAD10(),LOCK()
+Global EMODE$(),OB$(),ECHO(),CO(),I(),SGAD(),D_INK(),GPAL(),LW(),GAD24(),SAM$(),GAD16(),GAD10(),LOCK()
    Global OPS(),LOPS(),SPRDATA()
    Global TELZO(),TELX(),TELZ(),CPTUL(),USED(),WB(),UWB()
    Global BUT$(),PX(),PY(),ZO(),ZP(),WT(),ZW(),ZH(),ZC(),ZB(),UZB(),OBX(),OBZ(),ZZ()
@@ -146,9 +146,12 @@ Procedure _DO_MAIN
       '
       ' VanillaKeys
       '
-      If Key State(80) : _CYCLEBUTTON : End If 
+      
+      If Key State(80) : _CYCLEMODE : End If 
       If Key State(80) : Wait 10 : End If 
 
+      _CYCLEBUTTON
+      
       A$=""
       If AC=$200000
          X=_wnd Id Event X Mouse
@@ -333,17 +336,113 @@ Return
    End If 
 End Proc[E]
 
-Procedure _CYCLEBUTTON
-   If OP>37
-      _TIDYDEF
-      OP=0
-      _INITDEF
+Procedure _CYCLEMODE
+   If _EDITMODE=4
+      _EDITMODE=0
    Else 
-      _TIDYDEF
-      OP=OP+1
-      _INITDEF
+      _EDITMODE=_EDITMODE+1
    End If 
 End Proc
+
+Procedure _CYCLEBUTTON
+   If _EDITMODE=0
+      If A$="1"
+         _TIDYDEF : OP=0 : _INITDEF
+   End If 
+      If A$="2"
+         _TIDYDEF : OP=3 : _INITDEF
+      End If 
+      If A$="3"
+         _TIDYDEF : OP=1 : _INITDEF
+      End If 
+      If A$="4"
+         _TIDYDEF : OP=27 : _INITDEF
+      End If 
+      If A$="5"
+         _TIDYDEF : OP=14 : _INITDEF
+      End If 
+      If A$="6"
+         _TIDYDEF : OP=17 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=1
+      If A$="1"
+         _TIDYDEF : OP=21 : _INITDEF
+      End If 
+      If A$="2"
+         _TIDYDEF : OP=22 : _INITDEF
+      End If 
+      If A$="3"
+         _TIDYDEF : OP=23 : _INITDEF
+      End If 
+      If A$="4"
+         _TIDYDEF : OP=24 : _INITDEF
+      End If 
+      If A$="5"
+         _TIDYDEF : OP=25 : _INITDEF
+      End If 
+      If A$="6"
+         _TIDYDEF : OP=26 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=2
+      If A$="1"
+         _TIDYDEF : OP=10 : _INITDEF
+      End If 
+      If A$="2"
+         _TIDYDEF : OP=13 : _INITDEF
+      End If 
+      If A$="3"
+         _TIDYDEF : OP=33 : _INITDEF
+      End If 
+      If A$="4"
+         _TIDYDEF : OP=34 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=3
+      If A$="1"
+         _TIDYDEF : OP=2 : _INITDEF
+      End If 
+      If A$="2"
+         _TIDYDEF : OP=5 : _INITDEF
+      End If 
+      If A$="3"
+         _TIDYDEF : OP=8 : _INITDEF
+      End If 
+      If A$="4"
+         _TIDYDEF : OP=11 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=4
+      If A$="1"
+         _TIDYDEF : OP=28 : _INITDEF
+      End If 
+      If A$="2"
+         _TIDYDEF : OP=35 : _INITDEF
+      End If 
+      If A$="3"
+         _TIDYDEF : OP=31 : _INITDEF
+      End If 
+      If A$="4"
+         _TIDYDEF : OP=29 : _INITDEF
+      End If 
+      If A$="5"
+         _TIDYDEF : OP=32 : _INITDEF
+      End If 
+   End If 
+End Proc
+
+'Procedure _CYCLEBUTTON
+'   If OP>37 
+'      _TIDYDEF
+'      OP=0
+'      _INITDEF
+'   Else 
+'      _TIDYDEF
+'      OP=OP+1 
+'      _INITDEF
+'   End If 
+'End Proc
 
 Procedure _IPICKBUTTON[F]
    D1=_wnd Id Event Gadget
@@ -1199,6 +1298,13 @@ Procedure _INIT_PROGRAM
    OB$(0)=Catalog String$(11,"Alien")
    OB$(1)=Catalog String$(12,"Object")
    '
+   '  edit mode definitions 
+   'EMODE$(_EDITMODE) 
+   EMODE$(0)=Catalog String$(3000,"Geometry  ")
+   EMODE$(1)=Catalog String$(3001,"Textures  ")
+   EMODE$(2)=Catalog String$(3002,"Lighting  ")
+   EMODE$(3)=Catalog String$(3003,"Objects   ")
+   EMODE$(4)=Catalog String$(3004,"CtrlPoints")
    '
    '  Button definitions
    '
@@ -1388,6 +1494,17 @@ End Proc[D]
 '
 '----------------------------------------------------------------------------  
 '
+Procedure _MODE_SHOW
+   
+   _wnd Id Use 0
+
+   WX=0 : WY=4
+
+   _wnd Id Ink D_INK(2),,
+   Add WY,8 : M1$="Mode"+":"+EMODE$(_EDITMODE) : _wnd Id Text WX,WY+8,M1$
+
+End Proc
+
 Procedure _STAT_SHOW
 
    _wnd Id Use 0
@@ -4619,6 +4736,7 @@ Procedure _EVERY
    If OP=22 : _EVERY_SHOWWALL : End If 
    If OP=25 : _EVERY_SHOWWALL : End If 
    If STMODE=1 : _STAT_SHOW : End If 
+   _MODE_SHOW
 End Proc
 '
 Procedure _EVERY_SHOWWALL
