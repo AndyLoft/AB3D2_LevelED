@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="03-08-2023"
+   VDA$="05-08-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -147,8 +147,8 @@ Procedure _DO_MAIN
       ' VanillaKeys
       '
       
-      If Key State(80) : _CYCLEMODE : End If 
-      If Key State(80) : Wait 10 : End If 
+      If Key State(80) : _CYCLEMODEDOWN : Wait 10 : End If 
+      If Key State(81) : _CYCLEMODEUP : Wait 10 : End If 
 
       _CYCLEBUTTON
       
@@ -336,97 +336,109 @@ Return
    End If 
 End Proc[E]
 
-Procedure _CYCLEMODE
-   If _EDITMODE=4
-      _EDITMODE=0
-   Else 
+Procedure _CYCLEMODEUP
       _EDITMODE=_EDITMODE+1
+
+   If _EDITMODE>4
+      _EDITMODE=0
+   End If 
+End Proc
+
+Procedure _CYCLEMODEDOWN
+   _EDITMODE=_EDITMODE-1
+
+   If _EDITMODE<0
+      _EDITMODE=4
    End If 
 End Proc
 
 Procedure _CYCLEBUTTON
+   If Key State(89)
+      _TIDYDEF : OP=37 : _INITDEF
+   End If 
+
    If _EDITMODE=0
-      If A$="1"
+      If Key State(82)
          _TIDYDEF : OP=0 : _INITDEF
    End If 
-      If A$="2"
+      If Key State(83)
          _TIDYDEF : OP=3 : _INITDEF
       End If 
-      If A$="3"
+      If Key State(84)
          _TIDYDEF : OP=1 : _INITDEF
       End If 
-      If A$="4"
+      If Key State(85)
          _TIDYDEF : OP=27 : _INITDEF
       End If 
-      If A$="5"
+      If Key State(86)
          _TIDYDEF : OP=14 : _INITDEF
       End If 
-      If A$="6"
+      If Key State(87)
          _TIDYDEF : OP=17 : _INITDEF
       End If 
    End If 
    If _EDITMODE=1
-      If A$="1"
+      If Key State(82)
          _TIDYDEF : OP=21 : _INITDEF
       End If 
-      If A$="2"
+      If Key State(83)
          _TIDYDEF : OP=22 : _INITDEF
       End If 
-      If A$="3"
+      If Key State(84)
          _TIDYDEF : OP=23 : _INITDEF
       End If 
-      If A$="4"
+      If Key State(85)
          _TIDYDEF : OP=24 : _INITDEF
       End If 
-      If A$="5"
+      If Key State(86)
          _TIDYDEF : OP=25 : _INITDEF
       End If 
-      If A$="6"
+      If Key State(87)
          _TIDYDEF : OP=26 : _INITDEF
       End If 
    End If 
    If _EDITMODE=2
-      If A$="1"
+      If Key State(82)
          _TIDYDEF : OP=10 : _INITDEF
       End If 
-      If A$="2"
+      If Key State(83)
          _TIDYDEF : OP=13 : _INITDEF
       End If 
-      If A$="3"
+      If Key State(84)
          _TIDYDEF : OP=33 : _INITDEF
       End If 
-      If A$="4"
+      If Key State(85)
          _TIDYDEF : OP=34 : _INITDEF
       End If 
    End If 
    If _EDITMODE=3
-      If A$="1"
+      If Key State(82)
          _TIDYDEF : OP=2 : _INITDEF
       End If 
-      If A$="2"
+      If Key State(83)
          _TIDYDEF : OP=5 : _INITDEF
       End If 
-      If A$="3"
+      If Key State(84)
          _TIDYDEF : OP=8 : _INITDEF
       End If 
-      If A$="4"
+      If Key State(85)
          _TIDYDEF : OP=11 : _INITDEF
       End If 
    End If 
    If _EDITMODE=4
-      If A$="1"
+      If Key State(82)
          _TIDYDEF : OP=28 : _INITDEF
       End If 
-      If A$="2"
+      If Key State(83)
          _TIDYDEF : OP=35 : _INITDEF
       End If 
-      If A$="3"
+      If Key State(84)
          _TIDYDEF : OP=31 : _INITDEF
       End If 
-      If A$="4"
+      If Key State(85)
          _TIDYDEF : OP=29 : _INITDEF
       End If 
-      If A$="5"
+      If Key State(86)
          _TIDYDEF : OP=32 : _INITDEF
       End If 
    End If 
