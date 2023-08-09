@@ -5278,6 +5278,9 @@ End Proc
 '----------------------------------------------------------------------------  
 '
 Procedure _SAVE_LEVEL[F$]
+   If NZ<1
+      Goto S_END
+   End If 
    If F$<"A"
       _SELLEVEL[""]
       F$=Param$
