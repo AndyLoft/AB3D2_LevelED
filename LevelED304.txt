@@ -6524,10 +6524,10 @@ L_END:
    _REDRAW
 End Proc
 Procedure _CLIP_LEVEL[F$]
-   If F$<"A"
-      _SELLEVEL[""]
-      F$=Param$
-   End If 
+'   If F$<"A"
+'      _SELLEVEL[""] 
+'      F$=Param$ 
+'   End If 
    If F$<"A"
       Pop Proc
    End If 
@@ -7211,10 +7211,10 @@ C_ERR:
    Resume C_END
 End Proc
 Procedure _LINK_LEVEL[F$]
-   If F$<"A"
-      _SELLEVEL[""]
-      F$=Param$
-   End If 
+'   If F$<"A"
+'      _SELLEVEL[""] 
+'      F$=Param$ 
+'   End If 
    If F$<"A"
       Pop Proc
    End If 
@@ -7269,10 +7269,10 @@ L_ERR:
    Resume L_END
 End Proc
 Procedure _MAKE_LEVEL[F$,F]
-   If F$<"A"
-      _SELLEVEL[""]
-      F$=Param$
-   End If 
+'   If F$<"A"
+'      _SELLEVEL[""] 
+'      F$=Param$ 
+'   End If 
    If F$<"A"
       Pop Proc
    End If 
