@@ -22,7 +22,7 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="09-08-2023"
+   VDA$="10-08-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
@@ -225,13 +225,15 @@ MPROJ:
    If M2=0 : _IPICKBUTTON[38] : End If 
    If M2=1 : _IPICKBUTTON[6] : _LOAD_LEVEL[""] : End If 
    If M2=2 : _IPICKBUTTON[6] : _SAVE_LEVEL[CURLEV$] : End If 
-   If M2=3 : _IPICKBUTTON[6] : _SAVE_LEVEL[""] : End If 
-   If M2=4 : _IPICKBUTTON[6] : _CLIP_LEVEL[CURLEV$] : End If 
-   If M2=5 : _IPICKBUTTON[6] : _LINK_LEVEL[CURLEV$] : End If 
-   If M2=6 : _IPICKBUTTON[6] : _MAKE_LEVEL[CURLEV$,False] : End If 
-   If M2=7 : _IPICKBUTTON[6] : _MAKE_LEVEL[CURLEV$,True] : End If 
-   If M2=9 : _ICONIFY : End If 
-   If M2=10 and M3=0 : Pop Proc[True] : End If 
+   '
+   If M2=4 : _IPICKBUTTON[6] : _SAVE_LEVEL[""] : End If 
+   If M2=5 : _IPICKBUTTON[6] : _CLIP_LEVEL[CURLEV$] : End If 
+   If M2=6 : _IPICKBUTTON[6] : _LINK_LEVEL[CURLEV$] : End If 
+   If M2=7 : _IPICKBUTTON[6] : _MAKE_LEVEL[CURLEV$,False] : End If 
+   If M2=8 : _IPICKBUTTON[6] : _MAKE_LEVEL[CURLEV$,True] : End If 
+   '
+   If M2=10 : _ICONIFY : End If 
+   If M2=11 and M3=0 : Pop Proc[True] : End If 
 Return 
 
 MVIEW:
@@ -739,6 +741,7 @@ Procedure _INIT_MSCREEN
    _gt Add Item Catalog String$(1176,"About"),"",,
    _gt Add Item Catalog String$(1105,"Load Level"),"",,
    _gt Add Item Catalog String$(1106,"Save Level"),"",,
+   _gt Add Item -1,"",,
    _gt Add Item Catalog String$(1106,"Save Level As"),"",,
    _gt Add Item Catalog String$(1107,"Build Clip-file"),"",,
    _gt Add Item Catalog String$(1108,"Link Level"),"",,
@@ -5297,10 +5300,12 @@ Procedure _SAVE_LEVEL[F$]
    End If 
    LP$=LP$+"level_"+F$
 
-   'If Exist(LP$+"/twolev.dat") 
-   '   _SURE["","Overwrite level "+F$]
-   '   If Param=0 : Goto S_END : End If 
-   'End If  
+   If F$<>CURLEV$
+      If Exist(LP$+"/twolev.dat")
+         _SURE["","Overwrite level "+F$]
+         If Param=0 : Goto S_END : End If 
+      End If 
+   End If 
 
    MPTR=-1 : Change Mouse 3
    For A=0 To NZ
