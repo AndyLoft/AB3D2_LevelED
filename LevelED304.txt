@@ -22,18 +22,18 @@
    Set Buffer 650
    Amos To Back 
    VER$="AlienBreed 3DII LevelEd V3.04"
-   VDA$="03-08-2023"
+   VDA$="10-08-2023"
    Flush Libs 
    _amos Name "AB3DII_LevelED"
    '
    '
    '
-   Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL,CANVASWIDTH,CANVASHEIGHT,_TXT_BOX_W,STNZ
-   MXP=800 : MZ=256 : MCP=99 : MOBJ=200 : STNZ=0
+Global MXP,MZ,MCP,TEAM,MOBJ,DEFNCOL,CANVASWIDTH,CANVASHEIGHT,_TXT_BOX_W,STNZ,_EDITMODE,CURLEV$
+MXP=800 : MZ=256 : MCP=99 : MOBJ=200 : STNZ=0 : _EDITMODE=0
    '
    '
    '
-   Dim OB$(10),ECHO(MZ),CO(260),I(180),GPAL(16),D_INK(20),W(10,2),LW(10),GAD24(40),GAD16(40),GAD10(50),LOCK(20)
+Dim EMODE$(4),OB$(10),ECHO(MZ),CO(260),I(180),GPAL(16),D_INK(20),W(10,2),LW(10),GAD24(40),GAD16(40),GAD10(50),LOCK(20)
    Dim OPS(20,6),LOPS(20,6),SGAD(120),SPRDATA(20,10)
    Dim TELZO(MZ),TELX(MZ),TELZ(MZ),CPTUL(MCP+1),USED(MZ),WB(MZ,10),UWB(MZ,10)
    Dim BUT$(59),PX(MXP),PY(MXP),ZO(MZ,10),ZP(MZ),WT(MZ,10),ZW(MZ,10,1)
@@ -56,7 +56,7 @@
    '
    '
    '
-   Global OB$(),ECHO(),CO(),I(),SGAD(),D_INK(),GPAL(),LW(),GAD24(),SAM$(),GAD16(),GAD10(),LOCK()
+Global EMODE$(),OB$(),ECHO(),CO(),I(),SGAD(),D_INK(),GPAL(),LW(),GAD24(),SAM$(),GAD16(),GAD10(),LOCK()
    Global OPS(),LOPS(),SPRDATA()
    Global TELZO(),TELX(),TELZ(),CPTUL(),USED(),WB(),UWB()
    Global BUT$(),PX(),PY(),ZO(),ZP(),WT(),ZW(),ZH(),ZC(),ZB(),UZB(),OBX(),OBZ(),ZZ()
@@ -146,9 +146,12 @@ Procedure _DO_MAIN
       '
       ' VanillaKeys
       '
-      If Key State(80) : _CYCLEBUTTON : End If 
-      If Key State(80) : Wait 10 : End If 
+      
+      If Key State(80) : _CYCLEMODEDOWN : Wait 10 : End If 
+      If Key State(81) : _CYCLEMODEUP : Wait 10 : End If 
 
+      _CYCLEBUTTON
+      
       A$=""
       If AC=$200000
          X=_wnd Id Event X Mouse
@@ -221,13 +224,16 @@ Pop Proc[False]
 MPROJ:
    If M2=0 : _IPICKBUTTON[38] : End If 
    If M2=1 : _IPICKBUTTON[6] : _LOAD_LEVEL[""] : End If 
-   If M2=2 : _IPICKBUTTON[6] : _SAVE_LEVEL[""] : End If 
-   If M2=3 : _IPICKBUTTON[6] : _CLIP_LEVEL[""] : End If 
-   If M2=4 : _IPICKBUTTON[6] : _LINK_LEVEL[""] : End If 
-   If M2=5 : _IPICKBUTTON[6] : _MAKE_LEVEL["",False] : End If 
-   If M2=6 : _IPICKBUTTON[6] : _MAKE_LEVEL["",True] : End If 
-   If M2=8 : _ICONIFY : End If 
-   If M2=9 and M3=0 : Pop Proc[True] : End If 
+   If M2=2 : _IPICKBUTTON[6] : _SAVE_LEVEL[CURLEV$] : End If 
+   '
+   If M2=4 : _IPICKBUTTON[6] : _SAVE_LEVEL[""] : End If 
+   If M2=5 : _IPICKBUTTON[6] : _CLIP_LEVEL[CURLEV$] : End If 
+   If M2=6 : _IPICKBUTTON[6] : _LINK_LEVEL[CURLEV$] : End If 
+   If M2=7 : _IPICKBUTTON[6] : _MAKE_LEVEL[CURLEV$,False] : End If 
+   If M2=8 : _IPICKBUTTON[6] : _MAKE_LEVEL[CURLEV$,True] : End If 
+   '
+   If M2=10 : _ICONIFY : End If 
+   If M2=11 and M3=0 : Pop Proc[True] : End If 
 Return 
 
 MVIEW:
@@ -333,17 +339,125 @@ Return
    End If 
 End Proc[E]
 
-Procedure _CYCLEBUTTON
-   If OP>37
-      _TIDYDEF
-      OP=0
-      _INITDEF
-   Else 
-      _TIDYDEF
-      OP=OP+1
-      _INITDEF
+Procedure _CYCLEMODEUP
+      _EDITMODE=_EDITMODE+1
+
+   If _EDITMODE>4
+      _EDITMODE=4
    End If 
 End Proc
+
+Procedure _CYCLEMODEDOWN
+   _EDITMODE=_EDITMODE-1
+
+   If _EDITMODE<0
+      _EDITMODE=0
+   End If 
+End Proc
+
+Procedure _CYCLEBUTTON
+   If Key State(89)
+      _TIDYDEF : OP=37 : _INITDEF
+   End If 
+
+   If _EDITMODE=0
+      If Key State(82)
+         _TIDYDEF : OP=0 : _INITDEF
+   End If 
+      If Key State(83)
+         _TIDYDEF : OP=3 : _INITDEF
+      End If 
+      If Key State(84)
+         _TIDYDEF : OP=1 : _INITDEF
+      End If 
+      If Key State(85)
+         _TIDYDEF : OP=27 : _INITDEF
+      End If 
+      If Key State(86)
+         _TIDYDEF : OP=14 : _INITDEF
+      End If 
+      If Key State(87)
+         _TIDYDEF : OP=17 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=1
+      If Key State(82)
+         _TIDYDEF : OP=21 : _INITDEF
+      End If 
+      If Key State(83)
+         _TIDYDEF : OP=22 : _INITDEF
+      End If 
+      If Key State(84)
+         _TIDYDEF : OP=23 : _INITDEF
+      End If 
+      If Key State(85)
+         _TIDYDEF : OP=24 : _INITDEF
+      End If 
+      If Key State(86)
+         _TIDYDEF : OP=25 : _INITDEF
+      End If 
+      If Key State(87)
+         _TIDYDEF : OP=26 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=2
+      If Key State(82)
+         _TIDYDEF : OP=10 : _INITDEF
+      End If 
+      If Key State(83)
+         _TIDYDEF : OP=13 : _INITDEF
+      End If 
+      If Key State(84)
+         _TIDYDEF : OP=33 : _INITDEF
+      End If 
+      If Key State(85)
+         _TIDYDEF : OP=34 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=3
+      If Key State(82)
+         _TIDYDEF : OP=2 : _INITDEF
+      End If 
+      If Key State(83)
+         _TIDYDEF : OP=5 : _INITDEF
+      End If 
+      If Key State(84)
+         _TIDYDEF : OP=8 : _INITDEF
+      End If 
+      If Key State(85)
+         _TIDYDEF : OP=11 : _INITDEF
+      End If 
+   End If 
+   If _EDITMODE=4
+      If Key State(82)
+         _TIDYDEF : OP=28 : _INITDEF
+      End If 
+      If Key State(83)
+         _TIDYDEF : OP=35 : _INITDEF
+      End If 
+      If Key State(84)
+         _TIDYDEF : OP=31 : _INITDEF
+      End If 
+      If Key State(85)
+         _TIDYDEF : OP=29 : _INITDEF
+      End If 
+      If Key State(86)
+         _TIDYDEF : OP=32 : _INITDEF
+      End If 
+   End If 
+End Proc
+
+'Procedure _CYCLEBUTTON
+'   If OP>37 
+'      _TIDYDEF
+'      OP=0
+'      _INITDEF
+'   Else 
+'      _TIDYDEF
+'      OP=OP+1 
+'      _INITDEF
+'   End If 
+'End Proc
 
 Procedure _IPICKBUTTON[F]
    D1=_wnd Id Event Gadget
@@ -627,6 +741,8 @@ Procedure _INIT_MSCREEN
    _gt Add Item Catalog String$(1176,"About"),"",,
    _gt Add Item Catalog String$(1105,"Load Level"),"",,
    _gt Add Item Catalog String$(1106,"Save Level"),"",,
+   _gt Add Item -1,"",,
+   _gt Add Item Catalog String$(1106,"Save Level As"),"",,
    _gt Add Item Catalog String$(1107,"Build Clip-file"),"",,
    _gt Add Item Catalog String$(1108,"Link Level"),"",,
    _gt Add Item Catalog String$(1110,"Make Level"),"",,
@@ -1199,6 +1315,13 @@ Procedure _INIT_PROGRAM
    OB$(0)=Catalog String$(11,"Alien")
    OB$(1)=Catalog String$(12,"Object")
    '
+   '  edit mode definitions 
+   'EMODE$(_EDITMODE) 
+   EMODE$(0)=Catalog String$(3000,"Geometry  ")
+   EMODE$(1)=Catalog String$(3001,"Textures  ")
+   EMODE$(2)=Catalog String$(3002,"Lighting  ")
+   EMODE$(3)=Catalog String$(3003,"Objects   ")
+   EMODE$(4)=Catalog String$(3004,"CtrlPoints")
    '
    '  Button definitions
    '
@@ -1388,6 +1511,18 @@ End Proc[D]
 '
 '----------------------------------------------------------------------------  
 '
+Procedure _MODE_SHOW
+   
+   _wnd Id Use 0
+
+   WX=0 : WY=4
+
+   _wnd Id Ink D_INK(2),,
+   Add WY,8 : M1$="Level"+":"+CURLEV$ : _wnd Id Text WX,WY+8,M1$
+   Add WY,8 : M1$="Mode"+":"+EMODE$(_EDITMODE) : _wnd Id Text WX,WY+8,M1$
+
+End Proc
+
 Procedure _STAT_SHOW
 
    _wnd Id Use 0
@@ -4619,6 +4754,7 @@ Procedure _EVERY
    If OP=22 : _EVERY_SHOWWALL : End If 
    If OP=25 : _EVERY_SHOWWALL : End If 
    If STMODE=1 : _STAT_SHOW : End If 
+   _MODE_SHOW
 End Proc
 '
 Procedure _EVERY_SHOWWALL
@@ -5145,6 +5281,9 @@ End Proc
 '----------------------------------------------------------------------------  
 '
 Procedure _SAVE_LEVEL[F$]
+   If NZ<1
+      Goto S_END
+   End If 
    If F$<"A"
       _SELLEVEL[""]
       F$=Param$
@@ -5161,10 +5300,12 @@ Procedure _SAVE_LEVEL[F$]
    End If 
    LP$=LP$+"level_"+F$
 
-   'If Exist(LP$+"/twolev.dat") 
-   '   _SURE["","Overwrite level "+F$]
-   '   If Param=0 : Goto S_END : End If 
-   'End If  
+   If F$<>CURLEV$
+      If Exist(LP$+"/twolev.dat")
+         _SURE["","Overwrite level "+F$]
+         If Param=0 : Goto S_END : End If 
+      End If 
+   End If 
 
    MPTR=-1 : Change Mouse 3
    For A=0 To NZ
@@ -6107,6 +6248,10 @@ Procedure _SAVE_LEVEL[F$]
    Bsave LP$+"/twolev.dat",Start(15) To MP
    Bsave LP$+"/twolev.obj",Start(12) To Start(12)+200*32
    Bsave LP$+"/twolev.links",Start(11) To Start(11)+100*100
+'--------- 
+'not sure this is the right place for this...
+   CURLEV$=F$
+'--------- 
 S_END:
    _R_N_MSG
    _wnd Id Activate 0
@@ -6379,6 +6524,7 @@ Procedure _LOAD_LEVEL[F$]
       End If 
    Next A
    GLINK=False : GCLIP=False
+   CURLEV$=F$
 L_END:
    _R_N_MSG
    _wnd Id Activate 0
@@ -6386,10 +6532,10 @@ L_END:
    _REDRAW
 End Proc
 Procedure _CLIP_LEVEL[F$]
-   If F$<"A"
-      _SELLEVEL[""]
-      F$=Param$
-   End If 
+'   If F$<"A"
+'      _SELLEVEL[""] 
+'      F$=Param$ 
+'   End If 
    If F$<"A"
       Pop Proc
    End If 
@@ -7072,19 +7218,19 @@ C_ERR:
    _ERRTXT["Clip Error:",Err$(Errn)]
    Resume C_END
 End Proc
-Procedure _LINK_LEVEL[A$]
-   If A$<"A"
-      _SELLEVEL[""]
-      A$=Param$
-   End If 
-   If A$<"A"
+Procedure _LINK_LEVEL[F$]
+'   If F$<"A"
+'      _SELLEVEL[""] 
+'      F$=Param$ 
+'   End If 
+   If F$<"A"
       Pop Proc
    End If 
    LP$=Peek$(LINK,64,Chr$(0))
    If LP$=""
       LP$="ab3:levels/"
    End If 
-   LP$=LP$+"level_"+A$
+   LP$=LP$+"level_"+F$
    On Error Goto L_ERR
    _N_MSG2[Catalog String$(246,"Doing Link-philez, hang on might be long"),0]
    NU=100
@@ -7131,10 +7277,10 @@ L_ERR:
    Resume L_END
 End Proc
 Procedure _MAKE_LEVEL[F$,F]
-   If F$<"A"
-      _SELLEVEL[""]
-      F$=Param$
-   End If 
+'   If F$<"A"
+'      _SELLEVEL[""] 
+'      F$=Param$ 
+'   End If 
    If F$<"A"
       Pop Proc
    End If 
